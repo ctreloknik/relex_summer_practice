@@ -3,8 +3,6 @@ package ru.relex.summer_practice.console;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
-import ru.relex.summer_practice.db.test;
-
 public class Main {
 	public static void main( String[] args )
     {
