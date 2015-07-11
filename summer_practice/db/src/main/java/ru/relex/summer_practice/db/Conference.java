@@ -8,17 +8,17 @@ import java.util.Set;
  * Created by Eugene on 11.07.2015.
  */
 @Entity
-@Table(name = "Conference")
+@Table(name = "CONFERENCE")
 public class Conference {
     @Id
-    @Column(name = "ConferenceID")
     @GeneratedValue
+    @Column(name = "CONFERENCE_ID")
     private Long id;
 
-    @Column(name = "Name")
+    @Column(name = "NAME")
     private String name;// Название конференции
 
-    @Column(name = "Description")
+    @Column(name = "DESCRIPTION")
     private String description;// Описание конференции
 
     // Одной конференции соответсвует множество потоков
@@ -47,5 +47,9 @@ public class Conference {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<Course> getCourses() {
+        return courses;
     }
 }

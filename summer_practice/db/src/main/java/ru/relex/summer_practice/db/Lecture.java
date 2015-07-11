@@ -2,31 +2,36 @@ package ru.relex.summer_practice.db;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Eugene on 11.07.2015.
  */
 @Entity
-@Table(name = "Lecture")
+@Table(name = "LECTURE")
 public class Lecture {
     @Id
-    @Column(name = "LectureID")
+    @Column(name = "LECTURE_ID")
     @GeneratedValue()
     private Long id;
 
     // Одной конкретной лекции соответсвует один конкретный поток
     @ManyToOne
-    @JoinColumn(name = "CourseID")
+    @JoinColumn(name = "COURSE_ID")
     private Course course;
 
-    @Column(name = "Topic")
+    @Column(name = "TOPIC")
     private String topic;
 
-    @Column(name = "Datetime")
+    @Column(name = "DATETIME")
     private Date datetime;
 
-    @Column(name = "Description")
+    @Column(name = "DESCRIPTION")
     private String description;
+
+    @OneToMany(mappedBy = "lecture")
+    private Set<Message> messages = new HashSet<Message>();
 
     public Long getId() {
         return id;
@@ -66,5 +71,9 @@ public class Lecture {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<Message> getMessages() {
+        return messages;
     }
 }

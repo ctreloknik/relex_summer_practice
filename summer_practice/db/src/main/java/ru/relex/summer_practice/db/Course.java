@@ -9,29 +9,29 @@ import java.util.Set;
  * Created by Eugene on 11.07.2015.
  */
 @Entity
-@Table(name = "Course")
+@Table(name = "COURSE")
 public class Course {
     @Id
-    @Column(name = "CourseID")
     @GeneratedValue()
+    @Column(name = "COURSE_ID")
     private Long id;
 
     // Одному конкретному потоку соответсвует одна конкретная конференция
     @ManyToOne
-    @JoinColumn(name = "ConferenceID")
+    @JoinColumn(name = "CONFERENCE_ID")
     private Conference conference;
 
     // Одному конкретному потоку соответсвует одна конкретная аудитория
     @ManyToOne
-    @JoinColumn(name = "LectureRoomID")
+    @JoinColumn(name = "LECTUREROOM_ID")
     private LectureRoom lectureRoom;
 
     @Temporal(value = TemporalType.DATE)
-    @Column(name = "StartDate")
+    @Column(name = "STARTDATE")
     private Date startDate;
 
     @Temporal(value = TemporalType.DATE)
-    @Column(name = "EndDate")
+    @Column(name = "ENDDATE")
     private Date endDate;
 
     // Одному потоку соответсвует множество лекций
@@ -76,5 +76,9 @@ public class Course {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public Set<Lecture> getLectures() {
+        return lectures;
     }
 }

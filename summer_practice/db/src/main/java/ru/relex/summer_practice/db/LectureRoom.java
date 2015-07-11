@@ -8,17 +8,17 @@ import java.util.Set;
  * Created by Eugene on 11.07.2015.
  */
 @Entity
-@Table(name = "LectureRoom")
+@Table(name = "LECTUREROOM")
 public class LectureRoom {
     @Id
-    @Column(name = "LectureRoomID")
     @GeneratedValue
+    @Column(name = "LECTUREROOM_ID")
     private Long id;
 
-    @Column(name = "Number")
+    @Column(name = "NUMBER")
     private String number;// Номер аудитории
 
-    @Column(name = "Seating")
+    @Column(name = "SEATING")
     private Integer seating;// Число мест для сидения
 
     // Одной аудитории соответсвует много потоков в разное время
@@ -47,5 +47,9 @@ public class LectureRoom {
 
     public void setSeating(Integer seating) {
         this.seating = seating;
+    }
+
+    public Set<Course> getCourses() {
+        return courses;
     }
 }
