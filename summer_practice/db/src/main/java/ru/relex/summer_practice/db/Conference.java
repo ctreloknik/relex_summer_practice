@@ -25,6 +25,26 @@ public class Conference {
     @OneToMany(mappedBy = "conference")
     private Set<Course> courses = new HashSet<Course>();
 
+    // Одной конференции соответсвует множество билетов
+    @OneToMany(mappedBy = "conference")
+    private Set<Ticket> ticket = new HashSet<Ticket>();
+
+    @OneToMany(mappedBy = "conference")
+    private Set<Founders> founders = new HashSet<Founders>();
+
+    public Set<Ticket> getTicket() {
+
+        return ticket;
+    }
+
+    public Set<Founders> getFounders() {
+        return founders;
+    }
+
+    public Set<Ticket> getTickets() {
+        return ticket;
+    }
+
     public Long getId() {
         return id;
     }

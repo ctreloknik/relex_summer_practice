@@ -30,8 +30,17 @@ public class Lecture {
     @Column(name = "DESCRIPTION")
     private String description;
 
+
+    // доклады - люди
     @OneToMany(mappedBy = "lecture")
-    private Set<Message> messages = new HashSet<Message>();
+    private Set<LectionPerson> lectionPerson = new HashSet<LectionPerson>();
+
+    @OneToMany(mappedBy = "lecture")
+    private Set<Message> message = new HashSet<Message>();
+
+    public Set<LectionPerson> getLectionPerson() {
+        return lectionPerson;
+    }
 
     public Long getId() {
         return id;
@@ -74,6 +83,6 @@ public class Lecture {
     }
 
     public Set<Message> getMessages() {
-        return messages;
+        return message;
     }
 }

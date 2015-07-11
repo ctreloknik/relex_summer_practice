@@ -28,6 +28,28 @@ public class Person {
 	@Column(name = "EMAIL")
 	private String email;
 
+	//
+	@OneToMany(mappedBy = "person")
+	private Set<PersonTicket> personTicket = new HashSet<PersonTicket>();
+
+	@OneToMany(mappedBy = "person")
+	private Set<Founders> founders = new HashSet<Founders>();
+
+	@OneToMany(mappedBy = "person")
+	private Set<PersonLectureRole> personLectureRole = new HashSet<PersonLectureRole>();
+
+	public Set<PersonTicket> getPersonTickets() {
+		return personTicket;
+	}
+
+	public Set<Founders> getFounders() {
+		return founders;
+	}
+
+	public Set<PersonLectureRole> getPersonLectureRole() {
+		return personLectureRole;
+	}
+
 	@OneToMany(mappedBy = "questioner")
 	private Set<Question> questions = new HashSet<Question>();
 
