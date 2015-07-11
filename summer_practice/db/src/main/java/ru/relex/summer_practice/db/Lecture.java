@@ -14,7 +14,10 @@ public class Lecture {
     @GeneratedValue()
     private Long id;
 
-    //CourseID
+    // Одной конкретной лекции соответсвует один конкретный поток
+    @ManyToOne
+    @JoinColumn(name = "CourseID")
+    private Course course;
 
     @Column(name = "Topic")
     private String topic;
@@ -31,6 +34,14 @@ public class Lecture {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public String getTopic() {
