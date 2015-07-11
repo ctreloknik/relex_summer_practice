@@ -1,5 +1,7 @@
 package ru.relex.summer_practice.console;
 
+import ru.relex.summer_practice.db.Ticket;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
