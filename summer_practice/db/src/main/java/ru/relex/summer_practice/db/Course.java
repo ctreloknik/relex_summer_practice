@@ -36,7 +36,11 @@ public class Course {
 
     // Одному потоку соответсвует множество лекций
     @OneToMany(mappedBy = "course")
-    private Set<Lecture> lectures = new HashSet<Lecture>();
+    private Set<Lecture> lecture = new HashSet<Lecture>();
+
+    public Set<Lecture> getLecture() {
+        return lecture;
+    }
 
     public Long getId() {
         return id;

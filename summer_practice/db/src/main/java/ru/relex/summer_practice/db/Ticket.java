@@ -1,30 +1,58 @@
 package ru.relex.summer_practice.db;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+/**
+ * Created by Nikita on 11.07.2015.
+ */
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table (name="Ticket")
 public class Ticket {
+    @Id
+    @Column(name="TICKET_ID")
+    @GeneratedValue
     private Long id;
-    private Long conferenceId;
+
+    @ManyToOne
+    @JoinColumn(name = "CONFERENCE_ID")
+    private Conference conference;
+
+    @Column(name = "PRICE")
     private int price;
 
-    @Id
-    @Column(name="TicketID")
+
+    // конференция / билет
+    @OneToMany(mappedBy = "ticket")
+    private Set<PersonTicket> personTicket = new HashSet<PersonTicket>();
+
+    public Set<PersonTicket> getPersonTicket() {
+        return personTicket;
+    }
+
     public Long getId() {
         return id;
     }
 
-    @Column(name="ConferenceID")
-    public Long getConferenceId() {
-        return conferenceId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    @Column(name = "Price")
+    public Conference getConference() {
+        return conference;
+    }
+
+    public void setConference(Conference conference) {
+        this.conference = conference;
+    }
+
     public int getPrice() {
         return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

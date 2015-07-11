@@ -2,6 +2,8 @@ package ru.relex.summer_practice.db;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Eugene on 11.07.2015.
@@ -27,6 +29,15 @@ public class Lecture {
 
     @Column(name = "Description")
     private String description;
+
+
+    // доклады - люди
+    @OneToMany(mappedBy = "lecture")
+    private Set<LectionPerson> lectionPerson = new HashSet<LectionPerson>();
+
+    public Set<LectionPerson> getLectionPerson() {
+        return lectionPerson;
+    }
 
     public Long getId() {
         return id;

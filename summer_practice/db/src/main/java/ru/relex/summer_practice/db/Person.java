@@ -1,10 +1,8 @@
 package ru.relex.summer_practice.db;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Person")
@@ -29,7 +27,28 @@ public class Person {
 	
 	@Column(name = "Email")
 	private String email;
-	
+
+	//
+	@OneToMany(mappedBy = "person")
+	private Set<PersonTicket> personTicket = new HashSet<PersonTicket>();
+
+	@OneToMany(mappedBy = "person")
+	private Set<Founders> founders = new HashSet<Founders>();
+
+	@OneToMany(mappedBy = "person")
+	private Set<PersonLectureRole> personLectureRole = new HashSet<PersonLectureRole>();
+
+	public Set<PersonTicket> getPersonTickets() {
+		return personTicket;
+	}
+
+	public Set<Founders> getFounders() {
+		return founders;
+	}
+
+	public Set<PersonLectureRole> getPersonLectureRole() {
+		return personLectureRole;
+	}
 
 	public Long getId() {
 		return id;
