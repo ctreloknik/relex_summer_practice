@@ -1,22 +1,15 @@
 package ru.relex.summer_practice.console;
 
-import ru.relex.summer_practice.db.Ticket;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 
-import ru.relex.summer_practice.db.Person;
+import ru.relex.summer_practice.dao.PersonDao;
 
 
 public class Main {
 	public static void main( String[] args )
     {
-		EntityManager em = Persistence.createEntityManagerFactory("COLIBRI").createEntityManager();
-		em.getTransaction().begin();
-        Person t = new Person();
-        t.setFullname("name");
-        em.merge(t);
-        em.getTransaction().commit();
+		PersonDao personDao = new PersonDao();
+        personDao.Create("Александр Сергеевич Мартынов","1111","1111",null,null);
         System.out.println("проверочка");
     }
 }

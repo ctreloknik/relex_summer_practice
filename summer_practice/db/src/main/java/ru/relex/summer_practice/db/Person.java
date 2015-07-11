@@ -34,6 +34,16 @@ public class Person {
 	@OneToMany(mappedBy = "person")
 	private Set<Rating> ratings = new HashSet<Rating>();
 
+	public Person(){}
+
+	public Person (String fullName, String phoneNumber, String email, String login, String password){
+		this.fullname = fullName;
+		this.password = password;
+		this.email = email;
+		this.login = login;
+		this.phoneNumber = phoneNumber;
+	}
+
 	public Long getId() {
 		return id;
 	}
