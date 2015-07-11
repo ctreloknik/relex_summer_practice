@@ -1,14 +1,12 @@
 package ru.relex.summer_practice.console;
 
 
-
-import ru.relex.summer_practice.dao.PersonDao;
-
+import ru.relex.summer_practice.dao.Impl.PersonDaoImpl;
 
 public class Main {
 	public static void main( String[] args )
     {
-		PersonDao personDao = new PersonDao();
+		PersonDaoImpl personDao = new PersonDaoImpl();
         personDao.Create("Александр Сергеевич Мартынов","1111","1111",null,null);
         System.out.println("проверочка");
     }

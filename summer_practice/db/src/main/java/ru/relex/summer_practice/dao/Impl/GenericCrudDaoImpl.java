@@ -1,19 +1,18 @@
-package ru.relex.summer_practice.dao;
+package ru.relex.summer_practice.dao.Impl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.lang.reflect.ParameterizedType;
-import java.util.List;
+import ru.relex.summer_practice.dao.GenericCridDao;
 
 /**
- * Created by Sasha on 11.07.2015.
+ * Created by Sasha on 12.07.2015.
  */
-public class GenericDaoCrud<T, PK> {
-
+public class GenericCrudDaoImpl<T, PK> implements GenericCridDao<T, PK>{
     private Class<T> instance;
 
-    public GenericDaoCrud(){
+    public GenericCrudDaoImpl(){
         this.instance = (Class<T>)(((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
     }
 
