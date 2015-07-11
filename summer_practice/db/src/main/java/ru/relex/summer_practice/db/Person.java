@@ -5,27 +5,27 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "Person")
+@Table(name = "PERSON")
 public class Person {
 
 	@Id
-	@Column(name = "PersonID")
 	@GeneratedValue
+	@Column(name = "PERSONE_ID")
 	private Long id;
 	
-	@Column(name = "FullName")
+	@Column(name = "FULLNAME")
 	private String fullname;
 	
-	@Column(name = "Login")
+	@Column(name = "LOGIN")
 	private String login;
 	
-	@Column(name = "Password")
+	@Column(name = "PASSWORD")
 	private String password;
 	
-	@Column(name = "PhoneNumber")
+	@Column(name = "PHONENUMBER")
 	private String phoneNumber;
 	
-	@Column(name = "Email")
+	@Column(name = "EMAIL")
 	private String email;
 
 	//
@@ -49,6 +49,12 @@ public class Person {
 	public Set<PersonLectureRole> getPersonLectureRole() {
 		return personLectureRole;
 	}
+
+	@OneToMany(mappedBy = "questioner")
+	private Set<Question> questions = new HashSet<Question>();
+
+	@OneToMany(mappedBy = "person")
+	private Set<Rating> ratings = new HashSet<Rating>();
 
 	public Long getId() {
 		return id;
@@ -96,5 +102,13 @@ public class Person {
 	
 	public void setEmail(String email) {
 		this.email = email;
-	}	
+	}
+
+	public Set<Rating> getRatings() {
+		return ratings;
+	}
+
+	public Set<Question> getQuestions() {
+		return questions;
+	}
 }

@@ -8,22 +8,22 @@ import java.util.Set;
  * Created by Eugene on 11.07.2015.
  */
 @Entity
-@Table(name = "Conference")
+@Table(name = "CONFERENCE")
 public class Conference {
     @Id
-    @Column(name = "ConferenceID")
     @GeneratedValue
+    @Column(name = "CONFERENCE_ID")
     private Long id;
 
-    @Column(name = "Name")
+    @Column(name = "NAME")
     private String name;// Название конференции
 
-    @Column(name = "Description")
+    @Column(name = "DESCRIPTION")
     private String description;// Описание конференции
 
     // Одной конференции соответсвует множество потоков
     @OneToMany(mappedBy = "conference")
-    private Set<Course> course = new HashSet<Course>();
+    private Set<Course> courses = new HashSet<Course>();
 
     // Одной конференции соответсвует множество билетов
     @OneToMany(mappedBy = "conference")
@@ -31,10 +31,6 @@ public class Conference {
 
     @OneToMany(mappedBy = "conference")
     private Set<Founders> founders = new HashSet<Founders>();
-
-    public Set<Course> getCourse() {
-        return course;
-    }
 
     public Set<Ticket> getTicket() {
 
@@ -71,5 +67,9 @@ public class Conference {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<Course> getCourses() {
+        return courses;
     }
 }

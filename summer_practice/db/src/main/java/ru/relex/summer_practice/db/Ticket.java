@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table (name="Ticket")
+@Table (name="TICKET")
 public class Ticket {
     @Id
     @Column(name="TICKET_ID")
@@ -24,7 +24,7 @@ public class Ticket {
     private int price;
 
 
-    // конференция / билет
+    //
     @OneToMany(mappedBy = "ticket")
     private Set<PersonTicket> personTicket = new HashSet<PersonTicket>();
 
