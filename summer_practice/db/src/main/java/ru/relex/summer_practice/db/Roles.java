@@ -45,4 +45,9 @@ public class Roles {
     public Set<PersonLectureRole> getPersonLectureRole() {
         return personLectureRole;
     }
+
+    @Override
+    public String toString(){
+        return this.name;
+    }
 }
