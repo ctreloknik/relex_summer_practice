@@ -1,5 +1,7 @@
 package ru.relex.summer_practice.dao.Impl;
 
+import ru.relex.summer_practice.dao.GenericCrudDao;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -8,8 +10,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
-
-import ru.relex.summer_practice.dao.GenericCrudDao;
 
 /**
  * Created by Sasha on 12.07.2015.

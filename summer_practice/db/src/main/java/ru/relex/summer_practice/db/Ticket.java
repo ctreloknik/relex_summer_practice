@@ -11,6 +11,8 @@ import java.util.Set;
 @Entity
 @Table (name="TICKET")
 public class Ticket {
+    public Ticket() {}
+
     @Id
     @Column(name="TICKET_ID")
     @GeneratedValue

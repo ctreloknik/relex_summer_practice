@@ -9,6 +9,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "FOUNDERS")
 public class Founders {
+    public Founders() {}
+
     @Id
     @Column(name = "FOUNDERS_ID")
     @GeneratedValue
