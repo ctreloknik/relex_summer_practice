@@ -4,12 +4,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.lang.reflect.ParameterizedType;
-import ru.relex.summer_practice.dao.GenericCridDao;
+import ru.relex.summer_practice.dao.GenericCrudDao;
 
 /**
  * Created by Sasha on 12.07.2015.
  */
-public class GenericCrudDaoImpl<T, PK> implements GenericCridDao<T, PK>{
+public class GenericCrudDaoImpl<T, PK> implements GenericCrudDao<T, PK> {
     private Class<T> instance;
 
     public GenericCrudDaoImpl(){
