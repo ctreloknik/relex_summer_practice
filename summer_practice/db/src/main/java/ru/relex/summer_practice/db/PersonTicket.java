@@ -9,7 +9,7 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "PersonTicket")
+@Table(name = "PERSON_TICKET")
 public class PersonTicket {
 
     @Id
@@ -55,7 +55,7 @@ public class PersonTicket {
         return ticket;
     }
 
-    public Set<LectionPerson> getLectionPerson() {
-        return lectionPerson;
+    public Set<LecturePerson> getLecturePerson() {
+        return lecturePerson;
     }
 }

@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Table(name = "LECTURE_PERSON")
 public class LecturePerson {
     @Id
-    @Column(name = "LECTION_TICKET_ID")
+    @Column(name = "LECTURE_TICKET_ID")
     @GeneratedValue
     private Long id;
 

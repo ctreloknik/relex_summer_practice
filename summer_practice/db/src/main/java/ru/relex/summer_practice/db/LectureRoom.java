@@ -8,11 +8,11 @@ import java.util.Set;
  * Created by Eugene on 11.07.2015.
  */
 @Entity
-@Table(name = "LECTUREROOM")
+@Table(name = "LECTURE_ROOM")
 public class LectureRoom {
     @Id
     @GeneratedValue
-    @Column(name = "LECTUREROOM_ID")
+    @Column(name = "LECTUR_EROOM_ID")
     private Long id;
 
     @Column(name = "NUMBER")

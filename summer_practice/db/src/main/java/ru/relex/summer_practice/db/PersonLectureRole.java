@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "PersonLectureRole")
+@Table(name = "PERSON_LECTURE_ROLE")
 public class PersonLectureRole {
     @Id
     @Column(name = "PERSON_LECTURE_ROLE_ID")

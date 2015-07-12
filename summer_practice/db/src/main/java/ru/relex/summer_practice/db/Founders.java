@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "Founders")
+@Table(name = "FOUNDERS")
 public class Founders {
     @Id
     @Column(name = "FOUNDERS_ID")

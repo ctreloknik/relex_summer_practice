@@ -33,13 +33,13 @@ public class Lecture {
 
     // доклады - люди
     @OneToMany(mappedBy = "lecture")
-    private Set<LectionPerson> lectionPerson = new HashSet<LectionPerson>();
+    private Set<LecturePerson> lecturePerson = new HashSet<LecturePerson>();
 
     @OneToMany(mappedBy = "lecture")
     private Set<Message> message = new HashSet<Message>();
 
-    public Set<LectionPerson> getLectionPerson() {
-        return lectionPerson;
+    public Set<LecturePerson> getLecturePerson() {
+        return lecturePerson;
     }
 
     public Long getId() {
