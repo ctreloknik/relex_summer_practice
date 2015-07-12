@@ -35,16 +35,16 @@ public class Question {
     private Date datetime;
 
     @Column(name = "MODERATED")
-    private Boolean Moderated;
+    private boolean Moderated;
 
     @OneToMany(mappedBy = "question")
     private Set<Rating> ratings = new HashSet<Rating>();
 
-    public Boolean getModerated() {
+    public boolean getModerated() {
         return Moderated;
     }
 
-    public void setModerated(Boolean moderated) {
+    public void setModerated(boolean moderated) {
         Moderated = moderated;
     }
 

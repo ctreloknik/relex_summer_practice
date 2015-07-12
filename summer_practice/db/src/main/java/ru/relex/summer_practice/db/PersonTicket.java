@@ -28,7 +28,7 @@ public class PersonTicket {
 
     // доклады для людей
     @OneToMany(mappedBy = "personTicket")
-    private Set<LectionPerson> lectionPerson = new HashSet<LectionPerson>();
+    private Set<LecturePerson> lecturePerson = new HashSet<LecturePerson>();
 
     public void setId(Long id) {
         this.id = id;

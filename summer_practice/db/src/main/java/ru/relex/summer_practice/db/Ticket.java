@@ -23,7 +23,6 @@ public class Ticket {
     @Column(name = "PRICE")
     private int price;
 
-
     //
     @OneToMany(mappedBy = "ticket")
     private Set<PersonTicket> personTicket = new HashSet<PersonTicket>();
