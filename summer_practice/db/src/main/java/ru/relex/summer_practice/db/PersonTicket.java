@@ -11,6 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name = "PERSON_TICKET")
 public class PersonTicket {
+    public PersonTicket() {}
 
     @Id
     @Column(name = "PERSON_TICKET_ID")

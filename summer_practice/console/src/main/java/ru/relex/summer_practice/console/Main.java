@@ -134,8 +134,8 @@ public class Main {
         System.out.print("NUMBER: ");
         Long number = Long.parseLong(inputReader.nextLine());
         Lecture lecture = lectureDao.Read(number);
-        System.out.println("Р’С‹ РІС‹Р±СЂР°Р»Рё Р»РµРєС†РёСЋ "+lecture.getTopic());
-        System.out.println("Р’РІРµРґРёС‚Рµ С‚РµРєСЃС‚ РІРѕРїСЂРѕСЃР°");
+        System.out.println("Вы выбрали лекцию "+lecture.getTopic());
+        System.out.println("Введите текст вопроса");
         String text = inputReader.nextLine();
         Question question = new Question();
         question.setQuestioner(person);

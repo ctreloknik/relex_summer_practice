@@ -12,7 +12,7 @@ import java.util.Set;
 public class LectureRoom {
     @Id
     @GeneratedValue
-    @Column(name = "LECTUR_EROOM_ID")
+    @Column(name = "LECTURE_ROOM_ID")
     private Long id;
 
     @Column(name = "NUMBER")

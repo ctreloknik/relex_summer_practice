@@ -11,6 +11,8 @@ import java.util.Set;
 @Entity
 @Table(name = "ROLES")
 public class Roles {
+    public Roles() {}
+
     @Id
     @Column(name = "ROLE_ID")
     @GeneratedValue
@@ -42,5 +44,10 @@ public class Roles {
 
     public Set<PersonLectureRole> getPersonLectureRole() {
         return personLectureRole;
+    }
+
+    @Override
+    public String toString(){
+        return this.name;
     }
 }
