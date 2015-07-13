@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * Created by Eugene on 12.07.2015.
  */
-public interface CourseDao extends GenericCrudDao<Course, Long> {
+public interface CourseDAO extends GenericCRUDDAO<Course, Long> {
     public Date getStartDate(Course course);
     public Date getEndDate(Course course);
 }

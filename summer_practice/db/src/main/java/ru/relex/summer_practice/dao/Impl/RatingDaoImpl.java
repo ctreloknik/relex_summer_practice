@@ -1,6 +1,6 @@
 package ru.relex.summer_practice.dao.Impl;
 
-import ru.relex.summer_practice.dao.RatingDao;
+import ru.relex.summer_practice.dao.RatingDAO;
 import ru.relex.summer_practice.db.Person;
 import ru.relex.summer_practice.db.Question;
 import ru.relex.summer_practice.db.Rating;
@@ -10,7 +10,7 @@ import javax.persistence.*;
 /**
  * Created by Sasha on 12.07.2015.
  */
-public class RatingDaoImpl extends GenericCrudDaoImpl<Rating, Long> implements RatingDao {
+public class RatingDAOImpl extends GenericCRUDDAOImpl<Rating, Long> implements RatingDAO {
 
     public void AddRating(Person person, Question question, int rating) {
         if(question.getQuestioner().getId() != person.getId()) {

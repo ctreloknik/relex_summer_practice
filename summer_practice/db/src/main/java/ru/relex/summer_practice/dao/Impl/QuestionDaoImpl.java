@@ -1,20 +1,17 @@
 package ru.relex.summer_practice.dao.Impl;
 
-import ru.relex.summer_practice.dao.QuestionDao;
+import ru.relex.summer_practice.dao.QuestionDAO;
 import ru.relex.summer_practice.db.Lecture;
 import ru.relex.summer_practice.db.Person;
 import ru.relex.summer_practice.db.Question;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by Sasha on 12.07.2015.
  */
-public class QuestionDaoImpl extends GenericCrudDaoImpl<Question, Long> implements QuestionDao {
+public class QuestionDAOImpl extends GenericCRUDDAOImpl<Question, Long> implements QuestionDAO {
     @Override
     public List<Question> ReadQuestionOrderByPerson(boolean desc) {
         String jpql = desc == false ? "SELECT q from Person p JOIN p.questions q ORDER BY p.login" :

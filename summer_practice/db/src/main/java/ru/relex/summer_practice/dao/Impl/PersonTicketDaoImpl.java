@@ -1,6 +1,6 @@
 package ru.relex.summer_practice.dao.Impl;
 
-import ru.relex.summer_practice.dao.PersonTicketDao;
+import ru.relex.summer_practice.dao.PersonTicketDAO;
 import ru.relex.summer_practice.db.Person;
 import ru.relex.summer_practice.db.PersonTicket;
 import ru.relex.summer_practice.db.Ticket;
@@ -9,14 +9,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by Nikita on 12.07.2015.
  */
-public class PersonTicketDaoImpl extends GenericCrudDaoImpl<PersonTicket, Long> implements PersonTicketDao{
+public class PersonTicketDAOImpl extends GenericCRUDDAOImpl<PersonTicket, Long> implements PersonTicketDAO {
     public Collection getPersonsByTickets(Ticket ticket) {
         EntityManagerFactory emf = null;
         EntityManager em = null;

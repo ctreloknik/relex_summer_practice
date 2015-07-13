@@ -5,6 +5,6 @@ import ru.relex.summer_practice.db.Person;
 /**
  * Created by Sasha on 12.07.2015.
  */
-public interface PersonDao extends GenericCrudDao<Person, Long> {
+public interface PersonDAO extends GenericCRUDDAO<Person, Long> {
     public Person Login(String login, String password);
 }

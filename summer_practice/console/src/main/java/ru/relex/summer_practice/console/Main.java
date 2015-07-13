@@ -1,7 +1,6 @@
 package ru.relex.summer_practice.console;
 
 import ru.relex.summer_practice.dao.Impl.*;
-import ru.relex.summer_practice.dao.QuestionDao;
 import ru.relex.summer_practice.db.*;
 
 import java.util.Date;
@@ -10,11 +9,11 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static PersonDaoImpl personDao = new PersonDaoImpl();
+    private static PersonDAOImpl personDao = new PersonDAOImpl();
     private static Scanner inputReader = new Scanner(System.in);
-    private static LectureDaoImpl lectureDao = new LectureDaoImpl();
-    private static QuestionDaoImpl questionDao = new QuestionDaoImpl();
-    private static RatingDaoImpl ratingDao = new RatingDaoImpl();
+    private static LectureDAOImpl lectureDao = new LectureDAOImpl();
+    private static QuestionDAOImpl questionDao = new QuestionDAOImpl();
+    private static RatingDAOImpl ratingDao = new RatingDAOImpl();
     private static List<Lecture> lectures;
     private static List<Question> questions;
 	public static void main( String[] args )
@@ -134,8 +133,8 @@ public class Main {
         System.out.print("NUMBER: ");
         Long number = Long.parseLong(inputReader.nextLine());
         Lecture lecture = lectureDao.Read(number);
-        System.out.println("Вы выбрали лекцию "+lecture.getTopic());
-        System.out.println("Введите текст вопроса");
+        System.out.println("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ "+lecture.getTopic());
+        System.out.println("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
         String text = inputReader.nextLine();
         Question question = new Question();
         question.setQuestioner(person);
