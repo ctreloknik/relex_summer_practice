@@ -1,39 +1,38 @@
 package ru.relex.summer_practice.dao.Impl;
 
-import ru.relex.summer_practice.dao.CourseDao;
-import ru.relex.summer_practice.db.Course;
+import ru.relex.summer_practice.dao.ConferenceDao;
+import ru.relex.summer_practice.db.Conference;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.util.Date;
 
 /**
  * Created by Eugene on 12.07.2015.
  */
-public class CourseDaoImpl extends GenericCrudDaoImpl<Course, Long> implements CourseDao {
-    public Date getStartDate(Course course) {
+public class ConferenceDaoImplImpl extends GenericCrudDaoImplImpl<Conference, Long> implements ConferenceDao {
+    public String getName(Conference conference) {
         EntityManagerFactory emf = null;
         EntityManager em = null;
         try {
             emf = Persistence.createEntityManagerFactory("PERSISTENCE");
             em = emf.createEntityManager();
-            Long course_id = course.getId();
-            return em.find(Course.class, course_id).getStartDate();
+            Long conference_id = conference.getId();
+            return em.find(Conference.class, conference_id).getName();
         } finally {
             if (em != null ) em.close();
             if (emf != null) emf.close();
         }
     }
 
-    public Date getEndDate(Course course) {
+    public String getDescription(Conference conference) {
         EntityManagerFactory emf = null;
         EntityManager em = null;
         try {
             emf = Persistence.createEntityManagerFactory("PERSISTENCE");
             em = emf.createEntityManager();
-            Long course_id = course.getId();
-            return em.find(Course.class, course_id).getEndDate();
+            Long conference_id = conference.getId();
+            return em.find(Conference.class, conference_id).getDescription();
         } finally {
             if (em != null ) em.close();
             if (emf != null) emf.close();

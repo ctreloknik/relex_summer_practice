@@ -1,9 +1,9 @@
 package ru.relex.summer_practice.dao.Impl;
 
-import ru.relex.summer_practice.dao.FoundersDao;
-import ru.relex.summer_practice.db.Conference;
-import ru.relex.summer_practice.db.Founders;
+import ru.relex.summer_practice.dao.PersonTicketDao;
 import ru.relex.summer_practice.db.Person;
+import ru.relex.summer_practice.db.PersonTicket;
+import ru.relex.summer_practice.db.Ticket;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,15 +14,15 @@ import java.util.Collection;
 /**
  * Created by Nikita on 12.07.2015.
  */
-public class FoundersDaoImpl extends GenericCrudDaoImpl<Founders, Long> implements FoundersDao {
-    public Collection getConferensesByPerson(Person person) {
+public class PersonTicketDaoImplImpl extends GenericCrudDaoImplImpl<PersonTicket, Long> implements PersonTicketDao {
+    public Collection getPersonsByTickets(Ticket ticket) {
         EntityManagerFactory emf = null;
         EntityManager em = null;
         try {
             emf = Persistence.createEntityManagerFactory("PERSISTENCE");
             em = emf.createEntityManager();
-            Query query = em.createQuery("select f from FOUNDERS f where f.person = :person")
-                    .setParameter("person", person);
+            Query query = em.createQuery("select pt from PERSON_TICKET pt where pt.ticket = :ticket")
+                    .setParameter("ticket", ticket);
             return query.getResultList();
         } finally {
             if (em != null ) em.close();
@@ -30,14 +30,14 @@ public class FoundersDaoImpl extends GenericCrudDaoImpl<Founders, Long> implemen
         }
     }
 
-    public Collection getPersonsByConference(Conference conference) {
+    public Collection getTicketsByPerson(Person person) {
         EntityManagerFactory emf = null;
         EntityManager em = null;
         try {
             emf = Persistence.createEntityManagerFactory("PERSISTENCE");
             em = emf.createEntityManager();
-            Query query = em.createQuery("select f from FOUNDERS f where f.conference = :conference")
-                    .setParameter("conference", conference);
+            Query query = em.createQuery("select pt from PERSON_TICKET pt where pt.person = :person")
+                    .setParameter("person", person);
             return query.getResultList();
         } finally {
             if (em != null ) em.close();

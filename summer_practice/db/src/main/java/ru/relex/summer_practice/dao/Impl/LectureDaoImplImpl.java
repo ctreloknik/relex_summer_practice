@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * Created by Eugene on 12.07.2015.
  */
-public class LectureDaoImpl extends GenericCrudDaoImpl<Lecture, Long> implements LectureDao {
+public class LectureDaoImplImpl extends GenericCrudDaoImplImpl<Lecture, Long> implements LectureDao {
     public String getTopic(Lecture lecture) {
         EntityManagerFactory emf = null;
         EntityManager em = null;

@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by Sasha on 12.07.2015.
  */
-public class PersonDaoImpl extends GenericCrudDaoImpl<Person, Long> implements PersonDao {
+public class PersonDaoImplImpl extends GenericCrudDaoImplImpl<Person, Long> implements PersonDao {
     public Person Login(String login, String password) {
         String jpa = "SELECT p FROM Person p WHERE p.login = :login and p.password = :password";
         HashMap<String,Object> parametres = new HashMap<>();

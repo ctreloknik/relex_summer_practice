@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Sasha on 12.07.2015.
  */
-public class QuestionDaoImpl extends GenericCrudDaoImpl<Question, Long> implements QuestionDao {
+public class QuestionDaoImplImpl extends GenericCrudDaoImplImpl<Question, Long> implements QuestionDao {
     @Override
     public List<Question> ReadQuestionOrderByPerson(boolean desc) {
         String jpql = desc == false ? "SELECT q from Person p JOIN p.questions q ORDER BY p.login" :

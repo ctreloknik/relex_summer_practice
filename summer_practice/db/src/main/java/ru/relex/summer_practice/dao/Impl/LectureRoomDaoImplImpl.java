@@ -1,7 +1,7 @@
 package ru.relex.summer_practice.dao.Impl;
 
-import ru.relex.summer_practice.dao.ConferenceDao;
-import ru.relex.summer_practice.db.Conference;
+import ru.relex.summer_practice.dao.LectureRoomDao;
+import ru.relex.summer_practice.db.LectureRoom;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,31 +10,31 @@ import javax.persistence.Persistence;
 /**
  * Created by Eugene on 12.07.2015.
  */
-public class ConferenceDaoImpl extends GenericCrudDaoImpl<Conference, Long> implements ConferenceDao {
-    public String getName(Conference conference) {
+public class LectureRoomDaoImplImpl extends GenericCrudDaoImplImpl<LectureRoom, Long> implements LectureRoomDao {
+    public String getNumber(LectureRoom lectureRoom) {
         EntityManagerFactory emf = null;
         EntityManager em = null;
         try {
             emf = Persistence.createEntityManagerFactory("PERSISTENCE");
             em = emf.createEntityManager();
-            Long conference_id = conference.getId();
-            return em.find(Conference.class, conference_id).getName();
+            Long lectureRoom_id = lectureRoom.getId();
+            return em.find(LectureRoom.class, lectureRoom_id).getNumber();
         } finally {
-            if (em != null ) em.close();
+            if (em != null) em.close();
             if (emf != null) emf.close();
         }
     }
 
-    public String getDescription(Conference conference) {
+    public int getSeating(LectureRoom lectureRoom) {
         EntityManagerFactory emf = null;
         EntityManager em = null;
         try {
             emf = Persistence.createEntityManagerFactory("PERSISTENCE");
             em = emf.createEntityManager();
-            Long conference_id = conference.getId();
-            return em.find(Conference.class, conference_id).getDescription();
+            Long lectureRoom_id = lectureRoom.getId();
+            return em.find(LectureRoom.class, lectureRoom_id).getSeating();
         } finally {
-            if (em != null ) em.close();
+            if (em != null) em.close();
             if (emf != null) emf.close();
         }
     }

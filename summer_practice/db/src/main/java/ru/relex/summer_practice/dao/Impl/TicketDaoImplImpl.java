@@ -10,7 +10,7 @@ import javax.persistence.Persistence;
 /**
  * Created by Nikita on 12.07.2015.
  */
-public class TicketDaoImpl extends GenericCrudDaoImpl<Ticket, Long> implements TicketDao {
+public class TicketDaoImplImpl extends GenericCrudDaoImplImpl<Ticket, Long> implements TicketDao {
     public int getPrice(Ticket ticket) {
         EntityManagerFactory emf = null;
         EntityManager em = null;

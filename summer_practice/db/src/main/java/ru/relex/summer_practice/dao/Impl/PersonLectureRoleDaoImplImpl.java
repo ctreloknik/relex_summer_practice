@@ -6,5 +6,5 @@ import ru.relex.summer_practice.db.PersonLectureRole;
 /**
  * Created by Nikita on 12.07.2015.
  */
-public class PersonLectureRoleDaoImpl extends GenericCrudDaoImpl<PersonLectureRole, Long> implements PersonLectureRoleDao {
+public class PersonLectureRoleDaoImplImpl extends GenericCrudDaoImplImpl<PersonLectureRole, Long> implements PersonLectureRoleDao {
 }

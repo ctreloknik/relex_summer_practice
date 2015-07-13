@@ -1,10 +1,10 @@
 package ru.relex.summer_practice.console;
 
 
-import ru.relex.summer_practice.dao.Impl.LectureDaoImpl;
-import ru.relex.summer_practice.dao.Impl.PersonDaoImpl;
-import ru.relex.summer_practice.dao.Impl.QuestionDaoImpl;
-import ru.relex.summer_practice.dao.Impl.RatingDaoImpl;
+import ru.relex.summer_practice.dao.Impl.LectureDaoImplImpl;
+import ru.relex.summer_practice.dao.Impl.PersonDaoImplImpl;
+import ru.relex.summer_practice.dao.Impl.QuestionDaoImplImpl;
+import ru.relex.summer_practice.dao.Impl.RatingDaoImplImpl;
 import ru.relex.summer_practice.db.Lecture;
 import ru.relex.summer_practice.db.Person;
 import ru.relex.summer_practice.db.Question;
@@ -16,11 +16,11 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static PersonDaoImpl personDao = new PersonDaoImpl();
+    private static PersonDaoImplImpl personDao = new PersonDaoImplImpl();
     private static Scanner inputReader = new Scanner(System.in);
-    private static LectureDaoImpl lectureDao = new LectureDaoImpl();
-    private static QuestionDaoImpl questionDao = new QuestionDaoImpl();
-    private static RatingDaoImpl ratingDao = new RatingDaoImpl();
+    private static LectureDaoImplImpl lectureDao = new LectureDaoImplImpl();
+    private static QuestionDaoImplImpl questionDao = new QuestionDaoImplImpl();
+    private static RatingDaoImplImpl ratingDao = new RatingDaoImplImpl();
     private static List<Lecture> lectures;
     private static List<Question> questions;
 	public static void main( String[] args )
