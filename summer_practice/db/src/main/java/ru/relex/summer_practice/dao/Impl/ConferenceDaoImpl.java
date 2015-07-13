@@ -13,31 +13,6 @@ import java.util.Collection;
  * Created by Eugene on 12.07.2015.
  */
 public class ConferenceDaoImpl extends GenericCrudDaoImpl<Conference, Long> implements ConferenceDao{
-    @Override
-    public Conference Create(Conference conference) {
-        return super.Create(conference);
-    }
-
-    @Override
-    public Conference Read(Long id) {
-        return super.Read(id);
-    }
-
-    @Override
-    public Collection<Conference> ReadAll() {
-        return super.ReadAll();
-    }
-
-    @Override
-    public Conference Update(Conference conference) {
-        return super.Update(conference);
-    }
-
-    @Override
-    public void Delete(Long id) {
-        super.Delete(id);
-    }
-
     public String getName(Conference conference) {
         EntityManagerFactory emf = null;
         EntityManager em = null;

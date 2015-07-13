@@ -9,36 +9,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Eugene on 12.07.2015.
  */
 public class LectureDaoImpl extends GenericCrudDaoImpl<Lecture, Long> implements LectureDao{
-    @Override
-    public Lecture Create(Lecture lecture) {
-        return super.Create(lecture);
-    }
-
-    @Override
-    public Lecture Read(Long id) {
-        return super.Read(id);
-    }
-
-    @Override
-    public Collection<Lecture> ReadAll() {
-        return super.ReadAll();
-    }
-
-    @Override
-    public Lecture Update(Lecture lecture) {
-        return super.Update(lecture);
-    }
-
-    @Override
-    public void Delete(Long id) {
-        super.Delete(id);
-    }
-
     public String getTopic(Lecture lecture) {
         EntityManagerFactory emf = null;
         EntityManager em = null;

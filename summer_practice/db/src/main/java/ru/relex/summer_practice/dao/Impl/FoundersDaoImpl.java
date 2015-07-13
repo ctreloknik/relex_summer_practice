@@ -9,34 +9,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by Nikita on 12.07.2015.
  */
 public class FoundersDaoImpl extends GenericCrudDaoImpl<Founders, Long> implements FoundersDao{
-    public Founders Create(Founders founders){
-        return super.Create(founders);
-    }
-
-    public Founders Read(Long id){
-        return super.Read(id);
-    }
-
-    public Collection<Founders> ReadAll(){
-        return super.ReadAll();
-    }
-
-    public Founders Update(Founders founders){
-        return super.Update(founders);
-    }
-
-    public void Delete(Long id){
-        super.Delete(id);
-    }
-
     public Collection getConferensesByPerson(Person person) {
         EntityManagerFactory emf = null;
         EntityManager em = null;

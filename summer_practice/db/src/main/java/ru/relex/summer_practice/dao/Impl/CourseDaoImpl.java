@@ -14,31 +14,6 @@ import java.util.Date;
  * Created by Eugene on 12.07.2015.
  */
 public class CourseDaoImpl extends GenericCrudDaoImpl<Course, Long> implements CourseDao{
-    @Override
-    public Course Create(Course course) {
-        return super.Create(course);
-    }
-
-    @Override
-    public Course Read(Long id) {
-        return super.Read(id);
-    }
-
-    @Override
-    public Collection<Course> ReadAll() {
-        return super.ReadAll();
-    }
-
-    @Override
-    public Course Update(Course course) {
-        return super.Update(course);
-    }
-
-    @Override
-    public void Delete(Long id) {
-        super.Delete(id);
-    }
-
     public Date getStartDate(Course course) {
         EntityManagerFactory emf = null;
         EntityManager em = null;
