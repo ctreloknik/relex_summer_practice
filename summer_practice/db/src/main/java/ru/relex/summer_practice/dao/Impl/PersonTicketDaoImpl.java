@@ -26,7 +26,7 @@ public class PersonTicketDaoImpl extends GenericCrudDaoImpl<PersonTicket, Long> 
         return super.Read(id);
     }
 
-    public Collection<PersonTicket> ReadAll(){
+    public List<PersonTicket> ReadAll(){
         return super.ReadAll();
     }
 

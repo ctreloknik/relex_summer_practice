@@ -67,7 +67,6 @@ public class GenericCrudDaoImpl<T, PK> implements GenericCrudDao<T, PK> {
             CriteriaQuery<T> all = cq.select(rootEntry);
             return em.createQuery(all).getResultList();
         }finally {
-     
             if (em.getTransaction().isActive()) em.getTransaction().rollback();
             if (em != null && em.isOpen()) em.close();
             if (emf != null && emf.isOpen()) emf.close();
@@ -85,7 +84,6 @@ public class GenericCrudDaoImpl<T, PK> implements GenericCrudDao<T, PK> {
             em.getTransaction().commit();
             return t;
         }finally {
-
             if (em.getTransaction().isActive()) em.getTransaction().rollback();
             if (em != null && em.isOpen()) em.close();
             if (emf != null && emf.isOpen()) emf.close();
