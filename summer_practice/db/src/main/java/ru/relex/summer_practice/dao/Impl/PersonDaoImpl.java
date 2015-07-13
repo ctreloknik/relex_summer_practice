@@ -1,6 +1,6 @@
 package ru.relex.summer_practice.dao.Impl;
 
-import ru.relex.summer_practice.dao.PersonDAO;
+import ru.relex.summer_practice.dao.PersonDao;
 import ru.relex.summer_practice.db.Person;
 
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by Sasha on 12.07.2015.
  */
-public class PersonDAOImpl extends GenericCRUDDAOImpl<Person, Long> implements PersonDAO {
+public class PersonDaoImpl extends GenericCrudDaoImpl<Person, Long> implements PersonDao {
     public Person Login(String login, String password) {
         String jpa = "SELECT p FROM Person p WHERE p.login = :login and p.password = :password";
         HashMap<String,Object> parametres = new HashMap<>();

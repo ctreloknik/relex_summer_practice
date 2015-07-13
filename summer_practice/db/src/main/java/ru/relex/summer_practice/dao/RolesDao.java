@@ -5,5 +5,5 @@ import ru.relex.summer_practice.db.Roles;
 /**
  * Created by Nikita on 12.07.2015.
  */
-public interface RolesDAO extends GenericCRUDDAO<Roles, Long> {
+public interface RolesDao extends GenericCrudDao<Roles, Long> {
 }

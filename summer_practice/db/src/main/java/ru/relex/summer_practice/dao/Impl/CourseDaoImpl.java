@@ -1,6 +1,6 @@
 package ru.relex.summer_practice.dao.Impl;
 
-import ru.relex.summer_practice.dao.CourseDAO;
+import ru.relex.summer_practice.dao.CourseDao;
 import ru.relex.summer_practice.db.Course;
 
 import javax.persistence.EntityManager;
@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * Created by Eugene on 12.07.2015.
  */
-public class CourseDAOImpl extends GenericCRUDDAOImpl<Course, Long> implements CourseDAO {
+public class CourseDaoImpl extends GenericCrudDaoImpl<Course, Long> implements CourseDao {
     public Date getStartDate(Course course) {
         EntityManagerFactory emf = null;
         EntityManager em = null;

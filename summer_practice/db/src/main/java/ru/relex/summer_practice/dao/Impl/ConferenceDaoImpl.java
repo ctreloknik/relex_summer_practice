@@ -1,6 +1,6 @@
 package ru.relex.summer_practice.dao.Impl;
 
-import ru.relex.summer_practice.dao.ConferenceDAO;
+import ru.relex.summer_practice.dao.ConferenceDao;
 import ru.relex.summer_practice.db.Conference;
 
 import javax.persistence.EntityManager;
@@ -10,7 +10,7 @@ import javax.persistence.Persistence;
 /**
  * Created by Eugene on 12.07.2015.
  */
-public class ConferenceDAOImpl extends GenericCRUDDAOImpl<Conference, Long> implements ConferenceDAO {
+public class ConferenceDaoImpl extends GenericCrudDaoImpl<Conference, Long> implements ConferenceDao {
     public String getName(Conference conference) {
         EntityManagerFactory emf = null;
         EntityManager em = null;

@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * Created by Sasha on 12.07.2015.
  */
-public interface LectureDAO extends GenericCRUDDAO<Lecture, Long> {
+public interface LectureDao extends GenericCrudDao<Lecture, Long> {
     public String getTopic(Lecture lecture);
     public Date getDatetime(Lecture lecture);
     public String getDescription(Lecture lecture);

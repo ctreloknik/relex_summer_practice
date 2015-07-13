@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by Sasha on 12.07.2015.
  */
-public interface QuestionDAO extends GenericCRUDDAO<Question, Long> {
+public interface QuestionDao extends GenericCrudDao<Question, Long> {
     public List<Question> ReadQuestionOrderByDate (boolean desc);
     public List<Question> ReadQuestionOrderByRating (boolean desc);
     public List<Question> ReadQuestionOrderByPerson (boolean desc);

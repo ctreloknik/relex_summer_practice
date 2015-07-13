@@ -1,11 +1,9 @@
 package ru.relex.summer_practice.dao.Impl;
 
-import ru.relex.summer_practice.dao.GenericCRUDDAO;
+import ru.relex.summer_practice.dao.GenericCrudDao;
 
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -16,10 +14,10 @@ import java.util.Map;
 /**
  * Created by Sasha on 12.07.2015.
  */
-public class GenericCRUDDAOImpl<T, PK> implements GenericCRUDDAO<T, PK> {
+public class GenericCrudDaoImpl<T, PK> implements GenericCrudDao<T, PK> {
     private Class<T> instance;
 
-    public GenericCRUDDAOImpl(){
+    public GenericCrudDaoImpl(){
         this.instance = (Class<T>)(((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
     }
 

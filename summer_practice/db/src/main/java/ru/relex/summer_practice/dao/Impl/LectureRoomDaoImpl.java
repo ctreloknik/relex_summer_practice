@@ -1,6 +1,6 @@
 package ru.relex.summer_practice.dao.Impl;
 
-import ru.relex.summer_practice.dao.LectureRoomDAO;
+import ru.relex.summer_practice.dao.LectureRoomDao;
 import ru.relex.summer_practice.db.LectureRoom;
 
 import javax.persistence.EntityManager;
@@ -10,7 +10,7 @@ import javax.persistence.Persistence;
 /**
  * Created by Eugene on 12.07.2015.
  */
-public class LectureRoomDAOImpl extends GenericCRUDDAOImpl<LectureRoom, Long> implements LectureRoomDAO {
+public class LectureRoomDaoImpl extends GenericCrudDaoImpl<LectureRoom, Long> implements LectureRoomDao {
     public String getNumber(LectureRoom lectureRoom) {
         EntityManagerFactory emf = null;
         EntityManager em = null;
