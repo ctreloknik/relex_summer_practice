@@ -5,43 +5,24 @@ import ru.relex.summer_practice.db.Person;
 import ru.relex.summer_practice.db.PersonTicket;
 import ru.relex.summer_practice.db.Ticket;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
 import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * Created by Nikita on 12.07.2015.
  */
 public class PersonTicketDaoImpl extends GenericCrudDaoImpl<PersonTicket, Long> implements PersonTicketDao {
     public Collection getPersonsByTickets(Ticket ticket) {
-        EntityManagerFactory emf = null;
-        EntityManager em = null;
-        try {
-            emf = Persistence.createEntityManagerFactory("PERSISTENCE");
-            em = emf.createEntityManager();
-            Query query = em.createQuery("select pt from PERSON_TICKET pt where pt.ticket = :ticket")
-                    .setParameter("ticket", ticket);
-            return query.getResultList();
-        } finally {
-            if (em != null ) em.close();
-            if (emf != null) emf.close();
-        }
+        String jpql = "SELECT pt from PERSON_TICKET tp WHERE pt.ticket = :ticket";
+        HashMap<String,Object> parameters = new HashMap<>();
+        parameters.put("ticket", ticket);
+        return this.EexecuteQuery(jpql,parameters);
     }
 
     public Collection getTicketsByPerson(Person person) {
-        EntityManagerFactory emf = null;
-        EntityManager em = null;
-        try {
-            emf = Persistence.createEntityManagerFactory("PERSISTENCE");
-            em = emf.createEntityManager();
-            Query query = em.createQuery("select pt from PERSON_TICKET pt where pt.person = :person")
-                    .setParameter("person", person);
-            return query.getResultList();
-        } finally {
-            if (em != null ) em.close();
-            if (emf != null) emf.close();
-        }
+        String jpql = "SELECT pt from PERSON_TICKET tp WHERE pt.person = :person";
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("person", person);
+        return this.EexecuteQuery(jpql, parameters);
     }
 }

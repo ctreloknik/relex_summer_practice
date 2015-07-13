@@ -47,13 +47,13 @@ public class DBModuleTest {
         role.setName("Создатель конференции");
         roles.Create(role);
 
-        System.out.println("!!!!!!!!!!  ONE PERSON ADDED !!!!!!!!!!!!!!!!");
+        System.out.println("!!!!!!!!!!  ONE ROLE ADDED !!!!!!!!!!!!!!!!");
 
         System.out.println("!!!!!!!!! THAT IS WORKING !!!!!!!!!");
         role.setName("Докладчик");
         roles.Create(role);
 
-        System.out.println("!!!!!!!!!!  TWO PERSON ADDED !!!!!!!!!!!!!!!!");
+        System.out.println("!!!!!!!!!!  TWO ROLE ADDED !!!!!!!!!!!!!!!!");
 
         ArrayList<Roles> getRoles = (ArrayList<Roles>)roles.ReadAll();
         for (Roles out : getRoles)
