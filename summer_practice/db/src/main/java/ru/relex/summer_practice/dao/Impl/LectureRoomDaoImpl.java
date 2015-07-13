@@ -12,31 +12,6 @@ import java.util.Collection;
  * Created by Eugene on 12.07.2015.
  */
 public class LectureRoomDaoImpl extends GenericCrudDaoImpl<LectureRoom, Long> implements LectureRoomDao{
-    @Override
-    public LectureRoom Create(LectureRoom lectureRoom) {
-        return super.Create(lectureRoom);
-    }
-
-    @Override
-    public LectureRoom Read(Long id) {
-        return super.Read(id);
-    }
-
-    @Override
-    public Collection<LectureRoom> ReadAll() {
-        return super.ReadAll();
-    }
-
-    @Override
-    public LectureRoom Update(LectureRoom lectureRoom) {
-        return super.Update(lectureRoom);
-    }
-
-    @Override
-    public void Delete(Long id) {
-        super.Delete(id);
-    }
-
     public String getNumber(LectureRoom lectureRoom) {
         EntityManagerFactory emf = null;
         EntityManager em = null;
