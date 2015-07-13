@@ -5,5 +5,5 @@ import ru.relex.summer_practice.db.LecturePerson;
 /**
  * Created by Sasha on 12.07.2015.
  */
-public interface LecturePersonDao extends GenericCrudDao<LecturePerson, Long> {
+public interface LecturePersonDAO extends GenericCRUDDAO<LecturePerson, Long> {
 }

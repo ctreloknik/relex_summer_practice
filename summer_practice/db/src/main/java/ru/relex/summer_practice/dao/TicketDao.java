@@ -5,6 +5,6 @@ import ru.relex.summer_practice.db.Ticket;
 /**
  * Created by Nikita on 12.07.2015.
  */
-public interface TicketDao extends GenericCrudDao<Ticket, Long>{
+public interface TicketDAO extends GenericCRUDDAO<Ticket, Long> {
     public int getPrice(Ticket ticket);
 }
