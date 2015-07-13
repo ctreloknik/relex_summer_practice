@@ -1,7 +1,7 @@
 package ru.relex.summer_practice.console;
 
-import ru.relex.summer_practice.dao.Impl.PersonDAOImpl;
-import ru.relex.summer_practice.dao.Impl.RolesDAOImpl;
+import ru.relex.summer_practice.dao.Impl.PersonDaoImpl;
+import ru.relex.summer_practice.dao.Impl.RolesDaoImpl;
 import ru.relex.summer_practice.db.Person;
 import ru.relex.summer_practice.db.Roles;
 
@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class DBModuleTest {
     public static void personTest(){
-        PersonDAOImpl personDao = new PersonDAOImpl();
+        PersonDaoImpl personDao = new PersonDaoImpl();
         Person person = new Person();
 
         System.out.println("!!!!!!!!! THAT IS WORKING !!!!!!!!!");
@@ -40,7 +40,7 @@ public class DBModuleTest {
     }
 
     public static void RolesTest(){
-        RolesDAOImpl roles = new RolesDAOImpl();
+        RolesDaoImpl roles = new RolesDaoImpl();
         Roles role = new Roles();
 
         System.out.println("!!!!!!!!! THAT IS WORKING !!!!!!!!!");

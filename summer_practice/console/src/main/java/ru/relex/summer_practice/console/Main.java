@@ -1,7 +1,14 @@
 package ru.relex.summer_practice.console;
 
-import ru.relex.summer_practice.dao.Impl.*;
-import ru.relex.summer_practice.db.*;
+
+import ru.relex.summer_practice.dao.Impl.LectureDaoImpl;
+import ru.relex.summer_practice.dao.Impl.PersonDaoImpl;
+import ru.relex.summer_practice.dao.Impl.QuestionDaoImpl;
+import ru.relex.summer_practice.dao.Impl.RatingDaoImpl;
+import ru.relex.summer_practice.db.Lecture;
+import ru.relex.summer_practice.db.Person;
+import ru.relex.summer_practice.db.Question;
+
 
 import java.util.Date;
 import java.util.List;
@@ -9,17 +16,21 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static PersonDAOImpl personDao = new PersonDAOImpl();
+    private static PersonDaoImpl personDao = new PersonDaoImpl();
     private static Scanner inputReader = new Scanner(System.in);
-    private static LectureDAOImpl lectureDao = new LectureDAOImpl();
-    private static QuestionDAOImpl questionDao = new QuestionDAOImpl();
-    private static RatingDAOImpl ratingDao = new RatingDAOImpl();
+    private static LectureDaoImpl lectureDao = new LectureDaoImpl();
+    private static QuestionDaoImpl questionDao = new QuestionDaoImpl();
+    private static RatingDaoImpl ratingDao = new RatingDaoImpl();
     private static List<Lecture> lectures;
     private static List<Question> questions;
 	public static void main( String[] args )
     {
-        //lectures = lectureDao.ReadAll();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Menu();
+        Lecture lecture = new Lecture();
+        lecture.setTopic("Sasha testing");
+        lecture.setDatetime(new Date());
+        lecture.setDescription("I'm testing function");
+        lectureDao.Create(lecture);
+        lectures = lectureDao.ReadAll();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Menu();
     }
 
     public static void Menu(){
@@ -133,8 +144,8 @@ public class Main {
         System.out.print("NUMBER: ");
         Long number = Long.parseLong(inputReader.nextLine());
         Lecture lecture = lectureDao.Read(number);
-        System.out.println("�� ������� ������ "+lecture.getTopic());
-        System.out.println("������� ����� �������");
+        System.out.println("Вы выбрали лекцию "+lecture.getTopic());
+        System.out.println("Введите свой вопрос");
         String text = inputReader.nextLine();
         Question question = new Question();
         question.setQuestioner(person);

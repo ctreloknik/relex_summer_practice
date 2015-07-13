@@ -9,7 +9,7 @@ import java.util.Collection;
 /**
  * Created by Sasha on 12.07.2015.
  */
-public interface FoundersDao extends GenericCRUDDAO<Founders, Long> {
+public interface FoundersDao extends GenericCrudDao<Founders, Long> {
     public Collection getConferensesByPerson(Person person);
     public Collection getPersonsByConference(Conference conference);
 }
