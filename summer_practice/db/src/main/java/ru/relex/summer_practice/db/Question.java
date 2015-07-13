@@ -37,6 +37,10 @@ public class Question {
     @Column(name = "MODERATED")
     private boolean Moderated;
 
+    @ManyToOne
+    @JoinColumn(name = "LECTURE_ID")
+    private Lecture lecture;
+
     @OneToMany(mappedBy = "question")
     private Set<Rating> ratings = new HashSet<Rating>();
 
@@ -96,7 +100,19 @@ public class Question {
         this.id = id;
     }
 
-    public Set<Rating> getRatings() {
+    public Lecture getLecture() {
+        return lecture;
+    }
+
+    public void setLecture(Lecture lecture) {
+        this.lecture = lecture;
+    }
+
+    public boolean isModerated() {
+        return Moderated;
+    }
+
+        public Set<Rating> getRatings() {
         return ratings;
     }
 }

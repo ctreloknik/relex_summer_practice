@@ -30,6 +30,8 @@ public class Lecture {
     @Column(name = "DESCRIPTION")
     private String description;
 
+    @OneToMany(mappedBy = "lecture")
+    private Set<Question> question = new HashSet<Question>();
 
     // доклады - люди
     @OneToMany(mappedBy = "lecture")
@@ -84,5 +86,10 @@ public class Lecture {
 
     public Set<Message> getMessages() {
         return message;
+
+    }
+
+    public Set<Question> getQuestion(){
+        return question;
     }
 }

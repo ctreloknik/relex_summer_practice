@@ -1,5 +1,6 @@
 package ru.relex.summer_practice.dao.Impl;
 
+import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -7,7 +8,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.lang.reflect.ParameterizedType;
-import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 import ru.relex.summer_practice.dao.GenericCrudDao;
 
@@ -32,8 +34,9 @@ public class GenericCrudDaoImpl<T, PK> implements GenericCrudDao<T, PK> {
             em.getTransaction().commit();
             return t;
         }finally {
-            if (em != null ) em.close();
-            if (emf != null) emf.close();
+            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            if (em != null && em.isOpen()) em.close();
+            if (emf != null && emf.isOpen()) emf.close();
         }
     }
 
@@ -45,12 +48,13 @@ public class GenericCrudDaoImpl<T, PK> implements GenericCrudDao<T, PK> {
             em = emf.createEntityManager();
             return em.find(instance, id);
         }finally {
-            if (em != null ) em.close();
-            if (emf != null) emf.close();
+            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            if (em != null && em.isOpen()) em.close();
+            if (emf != null && emf.isOpen()) emf.close();
         }
     }
 
-    public Collection<T> ReadAll() {
+    public List<T> ReadAll() {
         EntityManagerFactory emf = null;
         EntityManager em = null;
         try {
@@ -62,8 +66,9 @@ public class GenericCrudDaoImpl<T, PK> implements GenericCrudDao<T, PK> {
             CriteriaQuery<T> all = cq.select(rootEntry);
             return em.createQuery(all).getResultList();
         }finally {
-            if (em != null ) em.close();
-            if (emf != null) emf.close();
+            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            if (em != null && em.isOpen()) em.close();
+            if (emf != null && emf.isOpen()) emf.close();
         }
     }
 
@@ -78,8 +83,9 @@ public class GenericCrudDaoImpl<T, PK> implements GenericCrudDao<T, PK> {
             em.getTransaction().commit();
             return t;
         }finally {
-            if (em != null ) em.close();
-            if (emf != null) emf.close();
+            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            if (em != null && em.isOpen()) em.close();
+            if (emf != null && emf.isOpen()) emf.close();
         }
     }
 
@@ -94,8 +100,41 @@ public class GenericCrudDaoImpl<T, PK> implements GenericCrudDao<T, PK> {
             em.remove(t);
             em.getTransaction().commit();
         }finally {
-            if (em != null ) em.close();
-            if (emf != null) emf.close();
+            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            if (em != null && em.isOpen()) em.close();
+            if (emf != null && emf.isOpen()) emf.close();
+        }
+    }
+
+    protected List<T> EexecuteQuery(String jpql, Map<String,Object> parametres){
+        EntityManagerFactory emf = null;
+        EntityManager em = null;
+        try {
+            emf = Persistence.createEntityManagerFactory("PERSISTENCE");
+            em = emf.createEntityManager();
+            Query query = em.createQuery(jpql);
+            for(Map.Entry<String,Object> entry : parametres.entrySet()){
+                query.setParameter(entry.getKey(),entry.getValue());
+            }
+            return query.getResultList();
+        }finally {
+            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            if (em != null && em.isOpen()) em.close();
+            if (emf != null && emf.isOpen()) emf.close();
+        }
+    }
+
+    protected List<T> EexecuteQuery(String jpql){
+        EntityManagerFactory emf = null;
+        EntityManager em = null;
+        try {
+            emf = Persistence.createEntityManagerFactory("PERSISTENCE");
+            em = emf.createEntityManager();
+            return em.createQuery(jpql).getResultList();
+        }finally {
+            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            if (em != null && em.isOpen()) em.close();
+            if (emf != null && emf.isOpen()) emf.close();
         }
     }
 }

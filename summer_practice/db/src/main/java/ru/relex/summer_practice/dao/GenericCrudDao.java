@@ -1,6 +1,6 @@
 package ru.relex.summer_practice.dao;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Sasha on 12.07.2015.
@@ -10,6 +10,5 @@ public interface GenericCrudDao<T, PK> {
     public T Read (PK id);
     public T Update(T t);
     public void Delete(PK id);
-    public Collection<T> ReadAll();
-
+    public List<T> ReadAll();
 }
