@@ -14,11 +14,9 @@ public class RatingDaoImpl extends GenericCrudDaoImpl<Rating, Long> implements R
 
     public void AddRating(Person person, Question question, int rating) {
         if(question.getQuestioner().getId() != person.getId()) {
-            EntityManagerFactory emf = null;
             EntityManager em = null;
             try {
-                emf = Persistence.createEntityManagerFactory("PERSISTENCE");
-                em = emf.createEntityManager();
+                em = Singleton.CreateEntityManager();
                 em.getTransaction().begin();
                 Query query = em.createQuery("SELECT r FROM Rating r WHERE r.person = :person and r.question = :question");
                 query.setParameter("person", person);
@@ -46,7 +44,6 @@ public class RatingDaoImpl extends GenericCrudDaoImpl<Rating, Long> implements R
             } finally {
                 if (em.getTransaction().isActive()) em.getTransaction().rollback();
                 if (em != null && em.isOpen()) em.close();
-                if (emf != null && emf.isOpen()) emf.close();
             }
         }
     }
