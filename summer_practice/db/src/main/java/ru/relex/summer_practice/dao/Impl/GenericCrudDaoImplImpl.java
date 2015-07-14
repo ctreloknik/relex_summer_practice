@@ -15,59 +15,63 @@ import java.util.List;
 public class GenericCrudDaoImplImpl<T, PK>  extends AbstructDaoImpl<T, PK> implements GenericCrudDao<T, PK> {
     private Class<T> instance;
 
+    public GenericCrudDaoImplImpl(Class<T> instance) {
+        this.instance = instance;
+    }
+
     public GenericCrudDaoImplImpl() {
-        this.instance = (Class<T>) (((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
+
     }
 
     public T Create(T t) {
-        EntityManager em = getEntityManager();
+        em = getEntityManager();
         t = em.merge(t);
-        closeEntityManager(em);
+        closeEntityManager();
         return t;
     }
 
     public T Read(PK id) {
-        EntityManager em = getEntityManager();
+        em  = getEntityManager();
         T t = em.find(instance, id);
-        closeEntityManager(em);
+        closeEntityManager();
         return t;
     }
 
 
     public List<T> ReadAll() {
-        EntityManager em = getEntityManager();
+        em  = getEntityManager();
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<T> cq = cb.createQuery(instance);
         Root<T> rootEntry = cq.from(instance);
         CriteriaQuery<T> all = cq.select(rootEntry);
         List<T> t = em.createQuery(all).getResultList();
-        closeEntityManager(em);
+        closeEntityManager();
         return t;
     }
 
     public T Update(T t) {
-        EntityManager em = getEntityManager();
+        em  = getEntityManager();
         t = em.merge(t);
-        closeEntityManager(em);
+        closeEntityManager();
         return t;
     }
 
     public void Delete(PK id) {
-        EntityManager em = getEntityManager();
+        em  = getEntityManager();
         T t = em.find(instance, id);
         em.remove(t);
-        closeEntityManager(em);
+        closeEntityManager();
     }
 
     @Override
     protected EntityManager getEntityManager() {
-        EntityManager em = Singleton.CreateEntityManager();
+        em = Singleton.CreateEntityManager();
         em.getTransaction().begin();
         return em;
     }
 
     @Override
-    protected void closeEntityManager(EntityManager em) {
+    protected void closeEntityManager() {
         if (em.getTransaction().isActive()) em.getTransaction().commit();
         if (em != null && em.isOpen()) em.close();
     }

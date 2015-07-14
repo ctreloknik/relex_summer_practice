@@ -2,7 +2,7 @@ package ru.relex.summer_practice.console;
 
 
 import ru.relex.summer_practice.dao.Impl.LectureDaoImplImpl;
-import ru.relex.summer_practice.dao.Impl.PersonDaoImplImpl;
+import ru.relex.summer_practice.dao.Impl.PersonDaoImpl;
 import ru.relex.summer_practice.dao.Impl.QuestionDaoImplImpl;
 import ru.relex.summer_practice.dao.Impl.RatingDaoImplImpl;
 import ru.relex.summer_practice.db.Lecture;
@@ -16,7 +16,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static PersonDaoImplImpl personDao = new PersonDaoImplImpl();
+    private static PersonDaoImpl personDao = new PersonDaoImpl();
     private static Scanner inputReader = new Scanner(System.in);
     private static LectureDaoImplImpl lectureDao = new LectureDaoImplImpl();
     private static QuestionDaoImplImpl questionDao = new QuestionDaoImplImpl();

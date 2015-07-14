@@ -10,24 +10,25 @@ import java.util.Map;
  */
 public abstract class AbstructDaoImpl<T, PK>{
 
+    protected EntityManager em;
     protected abstract EntityManager getEntityManager();
-    protected abstract void closeEntityManager(EntityManager em);
+    protected abstract void closeEntityManager();
 
     protected List<T> EexecuteQuery(String jpql, Map<String,Object> parametres){
-        EntityManager em = getEntityManager();
+        em = getEntityManager();
         Query query = em.createQuery(jpql);
         for(Map.Entry<String,Object> entry : parametres.entrySet()){
             query.setParameter(entry.getKey(),entry.getValue());
         }
         List<T> result = query.getResultList();
-        closeEntityManager(em);
+        closeEntityManager();
         return result;
     }
 
     protected List<T> EexecuteQuery(String jpql){
-        EntityManager em = getEntityManager();
+        em = getEntityManager();
         List<T> result = em.createQuery(jpql).getResultList();
-        closeEntityManager(em);
+        closeEntityManager();
         return result;
     }
 

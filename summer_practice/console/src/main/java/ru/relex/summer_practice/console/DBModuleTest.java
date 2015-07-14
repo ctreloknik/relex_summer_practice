@@ -1,6 +1,6 @@
 package ru.relex.summer_practice.console;
 
-import ru.relex.summer_practice.dao.Impl.PersonDaoImplImpl;
+import ru.relex.summer_practice.dao.Impl.PersonDaoImpl;
 import ru.relex.summer_practice.dao.Impl.RolesDaoImplImpl;
 import ru.relex.summer_practice.db.Person;
 import ru.relex.summer_practice.db.Roles;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class DBModuleTest {
     public static void personTest(){
-        PersonDaoImplImpl personDao = new PersonDaoImplImpl();
+        PersonDaoImpl personDao = new PersonDaoImpl();
         Person person = new Person();
 
         System.out.println("!!!!!!!!! THAT IS WORKING !!!!!!!!!");

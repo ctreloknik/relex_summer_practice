@@ -26,6 +26,10 @@ public class LectureDaoImplImpl extends GenericCrudDaoImplImpl<Lecture, Long> im
         }
     }
 
+    public LectureDaoImplImpl(){
+        super(Lecture.class);
+    }
+
     public Date getDatetime(Lecture lecture) {
         EntityManagerFactory emf = null;
         EntityManager em = null;

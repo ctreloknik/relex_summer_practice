@@ -10,7 +10,7 @@ import javax.persistence.Persistence;
 /**
  * Created by Eugene on 12.07.2015.
  */
-public class ConferenceDaoImplImpl extends GenericCrudDaoImplImpl<Conference, Long> implements ConferenceDao {
+public class ConferenceDaoImpl extends GenericCrudDaoImplImpl<Conference, Long> implements ConferenceDao {
     public String getName(Conference conference) {
         EntityManagerFactory emf = null;
         EntityManager em = null;

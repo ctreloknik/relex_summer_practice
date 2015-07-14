@@ -9,6 +9,7 @@
   <modules>
     <module>db</module>
     <module>console</module>
+    <module>web</module>
   </modules>
   <build>
         <plugins>

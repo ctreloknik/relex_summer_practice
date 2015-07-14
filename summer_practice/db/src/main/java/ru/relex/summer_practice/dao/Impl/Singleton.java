@@ -9,7 +9,11 @@ import javax.persistence.Persistence;
  */
 public class Singleton {
 
-    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCE");
+    private static EntityManagerFactory emf;
+
+    static {
+        emf = Persistence.createEntityManagerFactory("PERSISTENCE");
+    }
 
     public static EntityManager CreateEntityManager(){
         return emf.createEntityManager();
