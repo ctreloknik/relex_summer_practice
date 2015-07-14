@@ -11,7 +11,11 @@ import java.util.HashMap;
 /**
  * Created by Nikita on 12.07.2015.
  */
-public class FoundersDaoImplImpl extends GenericCrudDaoImplImpl<Founders, Long> implements FoundersDao {
+public class FoundersDaoImpl extends GenericCrudDaoImpl<Founders, Long> implements FoundersDao {
+    public FoundersDaoImpl(){
+        super(Founders.class);
+    }
+
     public Collection getConferensesByPerson(Person person) {
         String jpql = "select f from FOUNDERS f where f.person = :person";
         HashMap<String, Object> parametres = new HashMap<>();

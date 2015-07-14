@@ -10,7 +10,11 @@ import javax.persistence.Persistence;
 /**
  * Created by Eugene on 12.07.2015.
  */
-public class LectureRoomDaoImplImpl extends GenericCrudDaoImplImpl<LectureRoom, Long> implements LectureRoomDao {
+public class LectureRoomDaoImpl extends GenericCrudDaoImpl<LectureRoom, Long> implements LectureRoomDao {
+    public LectureRoomDaoImpl() {
+        super(LectureRoom.class);
+    }
+
     public String getNumber(LectureRoom lectureRoom) {
         EntityManagerFactory emf = null;
         EntityManager em = null;

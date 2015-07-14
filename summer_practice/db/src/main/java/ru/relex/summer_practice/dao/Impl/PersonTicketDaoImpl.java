@@ -11,7 +11,11 @@ import java.util.HashMap;
 /**
  * Created by Nikita on 12.07.2015.
  */
-public class PersonTicketDaoImplImpl extends GenericCrudDaoImplImpl<PersonTicket, Long> implements PersonTicketDao {
+public class PersonTicketDaoImpl extends GenericCrudDaoImpl<PersonTicket, Long> implements PersonTicketDao {
+    public PersonTicketDaoImpl(){
+        super(PersonTicket.class);
+    }
+
     public Collection getPersonsByTickets(Ticket ticket) {
         String jpql = "SELECT pt from PERSON_TICKET tp WHERE pt.ticket = :ticket";
         HashMap<String,Object> parameters = new HashMap<>();

@@ -1,7 +1,7 @@
 package ru.relex.summer_practice.console;
 
 import ru.relex.summer_practice.dao.Impl.PersonDaoImpl;
-import ru.relex.summer_practice.dao.Impl.RolesDaoImplImpl;
+import ru.relex.summer_practice.dao.Impl.RolesDaoImpl;
 import ru.relex.summer_practice.db.Person;
 import ru.relex.summer_practice.db.Roles;
 
@@ -40,7 +40,7 @@ public class DBModuleTest {
     }
 
     public static void RolesTest(){
-        RolesDaoImplImpl roles = new RolesDaoImplImpl();
+        RolesDaoImpl roles = new RolesDaoImpl();
         Roles role = new Roles();
 
         System.out.println("!!!!!!!!! THAT IS WORKING !!!!!!!!!");

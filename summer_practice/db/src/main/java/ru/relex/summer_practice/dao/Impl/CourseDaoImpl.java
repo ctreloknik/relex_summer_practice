@@ -11,7 +11,11 @@ import java.util.Date;
 /**
  * Created by Eugene on 12.07.2015.
  */
-public class CourseDaoImplImpl extends GenericCrudDaoImplImpl<Course, Long> implements CourseDao {
+public class CourseDaoImpl extends GenericCrudDaoImpl<Course, Long> implements CourseDao {
+    public CourseDaoImpl(){
+        super(Course.class);
+    }
+
     public Date getStartDate(Course course) {
         EntityManagerFactory emf = null;
         EntityManager em = null;

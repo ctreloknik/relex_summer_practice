@@ -6,6 +6,8 @@ import ru.relex.summer_practice.db.Roles;
 /**
  * Created by Nikita on 12.07.2015.
  */
-public class RolesDaoImplImpl extends GenericCrudDaoImplImpl<Roles, Long> implements RolesDao {
-
+public class RolesDaoImpl extends GenericCrudDaoImpl<Roles, Long> implements RolesDao {
+    public RolesDaoImpl(){
+        super(Roles.class);
+    }
 }
