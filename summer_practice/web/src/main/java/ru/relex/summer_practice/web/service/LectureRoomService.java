@@ -16,7 +16,7 @@ import java.util.Map;
  */
 
 @Stateless
-public class LectureRoomServise extends LectureRoomDaoImpl{
+public class LectureRoomService extends LectureRoomDaoImpl{
     @PersistenceContext(unitName = "PERSISTENCEUNIT")
     protected EntityManager em;
 
