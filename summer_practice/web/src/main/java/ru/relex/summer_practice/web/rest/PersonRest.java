@@ -31,29 +31,5 @@ public class PersonRest{
         }
         return Response.status(200).entity(result).build();
     }
-/*
-    @Override
-    public Person Create(Person person) {
-        return null;
-    }
 
-    @Override
-    public Person Read(Long id) {
-        return null;
-    }
-
-    @Override
-    public Person Update(Person person) {
-        return null;
-    }
-
-    @Override
-    public void Delete(Long id) {
-
-    }
-
-    @Override
-    public List<Person> ReadAll() {
-        return null;
-    }*/
 }
