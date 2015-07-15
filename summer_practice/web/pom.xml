@@ -80,6 +80,8 @@
       <version>2.2.0.GA</version>
       <scope>provided</scope>
     </dependency>
+
+
     <dependency>
       <groupId>ru.relex</groupId>
       <artifactId>db</artifactId>

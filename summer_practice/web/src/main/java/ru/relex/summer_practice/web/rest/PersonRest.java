@@ -8,9 +8,10 @@ import ru.relex.summer_practice.web.service.TestService;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,12 +25,36 @@ public class PersonRest{
     PersonService personService;
 
     @GET
-    public Response printMessage() {
-        String result = "All person:\n";
-        for (Person person : personService.ReadAll()){
-           result+=person.getLogin() + "\n";
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Person> printMessage() {
+        ArrayList<Person> persons = new ArrayList<>();
+        for(Person person : personService.ReadAll()){
+            Person p = new Person();
+            p.setLogin(person.getLogin());
+            p.setPassword(person.getPassword());
+            p.setFullname(person.getFullname());
+            p.setEmail(person.getEmail());
+            p.setPhoneNumber(person.getPhoneNumber());
+            p.setId(person.getId());
+            persons.add(p);
         }
-        return Response.status(200).entity(result).build();
+        return persons;
+    }
+
+    @POST
+    @Consumes({ MediaType.APPLICATION_JSON})
+    @Produces({ MediaType.APPLICATION_JSON})
+    @Path("/update")
+    public Person update(Person person) {
+        person =  personService.Update(person);
+        Person p = new Person();
+        p.setLogin(person.getLogin());
+        p.setPassword(person.getPassword());
+        p.setFullname(person.getFullname());
+        p.setEmail(person.getEmail());
+        p.setPhoneNumber(person.getPhoneNumber());
+        p.setId(person.getId());
+        return p;
     }
 
 }

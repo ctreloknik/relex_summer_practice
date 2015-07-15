@@ -4,24 +4,140 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap 101 Template</title>
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <title>Conferences</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css">
+    <!-- Latest compiled and minified JavaScript -->
   </head>
-  <body>
-	<div class="container"> 
-    <h1>Hello, world!</h1></div>
+  <body style="margin-top: 70px">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Conferences</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Persons</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+  <div class="container">
+    <h2>Persons</h2>
+    <p>Here's the list of persons below.<a href="#">Click here</a> to add new person.</p>
+    <hr/>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Login</th>
+        <th>Password</th>
+        <th>Full name</th>
+        <th>Phone number</th>
+        <th>Email</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody id="tablebody">
+
+      </tbody>
+    </table>
+  </div><!-- /.container -->
+
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+  <script>
+    $.ajax({
+      type: "GET",
+      url: "allperson/",
+      async: true,
+      dataType: "json",
+      jsonpCallback: 'jsonCallback',
+      contentType: "application/json",
+      success: function(event){
+        for(var i=0; i<event.length; i++){
+          var element = "<tr>";
+          element+="<td>"+event[i].login+"</td>";
+          element+="<td>"+event[i].password+"</td>";
+          element+="<td>"+event[i].fullname+"</td>";
+          element+="<td>"+event[i].phoneNumber+"</td>";
+          element+="<td>"+event[i].email+"</td>";
+          element+="<td><a href='#' class='edit' data-toggle='modal' data-target='#editmodel' ";
+          element+="data-login='"+event[i].login+"' ";
+          element+="data-password='"+event[i].password+"' ";
+          element+="data-fullname='"+event[i].fullname+"' ";
+          element+="data-phonenumber='"+event[i].phoneNumber+"' ";
+          element+="data-email='"+event[i].email+"' ";
+          element+="data-id='"+event[i].id+"' ";
+          element+="><span class='glyphicon glyphicon-pencil' aria-hidden='true'> Edit</span></a></td>";
+          element+="</tr>";
+          $("#tablebody").append(element);
+        }
+        $(document).on("click",".edit",function(){
+          $(".modal-body #mlogin").val($(this).data('login') == null ? "null": $(this).data('login'));
+          $(".modal-body #mpassword").val($(this).data('password') == null ? "null": $(this).data('password'));
+          $(".modal-body #mfullname").val($(this).data('fullname') == null ? "null": $(this).data('fullname'));
+          $(".modal-body #mphonenumber").val($(this).data('phonenumer') == null ? "null": $(this).data('phonenumer'));
+          $(".modal-body #memail").val($(this).data('email') == null ? "null": $(this).data('email'));
+          $(".modal-body #mid").val($(this).data('id') == null ? "null": $(this).data('id'));
+        });
+      }
+    });
+    function createJSON(){
+      return JSON.stringify({
+        "id": $('.modal-body #mid').val(),
+        "login": $('.modal-body #mlogin').val(),
+        "password": $('.modal-body #mpassword').val(),
+        "phoneNumber": $('.modal-body #mphonenumber').val(),
+        "fullname": $('.modal-body #mfullname').val(),
+        "email": $('.modal-body #memail').val()
+      });
+    }
+    function personUpdate(){
+      $.ajax({
+        type: 'POST',
+        contentType: 'application/json',
+        url: "allperson/update",
+        dataType: "json",
+        data: createJSON(),
+        success: function(data){
+          alert('Wine created successfully');
+        }
+      });
+    }
+  </script>
+  <div class="modal fade editmodel" id="editmodel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <input type="text" name="login" id="mlogin" value=""/>
+          <input type="text" name="password" id="mpassword" value=""/>
+          <input type="text" name="fullname" id="mfullname" value=""/>
+          <input type="text" name="phoneNumber" id="mphonenumber" value=""/>
+          <input type="text" name="email" id="memail" value=""/>
+          <input type="hidden" name="id" id="mid"  value=""/>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" onclick="personUpdate()" data-dismiss="modal">Ok</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
   </body>
 </html>
