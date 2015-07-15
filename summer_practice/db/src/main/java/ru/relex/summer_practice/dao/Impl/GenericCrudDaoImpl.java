@@ -6,20 +6,19 @@ import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 /**
  * Created by Sasha on 12.07.2015.
  */
-public class GenericCrudDaoImplImpl<T, PK>  extends AbstructDaoImpl<T, PK> implements GenericCrudDao<T, PK> {
+public class GenericCrudDaoImpl<T, PK>  extends AbstructDaoImpl<T, PK> implements GenericCrudDao<T, PK> {
     private Class<T> instance;
 
-    public GenericCrudDaoImplImpl(Class<T> instance) {
+    public GenericCrudDaoImpl(Class<T> instance) {
         this.instance = instance;
     }
 
-    public GenericCrudDaoImplImpl() {
+    public GenericCrudDaoImpl() {
 
     }
 

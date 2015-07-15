@@ -8,7 +8,11 @@ import javax.persistence.EntityManager;
 /**
  * Created by Nikita on 12.07.2015.
  */
-public class TicketDaoImplImpl extends GenericCrudDaoImplImpl<Ticket, Long> implements TicketDao {
+public class TicketDaoImpl extends GenericCrudDaoImpl<Ticket, Long> implements TicketDao {
+    public TicketDaoImpl(){
+        super(Ticket.class);
+    }
+
     public int getPrice(Ticket ticket) {
         EntityManager em = null;
         try {

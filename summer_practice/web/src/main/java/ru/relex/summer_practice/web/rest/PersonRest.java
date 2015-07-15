@@ -1,10 +1,7 @@
 package ru.relex.summer_practice.web.rest;
 
-import ru.relex.summer_practice.dao.GenericCrudDao;
-import ru.relex.summer_practice.dao.Impl.GenericCrudDaoImplImpl;
 import ru.relex.summer_practice.db.Person;
 import ru.relex.summer_practice.web.service.PersonService;
-import ru.relex.summer_practice.web.service.TestService;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

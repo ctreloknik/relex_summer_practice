@@ -10,7 +10,10 @@ import javax.persistence.*;
 /**
  * Created by Sasha on 12.07.2015.
  */
-public class RatingDaoImplImpl extends GenericCrudDaoImplImpl<Rating, Long> implements RatingDao {
+public class RatingDaoImpl extends GenericCrudDaoImpl<Rating, Long> implements RatingDao {
+    public RatingDaoImpl(){
+        super(Rating.class);
+    }
 
     public void AddRating(Person person, Question question, int rating) {
         if(question.getQuestioner().getId() != person.getId()) {
