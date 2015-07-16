@@ -5,8 +5,8 @@ import ru.relex.summer_practice.db.Conference;
 import ru.relex.summer_practice.db.Founders;
 import ru.relex.summer_practice.db.Person;
 
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by Nikita on 12.07.2015.
@@ -16,14 +16,14 @@ public class FoundersDaoImpl extends GenericCrudDaoImpl<Founders, Long> implemen
         super(Founders.class);
     }
 
-    public List<Founders> getConferensesByPerson(Person person) {
+    public Collection getConferensesByPerson(Person person) {
         String jpql = "select f from FOUNDERS f where f.person = :person";
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("person",person);
         return this.EexecuteQuery(jpql, parameters);
     }
 
-    public List<Founders> getPersonsByConference(Conference conference) {
+    public Collection getPersonsByConference(Conference conference) {
         String jpql = "select f from FOUNDERS f where f.conference = :conference";
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("conference",conference);
