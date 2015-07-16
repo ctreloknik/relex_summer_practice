@@ -1,7 +1,9 @@
-package ru.relex.summer_practice.web.service;
+package ru.relex.summer_practice.service;
 
-import ru.relex.summer_practice.dao.Impl.ConferenceDaoImpl;
-import ru.relex.summer_practice.db.Conference;
+import ru.relex.summer_practice.dao.Impl.RatingDaoImpl;
+import ru.relex.summer_practice.db.Person;
+import ru.relex.summer_practice.db.Question;
+import ru.relex.summer_practice.db.Rating;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -16,7 +18,7 @@ import java.util.Map;
  */
 
 @Stateless
-public class ConferenceService extends ConferenceDaoImpl {
+public class RatingService extends RatingDaoImpl {
     @PersistenceContext(unitName = "PERSISTENCEUNIT")
     protected EntityManager em;
 
@@ -31,39 +33,32 @@ public class ConferenceService extends ConferenceDaoImpl {
     }
 
     @Override
-    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public String getName(Conference conference) {
-        return super.getName(conference);
-    }
-
-    @Override
-    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public String getDescription(Conference conference) {
-        return super.getDescription(conference);
+    public void AddRating(Person person, Question question, int rating) {
+        super.AddRating(person, question, rating);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Conference Create(Conference conference) {
-        return super.Create(conference);
+    public Rating Create(Rating rating) {
+        return super.Create(rating);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public Conference Read(Long id) {
+    public Rating Read(Long id) {
         return super.Read(id);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public List<Conference> ReadAll() {
+    public List<Rating> ReadAll() {
         return super.ReadAll();
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Conference Update(Conference conference) {
-        return super.Update(conference);
+    public Rating Update(Rating rating) {
+        return super.Update(rating);
     }
 
     @Override
@@ -74,13 +69,13 @@ public class ConferenceService extends ConferenceDaoImpl {
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    protected List<Conference> EexecuteQuery(String jpql, Map<String, Object> parametres) {
+    protected List<Rating> EexecuteQuery(String jpql, Map<String, Object> parametres) {
         return super.EexecuteQuery(jpql, parametres);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    protected List<Conference> EexecuteQuery(String jpql) {
+    protected List<Rating> EexecuteQuery(String jpql) {
         return super.EexecuteQuery(jpql);
     }
 }

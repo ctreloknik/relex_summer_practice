@@ -1,7 +1,7 @@
 package ru.relex.summer_practice.web.rest;
 
 import ru.relex.summer_practice.db.Person;
-import ru.relex.summer_practice.web.service.PersonService;
+import ru.relex.summer_practice.service.PersonService;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -24,18 +24,7 @@ public class PersonRest{
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Person> printMessage() {
-        ArrayList<Person> persons = new ArrayList<>();
-        for(Person person : personService.ReadAll()){
-            Person p = new Person();
-            p.setLogin(person.getLogin());
-            p.setPassword(person.getPassword());
-            p.setFullname(person.getFullname());
-            p.setEmail(person.getEmail());
-            p.setPhoneNumber(person.getPhoneNumber());
-            p.setId(person.getId());
-            persons.add(p);
-        }
-        return persons;
+        return personService.ReadAll();
     }
 
     @POST
@@ -43,15 +32,7 @@ public class PersonRest{
     @Produces({ MediaType.APPLICATION_JSON})
     @Path("/update")
     public Person update(Person person) {
-        person =  personService.Update(person);
-        Person p = new Person();
-        p.setLogin(person.getLogin());
-        p.setPassword(person.getPassword());
-        p.setFullname(person.getFullname());
-        p.setEmail(person.getEmail());
-        p.setPhoneNumber(person.getPhoneNumber());
-        p.setId(person.getId());
-        return p;
+        return personService.Update(person);
     }
 
 }

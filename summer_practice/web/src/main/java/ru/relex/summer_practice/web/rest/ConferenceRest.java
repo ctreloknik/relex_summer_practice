@@ -1,6 +1,6 @@
 package ru.relex.summer_practice.web.rest;
 
-import ru.relex.summer_practice.web.service.ConferenceService;
+import ru.relex.summer_practice.service.ConferenceService;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

@@ -16,6 +16,7 @@ public class FoundersDaoImpl extends GenericCrudDaoImpl<Founders, Long> implemen
         super(Founders.class);
     }
 
+
     public Collection getConferensesByPerson(Person person) {
         String jpql = "select f from FOUNDERS f where f.person = :person";
         HashMap<String, Object> parametres = new HashMap<>();

@@ -1,16 +1,13 @@
-package ru.relex.summer_practice.web.service;
+package ru.relex.summer_practice.service;
 
-import ru.relex.summer_practice.dao.Impl.FoundersDaoImpl;
-import ru.relex.summer_practice.db.Conference;
-import ru.relex.summer_practice.db.Founders;
-import ru.relex.summer_practice.db.Person;
+import ru.relex.summer_practice.dao.Impl.LecturePersonDaoImpl;
+import ru.relex.summer_practice.db.LecturePerson;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +16,7 @@ import java.util.Map;
  */
 
 @Stateless
-public class FoundersService extends FoundersDaoImpl{
+public class LecturePersonService extends LecturePersonDaoImpl{
     @PersistenceContext(unitName = "PERSISTENCEUNIT")
     protected EntityManager em;
 
@@ -34,39 +31,27 @@ public class FoundersService extends FoundersDaoImpl{
     }
 
     @Override
-    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public Collection getConferensesByPerson(Person person) {
-        return super.getConferensesByPerson(person);
-    }
-
-    @Override
-    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public Collection getPersonsByConference(Conference conference) {
-        return super.getPersonsByConference(conference);
-    }
-
-    @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Founders Create(Founders founders) {
-        return super.Create(founders);
+    public LecturePerson Create(LecturePerson lecturePerson) {
+        return super.Create(lecturePerson);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public Founders Read(Long id) {
+    public LecturePerson Read(Long id) {
         return super.Read(id);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public List<Founders> ReadAll() {
+    public List<LecturePerson> ReadAll() {
         return super.ReadAll();
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Founders Update(Founders founders) {
-        return super.Update(founders);
+    public LecturePerson Update(LecturePerson lecturePerson) {
+        return super.Update(lecturePerson);
     }
 
     @Override
@@ -77,13 +62,13 @@ public class FoundersService extends FoundersDaoImpl{
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    protected List<Founders> EexecuteQuery(String jpql, Map<String, Object> parametres) {
+    protected List<LecturePerson> EexecuteQuery(String jpql, Map<String, Object> parametres) {
         return super.EexecuteQuery(jpql, parametres);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    protected List<Founders> EexecuteQuery(String jpql) {
+    protected List<LecturePerson> EexecuteQuery(String jpql) {
         return super.EexecuteQuery(jpql);
     }
 }

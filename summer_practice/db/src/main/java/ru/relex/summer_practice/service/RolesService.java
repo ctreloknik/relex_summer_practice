@@ -1,14 +1,13 @@
-package ru.relex.summer_practice.web.service;
+package ru.relex.summer_practice.service;
 
-import ru.relex.summer_practice.dao.Impl.CourseDaoImpl;
-import ru.relex.summer_practice.db.Course;
+import ru.relex.summer_practice.dao.Impl.RolesDaoImpl;
+import ru.relex.summer_practice.db.Roles;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +16,7 @@ import java.util.Map;
  */
 
 @Stateless
-public class CourseService extends CourseDaoImpl{
+public class RolesService extends RolesDaoImpl{
     @PersistenceContext(unitName = "PERSISTENCEUNIT")
     protected EntityManager em;
 
@@ -32,39 +31,27 @@ public class CourseService extends CourseDaoImpl{
     }
 
     @Override
-    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public Date getStartDate(Course course) {
-        return super.getStartDate(course);
-    }
-
-    @Override
-    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public Date getEndDate(Course course) {
-        return super.getEndDate(course);
-    }
-
-    @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Course Create(Course course) {
-        return super.Create(course);
+    public Roles Create(Roles roles) {
+        return super.Create(roles);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public Course Read(Long id) {
+    public Roles Read(Long id) {
         return super.Read(id);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public List<Course> ReadAll() {
+    public List<Roles> ReadAll() {
         return super.ReadAll();
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Course Update(Course course) {
-        return super.Update(course);
+    public Roles Update(Roles roles) {
+        return super.Update(roles);
     }
 
     @Override
@@ -75,13 +62,13 @@ public class CourseService extends CourseDaoImpl{
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    protected List<Course> EexecuteQuery(String jpql, Map<String, Object> parametres) {
+    protected List<Roles> EexecuteQuery(String jpql, Map<String, Object> parametres) {
         return super.EexecuteQuery(jpql, parametres);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    protected List<Course> EexecuteQuery(String jpql) {
+    protected List<Roles> EexecuteQuery(String jpql) {
         return super.EexecuteQuery(jpql);
     }
 }

@@ -28,15 +28,15 @@ public class Person {
 	@Column(name = "EMAIL")
 	private String email;
 
-	//
-	@OneToMany(mappedBy = "person")
-	private Set<PersonTicket> personTicket = new HashSet<PersonTicket>();
 
 	@OneToMany(mappedBy = "person")
-	private Set<Founders> founders = new HashSet<Founders>();
+	private transient Set<PersonTicket> personTicket = new HashSet<PersonTicket>();
 
 	@OneToMany(mappedBy = "person")
-	private Set<PersonLectureRole> personLectureRole = new HashSet<PersonLectureRole>();
+	private transient Set<Founders> founders = new HashSet<Founders>();
+
+	@OneToMany(mappedBy = "person")
+	private transient Set<PersonLectureRole> personLectureRole = new HashSet<PersonLectureRole>();
 
 	public Set<PersonTicket> getPersonTickets() {
 		return personTicket;
@@ -51,10 +51,10 @@ public class Person {
 	}
 
 	@OneToMany(mappedBy = "questioner")
-	private Set<Question> questions = new HashSet<Question>();
+	private transient Set<Question> questions = new HashSet<Question>();
 
 	@OneToMany(mappedBy = "person")
-	private Set<Rating> ratings = new HashSet<Rating>();
+	private transient Set<Rating> ratings = new HashSet<Rating>();
 
 	public Long getId() {
 		return id;

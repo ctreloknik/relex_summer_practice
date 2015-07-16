@@ -18,10 +18,6 @@ public class GenericCrudDaoImpl<T, PK>  extends AbstructDaoImpl<T, PK> implement
         this.instance = instance;
     }
 
-    public GenericCrudDaoImpl() {
-
-    }
-
     public T Create(T t) {
         em = getEntityManager();
         t = em.merge(t);

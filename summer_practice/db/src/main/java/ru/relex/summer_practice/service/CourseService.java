@@ -1,13 +1,14 @@
-package ru.relex.summer_practice.web.service;
+package ru.relex.summer_practice.service;
 
-import ru.relex.summer_practice.dao.Impl.TicketDaoImpl;
-import ru.relex.summer_practice.db.Ticket;
+import ru.relex.summer_practice.dao.Impl.CourseDaoImpl;
+import ru.relex.summer_practice.db.Course;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +17,7 @@ import java.util.Map;
  */
 
 @Stateless
-public class TicketService extends TicketDaoImpl {
+public class CourseService extends CourseDaoImpl{
     @PersistenceContext(unitName = "PERSISTENCEUNIT")
     protected EntityManager em;
 
@@ -32,32 +33,38 @@ public class TicketService extends TicketDaoImpl {
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public int getPrice(Ticket ticket) {
-        return super.getPrice(ticket);
-    }
-
-    @Override
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Ticket Create(Ticket ticket) {
-        return super.Create(ticket);
+    public Date getStartDate(Course course) {
+        return super.getStartDate(course);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public Ticket Read(Long id) {
+    public Date getEndDate(Course course) {
+        return super.getEndDate(course);
+    }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public Course Create(Course course) {
+        return super.Create(course);
+    }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public Course Read(Long id) {
         return super.Read(id);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public List<Ticket> ReadAll() {
+    public List<Course> ReadAll() {
         return super.ReadAll();
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Ticket Update(Ticket ticket) {
-        return super.Update(ticket);
+    public Course Update(Course course) {
+        return super.Update(course);
     }
 
     @Override
@@ -68,13 +75,13 @@ public class TicketService extends TicketDaoImpl {
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    protected List<Ticket> EexecuteQuery(String jpql, Map<String, Object> parametres) {
+    protected List<Course> EexecuteQuery(String jpql, Map<String, Object> parametres) {
         return super.EexecuteQuery(jpql, parametres);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    protected List<Ticket> EexecuteQuery(String jpql) {
+    protected List<Course> EexecuteQuery(String jpql) {
         return super.EexecuteQuery(jpql);
     }
 }

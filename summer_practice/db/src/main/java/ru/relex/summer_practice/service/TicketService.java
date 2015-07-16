@@ -1,9 +1,7 @@
-package ru.relex.summer_practice.web.service;
+package ru.relex.summer_practice.service;
 
-import ru.relex.summer_practice.dao.Impl.RatingDaoImpl;
-import ru.relex.summer_practice.db.Person;
-import ru.relex.summer_practice.db.Question;
-import ru.relex.summer_practice.db.Rating;
+import ru.relex.summer_practice.dao.Impl.TicketDaoImpl;
+import ru.relex.summer_practice.db.Ticket;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -18,7 +16,7 @@ import java.util.Map;
  */
 
 @Stateless
-public class RatingService extends RatingDaoImpl {
+public class TicketService extends TicketDaoImpl {
     @PersistenceContext(unitName = "PERSISTENCEUNIT")
     protected EntityManager em;
 
@@ -33,32 +31,33 @@ public class RatingService extends RatingDaoImpl {
     }
 
     @Override
-    public void AddRating(Person person, Question question, int rating) {
-        super.AddRating(person, question, rating);
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public int getPrice(Ticket ticket) {
+        return super.getPrice(ticket);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Rating Create(Rating rating) {
-        return super.Create(rating);
+    public Ticket Create(Ticket ticket) {
+        return super.Create(ticket);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public Rating Read(Long id) {
+    public Ticket Read(Long id) {
         return super.Read(id);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public List<Rating> ReadAll() {
+    public List<Ticket> ReadAll() {
         return super.ReadAll();
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Rating Update(Rating rating) {
-        return super.Update(rating);
+    public Ticket Update(Ticket ticket) {
+        return super.Update(ticket);
     }
 
     @Override
@@ -69,13 +68,13 @@ public class RatingService extends RatingDaoImpl {
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    protected List<Rating> EexecuteQuery(String jpql, Map<String, Object> parametres) {
+    protected List<Ticket> EexecuteQuery(String jpql, Map<String, Object> parametres) {
         return super.EexecuteQuery(jpql, parametres);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    protected List<Rating> EexecuteQuery(String jpql) {
+    protected List<Ticket> EexecuteQuery(String jpql) {
         return super.EexecuteQuery(jpql);
     }
 }

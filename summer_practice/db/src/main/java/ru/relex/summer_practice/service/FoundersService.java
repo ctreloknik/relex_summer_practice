@@ -1,13 +1,16 @@
-package ru.relex.summer_practice.web.service;
+package ru.relex.summer_practice.service;
 
-import ru.relex.summer_practice.dao.Impl.RolesDaoImpl;
-import ru.relex.summer_practice.db.Roles;
+import ru.relex.summer_practice.dao.Impl.FoundersDaoImpl;
+import ru.relex.summer_practice.db.Conference;
+import ru.relex.summer_practice.db.Founders;
+import ru.relex.summer_practice.db.Person;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +19,7 @@ import java.util.Map;
  */
 
 @Stateless
-public class RolesService extends RolesDaoImpl{
+public class FoundersService extends FoundersDaoImpl{
     @PersistenceContext(unitName = "PERSISTENCEUNIT")
     protected EntityManager em;
 
@@ -31,27 +34,39 @@ public class RolesService extends RolesDaoImpl{
     }
 
     @Override
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Roles Create(Roles roles) {
-        return super.Create(roles);
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public Collection getConferensesByPerson(Person person) {
+        return super.getConferensesByPerson(person);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public Roles Read(Long id) {
+    public Collection getPersonsByConference(Conference conference) {
+        return super.getPersonsByConference(conference);
+    }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public Founders Create(Founders founders) {
+        return super.Create(founders);
+    }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public Founders Read(Long id) {
         return super.Read(id);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public List<Roles> ReadAll() {
+    public List<Founders> ReadAll() {
         return super.ReadAll();
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Roles Update(Roles roles) {
-        return super.Update(roles);
+    public Founders Update(Founders founders) {
+        return super.Update(founders);
     }
 
     @Override
@@ -62,13 +77,13 @@ public class RolesService extends RolesDaoImpl{
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    protected List<Roles> EexecuteQuery(String jpql, Map<String, Object> parametres) {
+    protected List<Founders> EexecuteQuery(String jpql, Map<String, Object> parametres) {
         return super.EexecuteQuery(jpql, parametres);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    protected List<Roles> EexecuteQuery(String jpql) {
+    protected List<Founders> EexecuteQuery(String jpql) {
         return super.EexecuteQuery(jpql);
     }
 }

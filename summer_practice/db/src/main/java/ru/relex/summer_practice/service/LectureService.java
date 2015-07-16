@@ -1,4 +1,4 @@
-package ru.relex.summer_practice.web.service;
+package ru.relex.summer_practice.service;
 
 import ru.relex.summer_practice.dao.Impl.LectureDaoImpl;
 import ru.relex.summer_practice.db.Lecture;

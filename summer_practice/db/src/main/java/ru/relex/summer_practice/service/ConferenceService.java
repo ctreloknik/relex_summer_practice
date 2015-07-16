@@ -1,7 +1,7 @@
-package ru.relex.summer_practice.web.service;
+package ru.relex.summer_practice.service;
 
-import ru.relex.summer_practice.dao.Impl.PersonLectureRoleDaoImpl;
-import ru.relex.summer_practice.db.PersonLectureRole;
+import ru.relex.summer_practice.dao.Impl.ConferenceDaoImpl;
+import ru.relex.summer_practice.db.Conference;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -15,10 +15,8 @@ import java.util.Map;
  * Created by Nikita on 14.07.2015.
  */
 
-// Need
-
 @Stateless
-public class PersonLectureRoleService extends PersonLectureRoleDaoImpl{
+public class ConferenceService extends ConferenceDaoImpl {
     @PersistenceContext(unitName = "PERSISTENCEUNIT")
     protected EntityManager em;
 
@@ -33,27 +31,39 @@ public class PersonLectureRoleService extends PersonLectureRoleDaoImpl{
     }
 
     @Override
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public PersonLectureRole Create(PersonLectureRole personLectureRole) {
-        return super.Create(personLectureRole);
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public String getName(Conference conference) {
+        return super.getName(conference);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public PersonLectureRole Read(Long id) {
+    public String getDescription(Conference conference) {
+        return super.getDescription(conference);
+    }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public Conference Create(Conference conference) {
+        return super.Create(conference);
+    }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public Conference Read(Long id) {
         return super.Read(id);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public List<PersonLectureRole> ReadAll() {
+    public List<Conference> ReadAll() {
         return super.ReadAll();
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public PersonLectureRole Update(PersonLectureRole personLectureRole) {
-        return super.Update(personLectureRole);
+    public Conference Update(Conference conference) {
+        return super.Update(conference);
     }
 
     @Override
@@ -64,13 +74,13 @@ public class PersonLectureRoleService extends PersonLectureRoleDaoImpl{
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    protected List<PersonLectureRole> EexecuteQuery(String jpql, Map<String, Object> parametres) {
+    protected List<Conference> EexecuteQuery(String jpql, Map<String, Object> parametres) {
         return super.EexecuteQuery(jpql, parametres);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    protected List<PersonLectureRole> EexecuteQuery(String jpql) {
+    protected List<Conference> EexecuteQuery(String jpql) {
         return super.EexecuteQuery(jpql);
     }
 }

@@ -1,13 +1,16 @@
-package ru.relex.summer_practice.web.service;
+package ru.relex.summer_practice.service;
 
-import ru.relex.summer_practice.dao.Impl.LecturePersonDaoImpl;
-import ru.relex.summer_practice.db.LecturePerson;
+import ru.relex.summer_practice.dao.Impl.PersonTicketDaoImpl;
+import ru.relex.summer_practice.db.Person;
+import ru.relex.summer_practice.db.PersonTicket;
+import ru.relex.summer_practice.db.Ticket;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +19,7 @@ import java.util.Map;
  */
 
 @Stateless
-public class LecturePersonService extends LecturePersonDaoImpl{
+public class PersonTicketService extends PersonTicketDaoImpl{
     @PersistenceContext(unitName = "PERSISTENCEUNIT")
     protected EntityManager em;
 
@@ -31,27 +34,39 @@ public class LecturePersonService extends LecturePersonDaoImpl{
     }
 
     @Override
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public LecturePerson Create(LecturePerson lecturePerson) {
-        return super.Create(lecturePerson);
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public Collection getPersonsByTickets(Ticket ticket) {
+        return super.getPersonsByTickets(ticket);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public LecturePerson Read(Long id) {
+    public Collection getTicketsByPerson(Person person) {
+        return super.getTicketsByPerson(person);
+    }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public PersonTicket Create(PersonTicket personTicket) {
+        return super.Create(personTicket);
+    }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public PersonTicket Read(Long id) {
         return super.Read(id);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public List<LecturePerson> ReadAll() {
+    public List<PersonTicket> ReadAll() {
         return super.ReadAll();
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public LecturePerson Update(LecturePerson lecturePerson) {
-        return super.Update(lecturePerson);
+    public PersonTicket Update(PersonTicket personTicket) {
+        return super.Update(personTicket);
     }
 
     @Override
@@ -62,13 +77,13 @@ public class LecturePersonService extends LecturePersonDaoImpl{
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    protected List<LecturePerson> EexecuteQuery(String jpql, Map<String, Object> parametres) {
+    protected List<PersonTicket> EexecuteQuery(String jpql, Map<String, Object> parametres) {
         return super.EexecuteQuery(jpql, parametres);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    protected List<LecturePerson> EexecuteQuery(String jpql) {
+    protected List<PersonTicket> EexecuteQuery(String jpql) {
         return super.EexecuteQuery(jpql);
     }
 }
