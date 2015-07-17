@@ -23,13 +23,11 @@ public class LectureService extends LectureDaoImpl{
 
     @Override
     protected EntityManager getEntityManager() {
-        return super.getEntityManager();
+        return em;
     }
 
     @Override
-    protected void closeEntityManager() {
-        super.closeEntityManager();
-    }
+    protected void closeEntityManager() {}
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)

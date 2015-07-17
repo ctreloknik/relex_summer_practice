@@ -10,6 +10,7 @@
     <module>db</module>
     <module>console</module>
     <module>web</module>
+    <module>conference</module>
   </modules>
   <build>
         <plugins>

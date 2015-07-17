@@ -24,12 +24,12 @@ public class QuestionService extends QuestionDaoImpl{
 
     @Override
     protected EntityManager getEntityManager() {
-        return super.getEntityManager();
+        return em;
     }
 
     @Override
     protected void closeEntityManager() {
-        super.closeEntityManager();
+
     }
 
     @Override
