@@ -17,18 +17,17 @@ import java.util.Map;
 
 @Stateless
 public class TicketService extends TicketDaoImpl {
-    @PersistenceContext(unitName = "PERSISTENCEUNIT")
-    protected EntityManager em;
+
+    @Override
+    protected void closeEntityManager() {}
 
     @Override
     protected EntityManager getEntityManager() {
-        return super.getEntityManager();
+        return em;
     }
 
-    @Override
-    protected void closeEntityManager() {
-        super.closeEntityManager();
-    }
+    @PersistenceContext(unitName = "PERSISTENCEUNIT")
+    protected EntityManager em;
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)

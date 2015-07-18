@@ -19,18 +19,17 @@ import java.util.Map;
 
 @Stateless
 public class QuestionService extends QuestionDaoImpl{
-    @PersistenceContext(unitName = "PERSISTENCEUNIT")
-    protected EntityManager em;
+
+    @Override
+    protected void closeEntityManager() {}
 
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
 
-    @Override
-    protected void closeEntityManager() {
-
-    }
+    @PersistenceContext(unitName = "PERSISTENCEUNIT")
+    protected EntityManager em;
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)

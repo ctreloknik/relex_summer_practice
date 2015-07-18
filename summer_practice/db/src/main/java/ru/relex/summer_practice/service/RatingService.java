@@ -19,19 +19,17 @@ import java.util.Map;
 
 @Stateless
 public class RatingService extends RatingDaoImpl {
-    @PersistenceContext(unitName = "PERSISTENCEUNIT")
-    protected EntityManager em;
+
+    @Override
+    protected void closeEntityManager() {}
 
     @Override
     protected EntityManager getEntityManager() {
-        return super.getEntityManager();
+        return em;
     }
 
-    @Override
-    protected void closeEntityManager() {
-        super.closeEntityManager();
-    }
-
+    @PersistenceContext(unitName = "PERSISTENCEUNIT")
+    protected EntityManager em;
     @Override
     public void AddRating(Person person, Question question, int rating) {
         super.AddRating(person, question, rating);
