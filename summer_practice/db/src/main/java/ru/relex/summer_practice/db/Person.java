@@ -15,7 +15,10 @@ public class Person {
 	
 	@Column(name = "FULLNAME")
 	private String fullname;
-	
+
+	@Column(name="ROLE")
+	private String role;
+
 	@Column(name = "LOGIN")
 	private String login;
 	
@@ -110,5 +113,13 @@ public class Person {
 
 	public Set<Question> getQuestions() {
 		return questions;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 }

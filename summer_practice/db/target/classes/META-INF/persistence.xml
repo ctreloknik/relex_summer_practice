@@ -20,7 +20,7 @@
     <persistence-unit name="PERSISTENCEUNIT" transaction-type="JTA">
         <jta-data-source>java:/PostgresDS</jta-data-source>
         <properties>
-            <property name="hibernate.hbm2ddl.auto" value="validate"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL81Dialect"/>
         </properties>
     </persistence-unit>
