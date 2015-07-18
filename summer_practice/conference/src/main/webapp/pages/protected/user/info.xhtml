@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: Nikita
+  Date: 18.07.2015
+  Time: 16:14
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css"/>
+    <title>Личный кабинет</title>
+</h:head>
+
+<h:body>
+    <ui:composition template="/pages/public/template.xhtml">
+        <ui:define name="center_block">
+            <!-- Информация о пользователе -->
+            <h:form>
+                <p:panel id="basic" header="Информация о пользователе" style="margin-bottom:20px">
+                    <h:panelGrid columns="1" cellpadding="10">
+                        <h:outputText value="Имя:"/>
+                        <h:outputText value="#{personsBean.persons[0].fullname}" style="font-weight: bold"/>
+                        <p:separator />
+                        <h:outputText value="Телефон:"/>
+                        <h:outputText value=" #{personsBean.persons[0].phoneNumber}" style="font-weight: bold"/>
+                        <p:separator />
+                        <h:outputText value="Email:" />
+                        <h:outputText value="#{personsBean.persons[0].email}"  style="font-weight: bold"/>
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+
+            <!-- Информация о пользователе -->
+            <h:form>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+</html>
