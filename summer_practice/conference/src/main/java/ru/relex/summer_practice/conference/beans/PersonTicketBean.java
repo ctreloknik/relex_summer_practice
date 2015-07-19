@@ -30,8 +30,13 @@ public class PersonTicketBean {
 
     private List<PersonTicket> personTickets;
 
-    public List<PersonTicket> getTickets(String login) {
+    public List<PersonTicket> getTicketsByPerson(String login) {
         personTickets = service.getTicketsByPerson(getPerson(login));
+        return personTickets;
+    }
+
+    public List<PersonTicket> getTickets() {
+        personTickets = service.ReadAll();
         return personTickets;
     }
 

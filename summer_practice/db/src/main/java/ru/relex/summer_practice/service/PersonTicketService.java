@@ -10,7 +10,6 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -34,13 +33,13 @@ public class PersonTicketService extends PersonTicketDaoImpl{
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public Collection getPersonsByTickets(Ticket ticket) {
+    public List<PersonTicket> getPersonsByTickets(Ticket ticket) {
         return super.getPersonsByTickets(ticket);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public Collection getTicketsByPerson(Person person) {
+    public List<PersonTicket> getTicketsByPerson(Person person) {
         return super.getTicketsByPerson(person);
     }
 

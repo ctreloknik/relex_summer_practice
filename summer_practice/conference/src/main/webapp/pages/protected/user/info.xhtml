@@ -41,12 +41,15 @@
                 </p:panel>
             </h:form>
 
-
-                <p:dataTable var="ticketsBuyed" value="#{personTicketBean.getTickets(request.remoteUser)}">
+            <!--
+            <h:form>
+                <p:dataTable var="ticketsBuyed" value="# {personTicketBean.getTicketsByPerson(request.remoteUser)}">
                     <p:column headerText="Конференция">
-                        <h:outputText value="#{ticketsBuyed.}"/>
+                        <h:outputText value="# {ticketsBuyed}"/>
                     </p:column>
                 </p:dataTable>
+            </h:form>
+                -->
 
         </ui:define>
     </ui:composition>

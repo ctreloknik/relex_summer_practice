@@ -22,9 +22,7 @@ public class PersonsBean implements Serializable {
     PersonService personService;
 
     @PostConstruct
-    public void initPersonsBean(){
-
-    }
+    public void initPersonsBean() { }
 
     private List<Person> persons;
 
