@@ -1,16 +1,14 @@
 package ru.relex.summer_practice.service;
 
 
-import ru.relex.summer_practice.dao.GenericCrudDao;
 import ru.relex.summer_practice.dao.Impl.PersonDaoImpl;
-import ru.relex.summer_practice.dao.PersonDao;
 import ru.relex.summer_practice.db.Person;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.persistence.PersistenceContext;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Map;
 
@@ -66,6 +64,12 @@ public class PersonService extends PersonDaoImpl{
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Person Login(String login, String password) {
         return super.Login(login, password);
+    }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public Person getUserByNickname(String login) {
+        return super.getUserByNickname(login);
     }
 
     @Override
