@@ -10,7 +10,7 @@ public class Person {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "PERSONE_ID")
+	@Column(name = "PERSON_ID")
 	private Long id;
 	
 	@Column(name = "FULLNAME")
