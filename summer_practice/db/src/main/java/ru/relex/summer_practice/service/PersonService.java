@@ -61,15 +61,15 @@ public class PersonService extends PersonDaoImpl{
     }
 
     @Override
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Person Login(String login, String password) {
-        return super.Login(login, password);
-    }
-
-    @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public Person getUserByNickname(String login) {
         return super.getUserByNickname(login);
+    }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public Person Login(String login, String password) {
+        return super.Login(login, password);
     }
 
     @Override

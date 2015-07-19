@@ -5,7 +5,7 @@ import ru.relex.summer_practice.service.PersonService;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.ViewScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
@@ -15,14 +15,16 @@ import java.util.List;
  */
 
 @Named
-@ViewScoped
+@SessionScoped
 public class PersonsBean implements Serializable {
 
     @EJB
     PersonService personService;
 
     @PostConstruct
-    public void initPersonsBean() { }
+    public void initPersonsBean(){
+
+    }
 
     private List<Person> persons;
 

@@ -2,8 +2,8 @@
 <!--
   Created by IntelliJ IDEA.
   User: Nikita
-  Date: 18.07.2015
-  Time: 16:14
+  Date: 19.07.2015
+  Time: 21:27
 -->
 <!DOCTYPE html
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -14,7 +14,6 @@
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css"/>
@@ -24,26 +23,31 @@
 <h:body>
     <ui:composition template="/pages/public/template.xhtml">
         <ui:define name="center_block">
+
             <!-- Информация о пользователе -->
             <h:form>
-                <p:panel id="basic" header="Информация о пользователе" style="margin-bottom:20px">
+                <p:panel id="basic" header="Информация о пользователе #{request.remoteUser}" style="margin-bottom:5px">
                     <h:panelGrid columns="1" cellpadding="10">
+
                         <h:outputText value="Имя:"/>
-                        <h:outputText value="#{personsBean.persons[0].fullname}" style="font-weight: bold"/>
-                        <p:separator />
+                        <h:outputText value="#{personsBean.getPerson(request.remoteUser).fullname}" style="font-weight: bold"/>
+
                         <h:outputText value="Телефон:"/>
-                        <h:outputText value=" #{personsBean.persons[0].phoneNumber}" style="font-weight: bold"/>
-                        <p:separator />
-                        <h:outputText value="Email:" />
-                        <h:outputText value="#{personsBean.persons[0].email}"  style="font-weight: bold"/>
+                        <h:outputText value=" #{personsBean.getPerson(request.remoteUser).phoneNumber}" style="font-weight: bold"/>
+
+                        <h:outputText value="Email:"/>
+                        <h:outputText value="#{personsBean.getPerson(request.remoteUser).email}" style="font-weight: bold"/>
                     </h:panelGrid>
                 </p:panel>
             </h:form>
 
-            <!-- Информация о пользователе -->
-            <h:form>
 
-            </h:form>
+                <p:dataTable var="ticketsBuyed" value="#{personTicketBean.getTickets(request.remoteUser)}">
+                    <p:column headerText="Конференция">
+                        <h:outputText value="#{ticketsBuyed.}"/>
+                    </p:column>
+                </p:dataTable>
+
         </ui:define>
     </ui:composition>
 </h:body>
