@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: Sasha
+  Date: 18.07.2015
+  Time: 0:06
+-->
+<ui:composition template="/pages/public/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="center_block">
+        <style>
+            .ui-steps .ui-steps-item {
+                width: 25%;
+                border-radius: 0px;
+            }
+
+            .ui-state-highlight {
+                text-shadow: none !important;
+            }
+            .panel{
+                border-radius: 0px;
+            }
+        </style>
+        <br/>
+        <div class="col-md-10 col-md-offset-1" >
+            <h:form id="signup_form" class="form-horizontal">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="padding: 0">
+                        <p:steps id="steps" activeIndex="#{signUpBean.step}">
+                            <p:menuitem value="Personal"></p:menuitem>
+                            <p:menuitem value="Seat Selection" />
+                            <p:menuitem value="Payment" />
+                            <p:menuitem value="Confirmation" />
+                        </p:steps>
+                    </div>
+                    <div class="panel-body">
+                        <h3>
+                            <b>Регистрация на IConference</b>
+                        </h3>
+                        <hr/>
+                        <h:panelGroup id="mainpanel">
+                            <h:panelGroup id="panel1" rendered="#{signUpBean.step == 0}">
+                                <div class="form-group">
+                                    <label class="control-label col-xs-3">Логин</label>
+                                    <div class="col-xs-8">
+                                        <input type="text" class="form-control"  name="username" placeholder="Введите логин" ></input>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-xs-3">Пароль</label>
+                                    <div class="col-xs-8">
+                                        <input type="password" class="form-control" name="password1"  placeholder="Введите пароль"></input>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-xs-3" >Повторите пароль</label>
+                                    <div class="col-xs-8">
+                                        <input type="password" class="form-control" name="password2" placeholder="Введите пароль ещё раз"></input>
+                                    </div>
+                                </div>
+                            </h:panelGroup>
+                            <h:panelGroup id="panel2" rendered="#{signUpBean.step == 1}">
+                                <div class="form-group">
+                                    <label class="control-label col-xs-3">Полное имя</label>
+                                    <div class="col-xs-4">
+                                        <input type="text" class="form-control"  name="username" placeholder="Введите фамилию" ></input>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <input type="text" class="form-control"  name="username" placeholder="Введите имя" ></input>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-xs-3">Почта</label>
+                                    <div class="col-xs-8">
+                                        <input type="text" class="form-control"  name="username" placeholder="Введите имя" ></input>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-xs-3" >Мобильный номер</label>
+                                    <div class="col-xs-8">
+                                        <input type="password" class="form-control" name="password2" placeholder="Введите пароль ещё раз"></input>
+                                    </div>
+                                </div>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                    </div>
+                    <div class="panel-footer">
+                            <h:commandButton value="Назад" class="btn btn-primary" action="#{signUpBean.previousStep}">
+                                <f:ajax execute="@this" render="signup_form" ></f:ajax>
+                            </h:commandButton>
+
+                            <h:commandButton value="Далее" class="btn btn-primary" style="float: right" action="#{signUpBean.nextStep}">
+                                <f:ajax execute="@this" render="signup_form" ></f:ajax>
+                            </h:commandButton>
+                        </div>
+                    </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
