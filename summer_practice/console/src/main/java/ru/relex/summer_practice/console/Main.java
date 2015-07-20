@@ -86,7 +86,7 @@ public class Main {
         person.setLogin(login);
         person.setPassword(password);
         person.setFullname(fullname);
-        person.setPassword(phoneNumber);
+        person.setPhoneNumber(phoneNumber);
         person.setEmail(email);
         return personDao.Create(person);
     }
