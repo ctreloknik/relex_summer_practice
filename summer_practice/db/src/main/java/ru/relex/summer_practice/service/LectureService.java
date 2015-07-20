@@ -1,6 +1,7 @@
 package ru.relex.summer_practice.service;
 
 import ru.relex.summer_practice.dao.Impl.LectureDaoImpl;
+import ru.relex.summer_practice.db.Course;
 import ru.relex.summer_practice.db.Lecture;
 
 import javax.ejb.Stateless;
@@ -75,6 +76,12 @@ public class LectureService extends LectureDaoImpl{
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public String getTopic(Lecture lecture) {
         return super.getTopic(lecture);
+    }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public Date getStartTimeByCourse(Course course) {
+        return super.getStartTimeByCourse(course);
     }
 
     @Override
