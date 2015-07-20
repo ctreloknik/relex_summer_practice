@@ -31,6 +31,9 @@ public class Person {
 	@Column(name = "EMAIL")
 	private String email;
 
+	@Column(name = "BALANCE")
+	private Integer balance;
+
 
 	@OneToMany(mappedBy = "person")
 	private transient Set<PersonTicket> personTicket = new HashSet<PersonTicket>();
@@ -59,6 +62,7 @@ public class Person {
 	@OneToMany(mappedBy = "person")
 	private transient Set<Rating> ratings = new HashSet<Rating>();
 
+	// GETTERS AND SETTERS
 	public Long getId() {
 		return id;
 	}
@@ -105,6 +109,14 @@ public class Person {
 	
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Integer getBalance() {
+		return balance;
+	}
+
+	public void setBalance(Integer balance) {
+		this.balance = balance;
 	}
 
 	public Set<Rating> getRatings() {
