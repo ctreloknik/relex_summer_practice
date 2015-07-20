@@ -1,5 +1,6 @@
 package ru.relex.summer_practice.conference.beans;
 
+import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.LazyScheduleModel;
 import org.primefaces.model.ScheduleEvent;
@@ -54,5 +55,17 @@ public class EventsViewBean implements Serializable{
 
     public ScheduleModel getLazyEventModel(){
         return lazyEventModel;
+    }
+
+    public ScheduleEvent getEvent() {
+        return event;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void onDateSelect(SelectEvent selectEvent) {
+        event = new DefaultScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject());
     }
 }
