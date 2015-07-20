@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: Nikita
+  Date: 18.07.2015
+  Time: 19:20
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Simple JSF Facelets page</title>
+</h:head>
+
+
+<h:body>
+    <script type="text/javascript">
+        function handleDrop(event, ui) {
+            var droppedTicket = ui.draggable;
+            droppedTicket.fadeOut('fast');
+        }
+    </script>
+
+    <ui:composition template="/pages/public/template.xhtml">
+        <ui:define name="center_block">
+            <h:form id="ticketForm">
+
+                <!-- БИЛЕТЫ ДЛЯ ПОКУПКИ -->
+                <p:fieldset id="availableTicketsField" legend="Список билетов">
+                    <p:dataGrid id="availableTickets" var="ticket" value="#{dragNDropTicketsBean.tickets}" columns="3">
+                        <p:panel id="pnl" header="#{ticket.conference.name}" style="text-align:center">
+                            <h:panelGrid columns="1" style="width:100%">
+                               <!-- <p:graphicImage name="/demo/images/car/ *ПОСТАВИТЬ ШАРП* {car.brand}.gif" /> -->
+                                <h:outputText value="#{ticket.price}" />
+                            </h:panelGrid>
+                        </p:panel>
+
+                        <p:draggable for="pnl" revert="true" handle=".ui-panel-titlebar" stack=".ui-panel"/>
+                    </p:dataGrid>
+                </p:fieldset>
+
+                <p:fieldset id="selectedTickets" legend="Выбранные билеты" style="margin-top:20px">
+                    <p:outputPanel id="dropArea">
+                        <h:outputText value="Перенесите билеты сюда" rendered="#{empty dragNDropTicketsBean.droppedTickets}" style="font-size:24px;" />
+                        <p:dataTable id="selectedTicketsTable" var="ticket" value="#{dragNDropTicketsBean.droppedTickets}" rendered="#{not empty dragNDropTicketsBean.droppedTickets}">
+
+                            <!-- ИНФОРМАЦИЯ ПО БИЛЕТАМ В БЛОКАХ НИЖЕ -->
+                            <p:column headerText="Конференция">
+                                <h:outputText value="#{ticket.conference.name}" />
+                            </p:column>
+
+                            <p:column headerText="Цена">
+                                <h:outputText value="#{ticket.price}" />
+                            </p:column>
+
+
+                            <p:column style="width:32px">
+                                <p:commandButton update=":ticketForm:display" oncomplete="PF('ticketDialog').show()" icon="ui-icon-search">
+                                    <f:setPropertyActionListener value="#{ticket}" target="#{dragNDropTicketsBean.selectedTicket}" />
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </p:outputPanel>
+                </p:fieldset>
+
+                <p:droppable for="selectedTickets" tolerance="touch" activeStyleClass="ui-state-highlight" datasource="availableTickets" onDrop="handleDrop">
+                    <p:ajax listener="#{dragNDropTicketsBean.onTicketDrop}" update="dropArea availableTickets" />
+                </p:droppable>
+
+                <p:dialog header="Ticket Detail" widgetVar="ticketDialog" resizable="false" draggable="false"
+                          showEffect="fade" hideEffect="fade" modal="true">
+
+                    <p:outputPanel id="display">
+                        <h:panelGrid columns="2" cellpadding="5" rendered="#{not empty dragNDropTicketsBean.selectedTicket}">
+                            <!--
+                            <f:facet name="header">
+                                <p:graphicImage name="/demo/images/car/ *ШАРП* {dragNDropTicketsBean.selectedTicket.*был brand от машин в старом примере*}.gif"/>
+                            </f:facet>
+                             -->
+
+                            <h:outputText value="Конференция" />
+                            <h:outputText value="#{dragNDropTicketsBean.selectedTicket.conference.name}" style="font-weight:bold"/>
+
+                            <h:outputText value="Цена:" />
+                            <h:outputText value="#{dragNDropTicketsBean.selectedTicket.price}" style="font-weight:bold"/>
+
+                        </h:panelGrid>
+                    </p:outputPanel>
+                </p:dialog>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</h:body>
+
+</html>
