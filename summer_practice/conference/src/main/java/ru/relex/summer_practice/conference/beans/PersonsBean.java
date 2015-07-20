@@ -22,9 +22,7 @@ public class PersonsBean implements Serializable {
     PersonService personService;
 
     @PostConstruct
-    public void initPersonsBean(){
-
-    }
+    public void initPersonsBean() { }
 
     private List<Person> persons;
 
@@ -35,5 +33,9 @@ public class PersonsBean implements Serializable {
 
     public void setPersons(List<Person> persons) {
         this.persons = persons;
+    }
+
+    public Person getPerson(String login){
+        return personService.getUserByNickname(login);
     }
 }

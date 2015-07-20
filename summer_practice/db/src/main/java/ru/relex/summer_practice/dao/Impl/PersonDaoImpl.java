@@ -25,4 +25,11 @@ public class PersonDaoImpl extends GenericCrudDaoImpl<Person, Long> implements P
     public PersonDaoImpl(){
         super(Person.class);
     }
+
+    public Person getUserByNickname(String login) {
+        String jpa = "SELECT p FROM Person p WHERE p.login = :login";
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("login",login);
+        return this.EexecuteQuery(jpa, parameters).get(0);
+    }
 }

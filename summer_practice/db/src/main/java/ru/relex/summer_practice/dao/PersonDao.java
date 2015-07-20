@@ -7,4 +7,5 @@ import ru.relex.summer_practice.db.Person;
  */
 public interface PersonDao extends GenericCrudDao<Person, Long> {
     public Person Login(String login, String password);
+    public Person getUserByNickname(String login);
 }
