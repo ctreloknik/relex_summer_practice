@@ -72,6 +72,11 @@
             <artifactId>picketbox</artifactId>
             <version>4.0.20.Beta2</version>
         </dependency>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4</version>
+        </dependency>
     </dependencies>
 
     <repositories>

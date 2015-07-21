@@ -1,10 +1,7 @@
 package ru.relex.summer_practice.service;
 
 import ru.relex.summer_practice.dao.Impl.PersonLectureRoleDaoImpl;
-import ru.relex.summer_practice.db.Lecture;
-import ru.relex.summer_practice.db.Person;
 import ru.relex.summer_practice.db.PersonLectureRole;
-import ru.relex.summer_practice.db.Roles;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -62,24 +59,6 @@ public class PersonLectureRoleService extends PersonLectureRoleDaoImpl{
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void Delete(Long id) {
         super.Delete(id);
-    }
-
-    @Override
-    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public List<PersonLectureRole> getAllByPerson(Person person) {
-        return super.getAllByPerson(person);
-    }
-
-    @Override
-    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public List<PersonLectureRole> getAllByLecture(Lecture lecture) {
-        return super.getAllByLecture(lecture);
-    }
-
-    @Override
-    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public List<PersonLectureRole> getAllByRoles(Roles roles) {
-        return super.getAllByRoles(roles);
     }
 
     @Override

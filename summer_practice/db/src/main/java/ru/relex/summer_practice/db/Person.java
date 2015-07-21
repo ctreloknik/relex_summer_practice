@@ -31,6 +31,8 @@ public class Person {
 	@Column(name = "EMAIL")
 	private String email;
 
+	@Column(name = "CONFIRMED")
+	private Boolean confirmed;
 
 	@OneToMany(mappedBy = "person")
 	private transient Set<PersonTicket> personTicket = new HashSet<PersonTicket>();
@@ -121,5 +123,13 @@ public class Person {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public Boolean getConfirmed() {
+		return confirmed;
+	}
+
+	public void setConfirmed(Boolean confirmed) {
+		this.confirmed = confirmed;
 	}
 }

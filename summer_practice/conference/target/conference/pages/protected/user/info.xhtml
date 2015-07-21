@@ -41,23 +41,6 @@
                 </p:panel>
             </h:form>
 
-            <h:form>
-            <!-- Информация о купленных билетах на конференции -->
-            <p:dataTable var="buyedTickets" value="#{personTicketBean.getTickets(request.remoteUser)}">
-
-                <p:column headerText="Конференция">
-                    <h:outputText value="#{buyedTickets.ticket.conference.name}" />
-                </p:column>
-
-                <p:column headerText="Описание">
-                    <h:outputText value="#{buyedTickets.ticket.conference.description}" />
-                </p:column>
-
-                <p:column headerText="Цена">
-                    <h:outputText value="#{buyedTickets.ticket.price}" />
-                </p:column>
-            </p:dataTable>
-            </h:form>
             <!--
             <h:form>
                 <p:dataTable var="ticketsBuyed" value="# {personTicketBean.getTicketsByPerson(request.remoteUser)}">

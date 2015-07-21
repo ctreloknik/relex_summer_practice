@@ -10,6 +10,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -32,13 +33,13 @@ public class FoundersService extends FoundersDaoImpl{
     protected EntityManager em;
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public List<Founders> getConferensesByPerson(Person person) {
+    public Collection getConferensesByPerson(Person person) {
         return super.getConferensesByPerson(person);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-    public List<Founders> getPersonsByConference(Conference conference) {
+    public Collection getPersonsByConference(Conference conference) {
         return super.getPersonsByConference(conference);
     }
 
