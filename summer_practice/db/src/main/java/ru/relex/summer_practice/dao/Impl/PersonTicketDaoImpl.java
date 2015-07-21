@@ -17,7 +17,7 @@ public class PersonTicketDaoImpl extends GenericCrudDaoImpl<PersonTicket, Long> 
     }
 
     public List<PersonTicket> getPersonsByTickets(Ticket ticket) {
-        String jpql = "SELECT pt from PERSON_TICKET pt WHERE pt.ticket = :ticket";
+        String jpql = "SELECT pt from PersonTicket pt WHERE pt.ticket = :ticket";
         HashMap<String,Object> parameters = new HashMap<>();
         parameters.put("ticket", ticket);
         return this.EexecuteQuery(jpql,parameters);

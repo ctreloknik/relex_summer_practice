@@ -73,6 +73,12 @@ public class ConferenceService extends ConferenceDaoImpl {
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public List<Conference> getModeratedConference(Boolean moderated) {
+        return super.getModeratedConference(moderated);
+    }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     protected List<Conference> EexecuteQuery(String jpql, Map<String, Object> parametres) {
         return super.EexecuteQuery(jpql, parametres);
     }

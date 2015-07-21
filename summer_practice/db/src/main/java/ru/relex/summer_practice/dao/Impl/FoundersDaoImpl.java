@@ -5,8 +5,8 @@ import ru.relex.summer_practice.db.Conference;
 import ru.relex.summer_practice.db.Founders;
 import ru.relex.summer_practice.db.Person;
 
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Nikita on 12.07.2015.
