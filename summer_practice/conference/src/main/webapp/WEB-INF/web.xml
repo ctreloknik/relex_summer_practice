@@ -26,7 +26,7 @@
 
     <!-- Faces Servlet -->
     <welcome-file-list>
-        <welcome-file>pages/protected/user/info.xhtml</welcome-file>
+        <welcome-file>pages/public/main.xhtml</welcome-file>
     </welcome-file-list>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>

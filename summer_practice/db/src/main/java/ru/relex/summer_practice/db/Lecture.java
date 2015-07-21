@@ -35,14 +35,10 @@ public class Lecture {
 
     // доклады - люди
     @OneToMany(mappedBy = "lecture")
-    private Set<LecturePerson> lecturePerson = new HashSet<LecturePerson>();
+    private transient Set<LecturePerson> lecturePerson = new HashSet<LecturePerson>();
 
     @OneToMany(mappedBy = "lecture")
-    private Set<Message> message = new HashSet<Message>();
-
-    public Set<LecturePerson> getLecturePerson() {
-        return lecturePerson;
-    }
+    private transient Set<Message> message = new HashSet<Message>();
 
     public Long getId() {
         return id;
@@ -84,12 +80,27 @@ public class Lecture {
         this.description = description;
     }
 
-    public Set<Message> getMessages() {
-        return message;
-
+    public Set<Question> getQuestion() {
+        return question;
     }
 
-    public Set<Question> getQuestion(){
-        return question;
+    public void setQuestion(Set<Question> question) {
+        this.question = question;
+    }
+
+    public Set<LecturePerson> getLecturePerson() {
+        return lecturePerson;
+    }
+
+    public void setLecturePerson(Set<LecturePerson> lecturePerson) {
+        this.lecturePerson = lecturePerson;
+    }
+
+    public Set<Message> getMessage() {
+        return message;
+    }
+
+    public void setMessage(Set<Message> message) {
+        this.message = message;
     }
 }

@@ -21,29 +21,17 @@ public class Conference {
     @Column(name = "DESCRIPTION")
     private String description;// Описание конференции
 
-    // Одной конференции соответсвует множество потоков
-    @OneToMany(mappedBy = "conference")
-    private Set<Course> courses = new HashSet<Course>();
-
-    // Одной конференции соответсвует множество билетов
-    @OneToMany(mappedBy = "conference")
-    private Set<Ticket> ticket = new HashSet<Ticket>();
+    @Column(name = "MODERATED")
+    private Boolean moderated;
 
     @OneToMany(mappedBy = "conference")
-    private Set<Founders> founders = new HashSet<Founders>();
+    private transient Set<Course> courses = new HashSet<Course>();
 
-    public Set<Ticket> getTicket() {
+    @OneToMany(mappedBy = "conference")
+    private transient Set<Ticket> ticket = new HashSet<Ticket>();
 
-        return ticket;
-    }
-
-    public Set<Founders> getFounders() {
-        return founders;
-    }
-
-    public Set<Ticket> getTickets() {
-        return ticket;
-    }
+    @OneToMany(mappedBy = "conference")
+    private transient Set<Founders> founders = new HashSet<Founders>();
 
     public Long getId() {
         return id;
@@ -69,7 +57,35 @@ public class Conference {
         this.description = description;
     }
 
+    public Boolean getModerated() {
+        return moderated;
+    }
+
+    public void setModerated(Boolean moderated) {
+        this.moderated = moderated;
+    }
+
     public Set<Course> getCourses() {
         return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
+    }
+
+    public Set<Ticket> getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(Set<Ticket> ticket) {
+        this.ticket = ticket;
+    }
+
+    public Set<Founders> getFounders() {
+        return founders;
+    }
+
+    public void setFounders(Set<Founders> founders) {
+        this.founders = founders;
     }
 }
