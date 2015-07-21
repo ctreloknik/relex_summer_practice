@@ -31,6 +31,8 @@ public class Person {
 	@Column(name = "EMAIL")
 	private String email;
 
+	@Column(name = "CONFIRMED")
+	private Boolean confirmed;
 	@Column(name = "BALANCE")
 	private Integer balance;
 
@@ -133,5 +135,13 @@ public class Person {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public Boolean getConfirmed() {
+		return confirmed;
+	}
+
+	public void setConfirmed(Boolean confirmed) {
+		this.confirmed = confirmed;
 	}
 }

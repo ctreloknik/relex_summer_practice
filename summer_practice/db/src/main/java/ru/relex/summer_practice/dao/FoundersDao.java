@@ -4,7 +4,7 @@ import ru.relex.summer_practice.db.Conference;
 import ru.relex.summer_practice.db.Founders;
 import ru.relex.summer_practice.db.Person;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Created by Sasha on 12.07.2015.

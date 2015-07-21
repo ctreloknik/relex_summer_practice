@@ -6,6 +6,8 @@ import ru.relex.summer_practice.db.Conference;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Eugene on 12.07.2015.
@@ -15,6 +17,7 @@ public class ConferenceDaoImpl extends GenericCrudDaoImpl<Conference, Long> impl
         super(Conference.class);
     }
 
+    @Override
     public String getName(Conference conference) {
         EntityManagerFactory emf = null;
         EntityManager em = null;
@@ -29,6 +32,7 @@ public class ConferenceDaoImpl extends GenericCrudDaoImpl<Conference, Long> impl
         }
     }
 
+    @Override
     public String getDescription(Conference conference) {
         EntityManagerFactory emf = null;
         EntityManager em = null;
@@ -41,5 +45,13 @@ public class ConferenceDaoImpl extends GenericCrudDaoImpl<Conference, Long> impl
             if (em != null ) em.close();
             if (emf != null) emf.close();
         }
+    }
+
+    @Override
+    public List<Conference> getModeratedConference(Boolean moderated) {
+        String jpa = "SELECT c FROM Conference c WHERE c.moderated = :moderated";
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("moderated", moderated);
+        return this.EexecuteQuery(jpa, parameters);
     }
 }
