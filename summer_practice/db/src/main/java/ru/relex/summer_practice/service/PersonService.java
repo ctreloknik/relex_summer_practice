@@ -18,6 +18,10 @@ import java.util.Map;
 
 @Stateless
 public class PersonService extends PersonDaoImpl{
+    @Override
+    public Person getUserByEmail(String email) {
+        return super.getUserByEmail(email);
+    }
 
     @Override
     protected void closeEntityManager() {}

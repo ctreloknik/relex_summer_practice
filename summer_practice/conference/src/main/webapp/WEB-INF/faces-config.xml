@@ -22,4 +22,13 @@
                         <redirect/>
                 </navigation-case>
         </navigation-rule>
+        <navigation-rule>
+                <from-view-id>pages/public/recpass.xhtml</from-view-id>
+                <navigation-case>
+                        <from-action>#{userBean.passwordRecovery}</from-action>
+                        <from-outcome>success</from-outcome>
+                        <to-view-id>/pages/protected/user/main.xhtml</to-view-id>
+                        <redirect/>
+                </navigation-case>
+        </navigation-rule>
 </faces-config>

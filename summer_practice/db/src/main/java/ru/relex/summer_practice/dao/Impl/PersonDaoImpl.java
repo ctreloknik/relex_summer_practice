@@ -36,4 +36,16 @@ public class PersonDaoImpl extends GenericCrudDaoImpl<Person, Long> implements P
         }
         return person.get(0);
     }
+
+    @Override
+    public Person getUserByEmail(String email) {
+        String jpa = "SELECT p FROM Person p WHERE p.email = :email";
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("email",email);
+        List<Person> person = this.EexecuteQuery(jpa,parameters);
+        if (person.size() != 1){
+            return null;
+        }
+        return person.get(0);
+    }
 }
