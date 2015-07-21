@@ -28,7 +28,7 @@
             <h:form>
                 <p:panel id="basic" header="Информация о пользователе #{request.remoteUser}" style="margin-bottom:5px">
                     <h:panelGrid columns="2" cellpadding="25">
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <h:outputText value="Имя:" style="margin-top: 50px; margin-right: 20px"/>
                             <h:outputText value="#{personsBean.getPerson(request.remoteUser).fullname}"
                                           style="font-weight: bold"/>
@@ -46,7 +46,7 @@
                                           style="font-weight: bold"/>
                         </div>
 
-                        <div class="col-md-8">
+                        <div class="col-md-7">
 
                         </div>
                     </h:panelGrid>
