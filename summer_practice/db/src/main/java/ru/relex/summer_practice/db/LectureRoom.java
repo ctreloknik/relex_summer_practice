@@ -23,7 +23,7 @@ public class LectureRoom {
 
     // Одной аудитории соответсвует много потоков в разное время
     @OneToMany(mappedBy = "lectureRoom")
-    private Set<Course> courses = new HashSet<Course>();
+    private transient Set<Course> courses = new HashSet<Course>();
 
     public Long getId() {
         return id;
@@ -51,5 +51,9 @@ public class LectureRoom {
 
     public Set<Course> getCourses() {
         return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
     }
 }

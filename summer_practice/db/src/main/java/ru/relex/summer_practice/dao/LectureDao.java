@@ -1,5 +1,6 @@
 package ru.relex.summer_practice.dao;
 
+import ru.relex.summer_practice.db.Course;
 import ru.relex.summer_practice.db.Lecture;
 
 import java.util.Date;
@@ -11,4 +12,5 @@ public interface LectureDao extends GenericCrudDao<Lecture, Long> {
     public String getTopic(Lecture lecture);
     public Date getDatetime(Lecture lecture);
     public String getDescription(Lecture lecture);
+    public Date getStartTimeByCourse(Course course);
 }
