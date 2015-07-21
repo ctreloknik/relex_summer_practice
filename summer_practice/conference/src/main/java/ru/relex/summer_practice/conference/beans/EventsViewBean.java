@@ -57,15 +57,12 @@ public class EventsViewBean implements Serializable{
         return lazyEventModel;
     }
 
-    public ScheduleEvent getEvent() {
-        return event;
-    }
-
     public List<Course> getCourses() {
         return courses;
     }
 
-    public void onDateSelect(SelectEvent selectEvent) {
-        event = new DefaultScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject());
+    public void onEventSelect(SelectEvent selectEvent) {
+        event = (ScheduleEvent) selectEvent.getObject();
     }
+
 }

@@ -52,43 +52,29 @@
                 <!-- Календарь событий -->
                 <div class="panel panel-default"> <!-- Bootstrap -->
                     <div class="panel-body" align="center">
-                        <h3><span class="label label-default">Календарь событий</span></h3>
+                        <h2><span class="label label-default">Календарь событий</span></h2>
                     </div>
 
                     <p:schedule id="schedule" value="#{eventsViewBean.lazyEventModel}" widgetVar="myschedule"
                                 draggable="false" resizable="false" rightHeaderTemplate="Month"
                                 clientTimeZone="local" timeFormat="hh:mm">
 
-                        <p:ajax event="dateSelect" update="eventDetails" oncomplete="PF('eventDialog').show();"/>
-                        <p:ajax event="eventSelect" update="eventDetails" oncomplete="PF('eventDialog').show();"/>
+                        <!-- Отслеживание нажатия на эвент -->
+                        <!-- <p:ajax event="eventSelect" update="eventDetails" oncomplete="PF('eventDialog').show();"/> -->
                     </p:schedule>
-
-                    <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
-                        <p:dataTable id="eventDetails" var="courses" value="#{eventsViewBean.courses}">
-
-                            <p:column headerText="Название конференции">
-                                <h:outputText value="#{courses.conference.name}"/>
-                            </p:column>
-
-                            <p:column headerText="Описание описание">
-                                <h:outputText value="#{courses.conference.description}"/>
-                            </p:column>
-
-                            <p:column headerText="Аудитория">
-                                <h:outputText value="#{courses.lectureRoom.number}"/>
-                            </p:column>
-
-                            <p:column headerText="Дата начала">
-                                <h:outputText value="#{courses.startDate}"/>
-                            </p:column>
-
-                            <p:column headerText="Дата конца">
-                                <h:outputText value="#{courses.endDate}"/>
-                            </p:column>
-                        </p:dataTable>
-                    </p:dialog>
-
                 </div>
+            </h:form>
+
+            <h:form>
+                <p:dataTable var="ticketsBuyed" value="#{personTicketBean.tickets}">
+                    <p:column headerText="Конференция">
+                        <h:outputText value="#{ticketsBuyed.ticket.conference.name}"/>
+                    </p:column>
+
+                    <p:column headerText="Описание">
+                        <h:outputText value="#{ticketsBuyed.ticket.conference.description}"/>
+                    </p:column>
+                </p:dataTable>
             </h:form>
 
         </ui:define>
