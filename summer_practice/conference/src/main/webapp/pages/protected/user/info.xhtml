@@ -66,27 +66,52 @@
                                 </p:schedule>
                             </div>
                         </p:tab>
+
                         <!-- Список купленных билетов -->
                         <p:tab title="Купленные билеты">
-                            <p:dataTable var="ticketsBuyed" value="#{personTicketBean.tickets}">
-                                <p:column headerText="Конференция">
+                            <p:dataTable id="ticketsTab" var="ticketsBuyed" value="#{personTicketBean.tickets}"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                         paginator="true" rows="10" style="margin-bottom:20px">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Конференция"/>
+                                    </f:facet>
                                     <h:outputText value="#{ticketsBuyed.ticket.conference.name}"/>
                                 </p:column>
 
-                                <p:column headerText="Описание">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Описание"/>
+                                    </f:facet>
                                     <h:outputText value="#{ticketsBuyed.ticket.conference.description}"/>
                                 </p:column>
                             </p:dataTable>
                         </p:tab>
 
+                        <!-- Список ролей на лекциях -->
                         <p:tab title="Роли на лекциях">
-                            <p:dataTable var="roles" value="#{rolesOnLecturesBean.roles}">
-                                <p:column headerText="Конференция">
-                                    <h:outputText value="#{roles.name}"/>
+                            <p:dataTable id="rolesTab" var="roles" value="#{rolesOnLecturesBean.roles}"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                         paginator="true" rows="10" style="margin-bottom:20px">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Конференция"/>
+                                    </f:facet>
+                                    <h:outputText value="#{roles.lecture.course.conference.name}"/>
                                 </p:column>
 
-                                <p:column headerText="Описание">
-                                    <h:outputText value="#{}"/>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Доклад"/>
+                                    </f:facet>
+                                    <h:outputText value="#{roles.lecture.topic}"/>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Роль"/>
+                                    </f:facet>
+                                    <h:outputText value="#{roles.roles.name}"/>
                                 </p:column>
                             </p:dataTable>
                         </p:tab>
@@ -95,8 +120,6 @@
             </h:form>
         </ui:define>
     </ui:composition>
-
-
 </h:body>
 
 </html>
