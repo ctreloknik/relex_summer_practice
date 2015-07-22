@@ -27,7 +27,7 @@ public class Ticket {
 
     //
     @OneToMany(mappedBy = "ticket")
-    private Set<PersonTicket> personTicket = new HashSet<PersonTicket>();
+    private transient Set<PersonTicket> personTicket = new HashSet<PersonTicket>();
 
     public Set<PersonTicket> getPersonTicket() {
         return personTicket;
