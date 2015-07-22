@@ -48,53 +48,47 @@
             </h:form>
 
             <h:form>
+                <p:panel>
+                    <p:tabView dynamic="true" cache="true">
+                        <!-- Календарь событий -->
+                        <p:tab title="Календарь событий">
+                            <div class="panel panel-default"> <!-- Bootstrap -->
+                                <div class="panel-body" align="center">
+                                    <h2><span class="label label-default">Календарь событий</span></h2>
+                                </div>
 
-                <p:tabView dynamic="true" cache="true">
-                    <p:tab title="Календарь событий">
-
-                        <div class="panel panel-default"> <!-- Bootstrap -->
-                            <div class="panel-body" align="center">
-                                <h2><span class="label label-default">Календарь событий</span></h2>
+                                <p:schedule id="schedule" value="#{eventsViewBean.lazyEventModel}"
+                                            draggable="false" resizable="false" rightHeaderTemplate="Month"
+                                            clientTimeZone="local" timeFormat="hh:mm"
+                                            style="margin-right: 50px; margin-left: 50px">
+                                    <!-- Отслеживание нажатия на эвент -->
+                                    <!-- <p:ajax event="eventSelect" update="eventDetails" oncomplete="PF('eventDialog').show();"/> -->
+                                </p:schedule>
                             </div>
+                        </p:tab>
+                        <!-- Список купленных билетов -->
+                        <p:tab title="Купленные билеты">
+                            <p:dataTable var="ticketsBuyed" value="#{personTicketBean.tickets}">
+                                <p:column headerText="Конференция">
+                                    <h:outputText value="#{ticketsBuyed.ticket.conference.name}"/>
+                                </p:column>
 
-                            <p:schedule id="schedule" value="#{eventsViewBean.lazyEventModel}"
-                                        draggable="false" resizable="false" rightHeaderTemplate="Month"
-                                        clientTimeZone="local" timeFormat="hh:mm"
-                                        style="margin-right: 50px; margin-left: 50px">
+                                <p:column headerText="Описание">
+                                    <h:outputText value="#{ticketsBuyed.ticket.conference.description}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:tab>
 
-                                <!-- Отслеживание нажатия на эвент -->
-                                <!-- <p:ajax event="eventSelect" update="eventDetails" oncomplete="PF('eventDialog').show();"/> -->
-                            </p:schedule>
-                        </div>
-                    </p:tab>
-
-                    <p:tab title="Купленные билеты">
-                        <p:dataTable var="ticketsBuyed" value="#{personTicketBean.tickets}">
-                            <p:column headerText="Конференция">
-                                <h:outputText value="#{ticketsBuyed.ticket.conference.name}"/>
-                            </p:column>
-
-                            <p:column headerText="Описание">
-                                <h:outputText value="#{ticketsBuyed.ticket.conference.description}"/>
-                            </p:column>
-                        </p:dataTable>
-                    </p:tab>
-
-                    <p:tab title="Godfather Part III">
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <p:graphicImage name="demo/images/godfather/godfather3.jpg" />
-                            <h:outputText value="After a break of more than 15 years..." />
-                        </h:panelGrid>
-                    </p:tab>
-                </p:tabView>
-
-                <!-- Календарь событий -->
-
+                        <p:tab title="Роли на лекциях
+                        ">
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <p:graphicImage name="demo/images/godfather/godfather3.jpg"/>
+                                <h:outputText value="After a break of more than 15 years..."/>
+                            </h:panelGrid>
+                        </p:tab>
+                    </p:tabView>
+                </p:panel>
             </h:form>
-        </ui:define>
-
-        <ui:define name="right_block">
-            *ближайшее собитие*
         </ui:define>
     </ui:composition>
 
