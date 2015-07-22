@@ -28,22 +28,27 @@
             <h:form>
                 <p:panel id="basic" header="Информация о пользователе #{request.remoteUser}" style="margin-bottom:5px">
                     <h:panelGrid columns="2" cellpadding="25">
+                        <div class="col-md-5">
+                            <h:outputText value="Имя:" style="margin-top: 50px; margin-right: 20px"/>
+                            <h:outputText value="#{personsBean.getPerson(request.remoteUser).fullname}"
+                                          style="font-weight: bold"/>
 
-                        <h:outputText value="Имя:" style="margin-top: 50px; margin-right: 20px"/>
-                        <h:outputText value="#{personsBean.getPerson(request.remoteUser).fullname}"
-                                      style="font-weight: bold"/>
+                            <h:outputText value="Телефон:" style="margin-top: 50px; margin-right: 20px"/>
+                            <h:outputText value=" #{personsBean.getPerson(request.remoteUser).phoneNumber}"
+                                          style="font-weight: bold"/>
 
-                        <h:outputText value="Телефон:" style="margin-top: 50px; margin-right: 20px"/>
-                        <h:outputText value=" #{personsBean.getPerson(request.remoteUser).phoneNumber}"
-                                      style="font-weight: bold"/>
+                            <h:outputText value="Email:" style="margin-top: 50px; margin-right: 20px"/>
+                            <h:outputText value="#{personsBean.getPerson(request.remoteUser).email}"
+                                          style="font-weight: bold"/>
 
-                        <h:outputText value="Email:" style="margin-top: 50px; margin-right: 20px"/>
-                        <h:outputText value="#{personsBean.getPerson(request.remoteUser).email}"
-                                      style="font-weight: bold"/>
+                            <h:outputText value="Баланс:" style="margin-top: 50px; margin-right: 20px"/>
+                            <h:outputText value="#{personsBean.getPerson(request.remoteUser).balance}"
+                                          style="font-weight: bold"/>
+                        </div>
 
-                        <h:outputText value="Баланс:" style="margin-top: 50px; margin-right: 20px"/>
-                        <h:outputText value="#{personsBean.getPerson(request.remoteUser).balance}"
-                                      style="font-weight: bold"/>
+                        <div class="col-md-7">
+
+                        </div>
                     </h:panelGrid>
                 </p:panel>
             </h:form>

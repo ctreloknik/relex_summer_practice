@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: Sasha
+  Date: 18.07.2015
+  Time: 0:06
+-->
+<ui:composition template="/pages/public/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="center_block">
+        <br/>
+
+        <div class="col-md-8 col-md-offset-2 thumbnail">
+            <div class="col-md-12">
+                <br/>
+
+                <h3><b>Восстановление пароля</b></h3>
+                <hr/>
+                <h:form>
+                    <h:panelGroup id="main">
+                        <p:messages id="msgs"/>
+                        <h:panelGroup rendered="#{userBean.email == null}">
+
+
+                            <div class="form-group">
+                                <label class="control-label ">Введите почтовый ящик</label>
+                                <p:inputText label="E-mail" value="#{userBean.email}"
+                                             class="form-control" placeholder="e-mail"
+                                             validatorMessage="Invalid email format"
+                                             required="true">
+                                    <f:validateRegex
+                                            pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                                </p:inputText>
+
+                            </div>
+
+                            <div class="form-group">
+                                <p:commandButton value="Отправить" update="main" class="btn btn-primary"
+                                                 action="#{userBean.sendCode}">
+                                </p:commandButton>
+                            </div>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{userBean.email != null}">
+                            <div class="form-group">
+                                <p>
+                                    <h:outputLabel value="Если вы не получили код,"></h:outputLabel>
+                                    <h:commandLink action="#{userBean.sendCode}" immediate="true" value="кликните сюда"></h:commandLink>
+                                    <h:outputLabel value=", чтобы получить новый код."></h:outputLabel>
+                                </p>
+                            </div>
+                            <div class="form-group">
+
+                                <h:outputLabel value="Код"></h:outputLabel>
+
+
+                                <p:inputText label="Код потверждения" value="#{userBean.code}"
+                                             class="form-control" placeholder="Введите код подверждения"
+                                             required="true"></p:inputText>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel value="Пароль"></h:outputLabel>
+
+
+                                    <p:inputText label="Пароль" type="password" value="#{userBean.password1}"
+                                                 class="form-control" id="password" placeholder="Введите пароль"
+                                                 required="true">
+                                    </p:inputText>
+
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel value="Повторите пароль"></h:outputLabel>
+
+
+                                    <p:inputText label="Повторите пароль" id="confirm" type="password"
+                                                 value="#{userBean.password2}" class="form-control" placeholder="Введите пароль"
+                                                 required="true"></p:inputText>
+
+                            </div>
+                            <div class="form-group">
+                                <p:commandButton value="Завершить" update="main" class="btn btn-primary"
+                                                 action="#{userBean.passwordRecovery}">
+                                </p:commandButton>
+                            </div>
+
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </h:form>
+                <br/>
+            </div>
+        </div>
+
+    </ui:define>
+</ui:composition>

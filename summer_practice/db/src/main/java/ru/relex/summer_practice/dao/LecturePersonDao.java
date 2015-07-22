@@ -12,5 +12,6 @@ import java.util.List;
  */
 public interface LecturePersonDao extends GenericCrudDao<LecturePerson, Long> {
     public List<LecturePerson> getPersonByLecture(Lecture lecture);
+
     public List<LecturePerson> getLecturesByPerson(Person person);
 }
