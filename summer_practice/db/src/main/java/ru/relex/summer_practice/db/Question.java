@@ -42,7 +42,7 @@ public class Question {
     private Lecture lecture;
 
     @OneToMany(mappedBy = "question")
-    private Set<Rating> ratings = new HashSet<Rating>();
+    private transient Set<Rating> ratings = new HashSet<Rating>();
 
     public boolean getModerated() {
         return Moderated;
