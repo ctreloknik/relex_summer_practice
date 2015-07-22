@@ -79,12 +79,16 @@
                             </p:dataTable>
                         </p:tab>
 
-                        <p:tab title="Роли на лекциях
-                        ">
-                            <h:panelGrid columns="2" cellpadding="10">
-                                <p:graphicImage name="demo/images/godfather/godfather3.jpg"/>
-                                <h:outputText value="After a break of more than 15 years..."/>
-                            </h:panelGrid>
+                        <p:tab title="Роли на лекциях">
+                            <p:dataTable var="roles" value="#{rolesOnLecturesBean.roles}">
+                                <p:column headerText="Конференция">
+                                    <h:outputText value="#{roles.name}"/>
+                                </p:column>
+
+                                <p:column headerText="Описание">
+                                    <h:outputText value="#{}"/>
+                                </p:column>
+                            </p:dataTable>
                         </p:tab>
                     </p:tabView>
                 </p:panel>
