@@ -11,4 +11,5 @@ public interface ConferenceDao extends GenericCrudDao<Conference, Long> {
     public String getName(Conference conference);
     public String getDescription(Conference conference);
     public List<Conference> getModeratedConference(Boolean moderated);
+    public List<Conference> getTicketsForBuying();
 }

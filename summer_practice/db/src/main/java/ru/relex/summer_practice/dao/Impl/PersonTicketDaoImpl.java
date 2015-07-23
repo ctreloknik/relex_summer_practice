@@ -1,9 +1,9 @@
 package ru.relex.summer_practice.dao.Impl;
 
 import ru.relex.summer_practice.dao.PersonTicketDao;
+import ru.relex.summer_practice.db.Conference;
 import ru.relex.summer_practice.db.Person;
 import ru.relex.summer_practice.db.PersonTicket;
-import ru.relex.summer_practice.db.Ticket;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,11 +16,18 @@ public class PersonTicketDaoImpl extends GenericCrudDaoImpl<PersonTicket, Long> 
         super(PersonTicket.class);
     }
 
-    public List<PersonTicket> getPersonsByTickets(Ticket ticket) {
+/*    public List<PersonTicket> getPersonsByTickets(Ticket ticket) {
         String jpql = "SELECT pt from PersonTicket pt WHERE pt.ticket = :ticket";
         HashMap<String,Object> parameters = new HashMap<>();
         parameters.put("ticket", ticket);
         return this.EexecuteQuery(jpql,parameters);
+    }*/
+
+    public List<PersonTicket> getPersonsByTickets(Conference conference) {
+        String jpql = "SELECT pt from PersonTicket pt WHERE pt.conference = :conference";
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("conference", conference);
+        return this.EexecuteQuery(jpql, parameters);
     }
 
     public List<PersonTicket> getTicketsByPerson(Person person) {
