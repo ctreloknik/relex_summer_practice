@@ -2,6 +2,7 @@ package ru.relex.summer_practice.dao.Impl;
 
 import ru.relex.summer_practice.dao.ConferenceDao;
 import ru.relex.summer_practice.db.Conference;
+import ru.relex.summer_practice.db.Person;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -55,12 +56,11 @@ public class ConferenceDaoImpl extends GenericCrudDaoImpl<Conference, Long> impl
         return this.EexecuteQuery(jpa, parameters);
     }
 
-
-    public List<Conference> getTicketsForBuying(){
-        String jpql = "SELECT DISTINCT c from Conference c, Course co WHERE c = co.conference and co.endDate>current_date)";
-        System.out.println(" getTicketsForBuying worked ");
-        List<Conference> res = this.EexecuteQuery(jpql);
-        System.out.println(" query worked");
-        return res;
+    public List<Conference> getTicketsForBuying(Person person){
+        String jpql = "SELECT DISTINCT c from Conference c, Course co WHERE c = co.conference and co.endDate>current_date" +
+                " and NOT EXISTS(SELECT pt.conference FROM PersonTicket pt WHERE pt.person = :person and c = pt.conference)";
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("person", person);
+        return this.EexecuteQuery(jpql, parameters);
     }
 }

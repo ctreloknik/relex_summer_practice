@@ -106,4 +106,9 @@ public class Conference {
     public void setFounders(Set<Founders> founders) {
         this.founders = founders;
     }
+
+    @Override
+    public String toString(){
+        return id + " " + name;
+    }
 }
