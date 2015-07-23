@@ -1,15 +1,15 @@
 package ru.relex.summer_practice.conference.beans;
 
 import org.primefaces.event.DragDropEvent;
+import ru.relex.summer_practice.db.Conference;
 import ru.relex.summer_practice.db.Ticket;
-import ru.relex.summer_practice.service.TicketService;
+import ru.relex.summer_practice.service.ConferenceService;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,42 +21,26 @@ import java.util.List;
 public class DragNDropTicketsBean implements Serializable {
 
     @EJB
-    TicketService ticketService;
+    ConferenceService conferenceService;
 
-    private List<Ticket> tickets;
-    private List<Ticket> droppedTickets;
-
-    private Ticket selectedTicket;
+    private List<Conference> conferences;
 
     @PostConstruct
-    public void init(){
-        tickets = ticketService.ReadAll();
-        droppedTickets = new ArrayList<Ticket>();
+    public void init() {
+        conferences = conferenceService.getTicketsForBuying();
     }
+
     public void onTicketDrop(DragDropEvent ddEvent) {
         Ticket ticket = ((Ticket) ddEvent.getData());
 
-        droppedTickets.add(ticket);
-        tickets.remove(ticket);
     }
 
-    public void setService(TicketService service) {
-        this.ticketService = service;
+    public void setService(ConferenceService service) {
+        this.conferenceService = service;
     }
 
-    public List<Ticket> getTickets() {
-        return tickets;
+    public List<Conference> getTickets() {
+        return conferences;
     }
 
-    public List<Ticket> getDroppedTickets() {
-        return droppedTickets;
-    }
-
-    public Ticket getSelectedTicket() {
-        return selectedTicket;
-    }
-
-    public void setSelectedTicket(Ticket selectedCar) {
-        this.selectedTicket = selectedCar;
-    }
 }
