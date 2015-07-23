@@ -48,57 +48,85 @@
             </h:form>
 
             <h:form>
+                <p:panel>
+                    <p:tabView dynamic="true" cache="true">
+                        <!-- Список ролей на лекциях -->
+                        <p:tab title="Роли на лекциях">
+                            <p:dataTable id="rolesTab" var="roles" value="#{rolesOnLecturesBean.roles}"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                         paginator="true" rows="10" style="margin-bottom:20px">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Конференция"/>
+                                    </f:facet>
+                                    <h:outputText value="#{roles.lecture.course.conference.name}"/>
+                                </p:column>
 
-                <p:tabView dynamic="true" cache="true">
-                    <p:tab title="Календарь событий">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Доклад"/>
+                                    </f:facet>
+                                    <h:outputText value="#{roles.lecture.topic}"/>
+                                </p:column>
 
-                        <div class="panel panel-default"> <!-- Bootstrap -->
-                            <div class="panel-body" align="center">
-                                <h2><span class="label label-default">Календарь событий</span></h2>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Роль"/>
+                                    </f:facet>
+                                    <h:outputText value="#{roles.roles.name}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:tab>
+
+                        <!-- Список купленных билетов -->
+                        <p:tab title="Купленные билеты">
+                            <p:dataTable id="ticketsTab" var="ticketsBuyed" value="#{personTicketBean.tickets}"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                         paginator="true" rows="10" style="margin-bottom:20px">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Конференция"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ticketsBuyed.conference.name}"/>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Описание"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ticketsBuyed.conference.description}"/>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Цена"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ticketsBuyed.conference.price}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:tab>
+
+                        <!-- Календарь событий -->
+                        <p:tab title="Календарь событий">
+                            <div class="panel panel-default"> <!-- Bootstrap -->
+                                <div class="panel-body" align="center">
+                                    <h2><span class="label label-default">Календарь событий</span></h2>
+                                </div>
+
+                                <p:schedule id="schedule" value="#{eventsViewBean.lazyEventModel}"
+                                            draggable="false" resizable="false" rightHeaderTemplate="Month"
+                                            clientTimeZone="local" timeFormat="hh:mm"
+                                            style="margin-right: 50px; margin-left: 50px">
+                                    <!-- Отслеживание нажатия на эвент -->
+                                    <!-- <p:ajax event="eventSelect" update="eventDetails" oncomplete="PF('eventDialog').show();"/> -->
+                                </p:schedule>
                             </div>
-
-                            <p:schedule id="schedule" value="#{eventsViewBean.lazyEventModel}"
-                                        draggable="false" resizable="false" rightHeaderTemplate="Month"
-                                        clientTimeZone="local" timeFormat="hh:mm"
-                                        style="margin-right: 50px; margin-left: 50px">
-
-                                <!-- Отслеживание нажатия на эвент -->
-                                <!-- <p:ajax event="eventSelect" update="eventDetails" oncomplete="PF('eventDialog').show();"/> -->
-                            </p:schedule>
-                        </div>
-                    </p:tab>
-
-                    <p:tab title="Купленные билеты">
-                        <p:dataTable var="ticketsBuyed" value="#{personTicketBean.tickets}">
-                            <p:column headerText="Конференция">
-                                <h:outputText value="#{ticketsBuyed.ticket.conference.name}"/>
-                            </p:column>
-
-                            <p:column headerText="Описание">
-                                <h:outputText value="#{ticketsBuyed.ticket.conference.description}"/>
-                            </p:column>
-                        </p:dataTable>
-                    </p:tab>
-
-                    <p:tab title="Godfather Part III">
-                        <h:panelGrid columns="2" cellpadding="10">
-                            <p:graphicImage name="demo/images/godfather/godfather3.jpg" />
-                            <h:outputText value="After a break of more than 15 years..." />
-                        </h:panelGrid>
-                    </p:tab>
-                </p:tabView>
-
-                <!-- Календарь событий -->
-
+                        </p:tab>
+                    </p:tabView>
+                </p:panel>
             </h:form>
         </ui:define>
-
-        <ui:define name="right_block">
-            *ближайшее собитие*
-        </ui:define>
     </ui:composition>
-
-
 </h:body>
 
 </html>

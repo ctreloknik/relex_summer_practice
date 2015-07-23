@@ -1,9 +1,9 @@
 package ru.relex.summer_practice.service;
 
 import ru.relex.summer_practice.dao.Impl.PersonTicketDaoImpl;
+import ru.relex.summer_practice.db.Conference;
 import ru.relex.summer_practice.db.Person;
 import ru.relex.summer_practice.db.PersonTicket;
-import ru.relex.summer_practice.db.Ticket;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -31,10 +31,16 @@ public class PersonTicketService extends PersonTicketDaoImpl{
     @PersistenceContext(unitName = "PERSISTENCEUNIT")
     protected EntityManager em;
 
-    @Override
+    /*@Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public List<PersonTicket> getPersonsByTickets(Ticket ticket) {
         return super.getPersonsByTickets(ticket);
+    }*/
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public List<PersonTicket> getPersonsByTickets(Conference conference) {
+        return super.getPersonsByTickets(conference);
     }
 
     @Override

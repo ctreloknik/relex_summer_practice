@@ -8,8 +8,8 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table (name="TICKET")
+//@Entity
+//@Table (name="TICKET")
 public class Ticket {
     public Ticket() {}
 
@@ -18,10 +18,10 @@ public class Ticket {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "CONFERENCE_ID")
     private Conference conference;
-
+*/
     @Column(name = "PRICE")
     private int price;
 
@@ -41,15 +41,15 @@ public class Ticket {
         this.id = id;
     }
 
-    public Conference getConference() {
+   /* public Conference getConference() {
         return conference;
     }
 
     public void setConference(Conference conference) {
         this.conference = conference;
     }
-
-    public int getPrice() {
+   */
+   public int getPrice() {
         return price;
     }
 

@@ -54,4 +54,13 @@ public class ConferenceDaoImpl extends GenericCrudDaoImpl<Conference, Long> impl
         parameters.put("moderated", moderated);
         return this.EexecuteQuery(jpa, parameters);
     }
+
+
+    public List<Conference> getTicketsForBuying(){
+        String jpql = "SELECT DISTINCT c from Conference c, Course co WHERE c = co.conference and co.endDate>current_date)";
+        System.out.println(" getTicketsForBuying worked ");
+        List<Conference> res = this.EexecuteQuery(jpql);
+        System.out.println(" query worked");
+        return res;
+    }
 }

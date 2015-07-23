@@ -79,6 +79,12 @@ public class ConferenceService extends ConferenceDaoImpl {
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public List<Conference> getTicketsForBuying() {
+        return super.getTicketsForBuying();
+    }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     protected List<Conference> EexecuteQuery(String jpql, Map<String, Object> parametres) {
         return super.EexecuteQuery(jpql, parametres);
     }
