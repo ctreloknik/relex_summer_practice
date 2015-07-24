@@ -56,6 +56,7 @@ public class ConferenceDaoImpl extends GenericCrudDaoImpl<Conference, Long> impl
         return this.EexecuteQuery(jpa, parameters);
     }
 
+
     public List<Conference> getTicketsForBuying(Person person){
         String jpql = "SELECT DISTINCT c from Conference c, Course co WHERE c = co.conference and co.endDate>current_date" +
                 " and NOT EXISTS(SELECT pt.conference FROM PersonTicket pt WHERE pt.person = :person and c = pt.conference)";
