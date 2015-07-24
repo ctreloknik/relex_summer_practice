@@ -24,7 +24,8 @@
     <ui:composition template="/pages/public/template.xhtml">
         <ui:define name="center_block">
             <h:form id="ticketForm">
-                <p:pickList id="pickListTickets" value="#{buyTicketsBean.conferences}" var="tickets" itemLabel="#{tickets}" itemValue="#{tickets}" />
+                <p:pickList id="pickListTickets" value="#{buyTicketsBean.conferences}" var="tickets"
+                            itemLabel="#{tickets}" itemValue="#{tickets}" />
 
                 <!--
                 <p:commandButton id="ticketsSubmit" value="Купить" update="displayTickets" oncomplete="PF('ticketsDialog').show()" style="margin-top:5px" />

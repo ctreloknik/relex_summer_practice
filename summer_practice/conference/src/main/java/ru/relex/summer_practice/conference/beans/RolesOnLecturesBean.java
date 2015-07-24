@@ -1,8 +1,6 @@
 package ru.relex.summer_practice.conference.beans;
 
-import ru.relex.summer_practice.db.Lecture;
 import ru.relex.summer_practice.db.PersonLectureRole;
-import ru.relex.summer_practice.service.LectureService;
 import ru.relex.summer_practice.service.PersonLectureRoleService;
 
 import javax.annotation.PostConstruct;
@@ -22,8 +20,8 @@ public class RolesOnLecturesBean {
     @EJB
     PersonLectureRoleService service;
 
-    @EJB
-    LectureService lectureService;
+    //@EJB
+    //LectureService lectureService;
 
     private List<PersonLectureRole> roles;
 
@@ -34,11 +32,5 @@ public class RolesOnLecturesBean {
 
     public List<PersonLectureRole> getRoles() {
         return roles;
-    }
-
-    public String getDateLecture(Lecture lecture){
-        String result = lectureService.getDatetime(lecture).toString();
-        System.out.println(result + "!!!!!!!! DATE_DATE");
-        return result;
     }
 }
