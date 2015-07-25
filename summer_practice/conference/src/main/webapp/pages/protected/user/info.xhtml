@@ -28,60 +28,103 @@
             <h:form>
                 <p:panel id="basic" header="Информация о пользователе #{request.remoteUser}" style="margin-bottom:5px">
                     <h:panelGrid columns="2" cellpadding="25">
-                        <div class="col-md-5">
-                            <h:outputText value="Имя:" style="margin-top: 50px; margin-right: 20px"/>
-                            <h:outputText value="#{personsBean.getPerson(request.remoteUser).fullname}"
-                                          style="font-weight: bold"/>
+                        <h:outputText value="Имя:" style="margin-bottom: 50px; margin-right: 35px"/>
+                        <h:outputText value="#{personsBean.getPerson(request.remoteUser).fullname}"
+                                      style="font-weight: bold"/>
 
-                            <h:outputText value="Телефон:" style="margin-top: 50px; margin-right: 20px"/>
-                            <h:outputText value=" #{personsBean.getPerson(request.remoteUser).phoneNumber}"
-                                          style="font-weight: bold"/>
+                        <h:outputText value="Телефон:" style="margin-bottom: 50px; margin-right: 35px"/>
+                        <h:outputText value=" #{personsBean.getPerson(request.remoteUser).phoneNumber}"
+                                      style="font-weight: bold"/>
 
-                            <h:outputText value="Email:" style="margin-top: 50px; margin-right: 20px"/>
-                            <h:outputText value="#{personsBean.getPerson(request.remoteUser).email}"
-                                          style="font-weight: bold"/>
+                        <h:outputText value="Email:" style="margin-bottom: 50px; margin-right: 35px"/>
+                        <h:outputText value="#{personsBean.getPerson(request.remoteUser).email}"
+                                      style="font-weight: bold"/>
 
-                            <h:outputText value="Баланс:" style="margin-top: 50px; margin-right: 20px"/>
-                            <h:outputText value="#{personsBean.getPerson(request.remoteUser).balance}"
-                                          style="font-weight: bold"/>
-                        </div>
-
-                        <div class="col-md-7">
-
-                        </div>
+                        <h:outputText value="Баланс:" style="margin-bottom: 50px; margin-right: 35px"/>
+                        <h:outputText value="#{personsBean.getPerson(request.remoteUser).balance}"
+                                      style="font-weight: bold"/>
                     </h:panelGrid>
                 </p:panel>
             </h:form>
 
             <h:form>
-                <!-- Календарь событий -->
-                <div class="panel panel-default"> <!-- Bootstrap -->
-                    <div class="panel-body" align="center">
-                        <h2><span class="label label-default">Календарь событий</span></h2>
-                    </div>
+                <p:panel>
+                    <p:tabView dynamic="true" cache="true">
+                        <!-- Календарь событий -->
+                        <p:tab title="Календарь событий">
+                            <div class="panel panel-default"> <!-- Bootstrap -->
+                                <div class="panel-body" align="center">
+                                    <h2><span class="label label-default">Календарь событий</span></h2>
+                                </div>
 
-                    <p:schedule id="schedule" value="#{eventsViewBean.lazyEventModel}" widgetVar="myschedule"
-                                draggable="false" resizable="false" rightHeaderTemplate="Month"
-                                clientTimeZone="local" timeFormat="hh:mm">
+                                <p:schedule id="schedule" value="#{eventsViewBean.lazyEventModel}"
+                                            draggable="false" resizable="false" rightHeaderTemplate="Month"
+                                            clientTimeZone="local" timeFormat="hh:mm"
+                                            style="margin-right: 50px; margin-left: 50px">
+                                    <!-- Отслеживание нажатия на эвент -->
+                                    <!-- <p:ajax event="eventSelect" update="eventDetails" oncomplete="PF('eventDialog').show();"/> -->
+                                </p:schedule>
+                            </div>
+                        </p:tab>
 
-                        <!-- Отслеживание нажатия на эвент -->
-                        <!-- <p:ajax event="eventSelect" update="eventDetails" oncomplete="PF('eventDialog').show();"/> -->
-                    </p:schedule>
-                </div>
+                        <!-- Список купленных билетов -->
+                        <p:tab title="Купленные билеты">
+                            <p:dataTable id="ticketsTab" var="ticketsBuyed" value="#{personTicketBean.tickets}"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                         paginator="true" rows="10" style="margin-bottom:20px">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Конференция"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ticketsBuyed.conference.name}"/>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Описание"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ticketsBuyed.conference.description}"/>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Цена"/>
+                                    </f:facet>
+                                    <h:outputText value="#{ticketsBuyed.conference.price}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:tab>
+
+                        <!-- Список ролей на лекциях -->
+                        <p:tab title="Роли на лекциях">
+                            <p:dataTable id="rolesTab" var="roles" value="#{rolesOnLecturesBean.roles}"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                         paginator="true" rows="10" style="margin-bottom:20px">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Конференция"/>
+                                    </f:facet>
+                                    <h:outputText value="#{roles.lecture.course.conference.name}"/>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Доклад"/>
+                                    </f:facet>
+                                    <h:outputText value="#{roles.lecture.topic}"/>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Роль"/>
+                                    </f:facet>
+                                    <h:outputText value="#{roles.roles.name}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:tab>
+                    </p:tabView>
+                </p:panel>
             </h:form>
-
-            <h:form>
-                <p:dataTable var="ticketsBuyed" value="#{personTicketBean.tickets}">
-                    <p:column headerText="Конференция">
-                        <h:outputText value="#{ticketsBuyed.ticket.conference.name}"/>
-                    </p:column>
-
-                    <p:column headerText="Описание">
-                        <h:outputText value="#{ticketsBuyed.ticket.conference.description}"/>
-                    </p:column>
-                </p:dataTable>
-            </h:form>
-
         </ui:define>
     </ui:composition>
 </h:body>

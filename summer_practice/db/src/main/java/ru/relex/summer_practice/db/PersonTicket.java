@@ -22,10 +22,13 @@ public class PersonTicket {
     @JoinColumn(name = "PERSON_ID")
     private Person person;
 
-    @ManyToOne
+    @OneToOne
+    @JoinColumn(name = "CONFERENCE_ID")
+    private Conference conference;
+    /*@ManyToOne
     @JoinColumn(name = "TICKET_ID")
     private Ticket ticket;
-
+*/
 
     // доклады для людей
     @OneToMany(mappedBy = "personTicket")
@@ -39,10 +42,18 @@ public class PersonTicket {
         this.person = person;
     }
 
-    public void setTicket(Ticket ticket) {
-        this.ticket = ticket;
+    public Conference getConference() {
+        return conference;
     }
 
+    public void setConference(Conference conference) {
+        this.conference = conference;
+    }
+
+    /*public void setTicket(Ticket ticket) {
+            this.ticket = ticket;
+        }
+    */
     public Long getId() {
 
         return id;
@@ -52,10 +63,10 @@ public class PersonTicket {
         return person;
     }
 
-    public Ticket getTicket() {
+  /*  public Ticket getTicket() {
         return ticket;
     }
-
+*/
     public Set<LecturePerson> getLecturePerson() {
         return lecturePerson;
     }

@@ -67,6 +67,12 @@ public class TicketService extends TicketDaoImpl {
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public List<Ticket> getTicketsForBuying() {
+        return super.getTicketsForBuying();
+    }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     protected List<Ticket> EexecuteQuery(String jpql, Map<String, Object> parametres) {
         return super.EexecuteQuery(jpql, parametres);
     }

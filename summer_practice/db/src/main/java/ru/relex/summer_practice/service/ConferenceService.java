@@ -2,6 +2,7 @@ package ru.relex.summer_practice.service;
 
 import ru.relex.summer_practice.dao.Impl.ConferenceDaoImpl;
 import ru.relex.summer_practice.db.Conference;
+import ru.relex.summer_practice.db.Person;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -75,6 +76,12 @@ public class ConferenceService extends ConferenceDaoImpl {
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public List<Conference> getModeratedConference(Boolean moderated) {
         return super.getModeratedConference(moderated);
+    }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public List<Conference> getTicketsForBuying(Person person) {
+        return super.getTicketsForBuying(person);
     }
 
     @Override

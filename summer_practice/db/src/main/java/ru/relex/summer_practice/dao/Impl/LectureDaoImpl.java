@@ -67,7 +67,7 @@ public class LectureDaoImpl extends GenericCrudDaoImpl<Lecture, Long> implements
         parameters.put("course",course);
         List<Lecture> result = this.EexecuteQuery(jpql, parameters);
         if (result.size() == 0) {
-            return new Date(0);
+            return null;
         }
         return result.get(0).getDatetime();
     }

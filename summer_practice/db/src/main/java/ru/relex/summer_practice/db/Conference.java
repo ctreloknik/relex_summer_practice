@@ -21,17 +21,31 @@ public class Conference {
     @Column(name = "DESCRIPTION")
     private String description;// Описание конференции
 
+    @Column(name = "PRICE")
+    private int price;
+
     @Column(name = "MODERATED")
     private Boolean moderated;
+
+    @OneToOne(mappedBy = "conference")
+    private PersonTicket personTicket;
 
     @OneToMany(mappedBy = "conference")
     private transient Set<Course> courses = new HashSet<Course>();
 
-    @OneToMany(mappedBy = "conference")
-    private transient Set<Ticket> ticket = new HashSet<Ticket>();
+    //@OneToMany(mappedBy = "conference")
+    //private transient Set<Ticket> ticket = new HashSet<Ticket>();
 
     @OneToMany(mappedBy = "conference")
     private transient Set<Founders> founders = new HashSet<Founders>();
+
+    public PersonTicket getPersonTicket() {
+        return personTicket;
+    }
+
+    public void setPersonTicket(PersonTicket personTicket) {
+        this.personTicket = personTicket;
+    }
 
     public Long getId() {
         return id;
@@ -57,6 +71,14 @@ public class Conference {
         this.description = description;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     public Boolean getModerated() {
         return moderated;
     }
@@ -73,13 +95,9 @@ public class Conference {
         this.courses = courses;
     }
 
-    public Set<Ticket> getTicket() {
-        return ticket;
-    }
+    // public Set<Ticket> getTicket() { return ticket; }
 
-    public void setTicket(Set<Ticket> ticket) {
-        this.ticket = ticket;
-    }
+    // public void setTicket(Set<Ticket> ticket) { this.ticket = ticket; }
 
     public Set<Founders> getFounders() {
         return founders;
@@ -87,5 +105,10 @@ public class Conference {
 
     public void setFounders(Set<Founders> founders) {
         this.founders = founders;
+    }
+
+    @Override
+    public String toString(){
+        return id + " " + name;
     }
 }

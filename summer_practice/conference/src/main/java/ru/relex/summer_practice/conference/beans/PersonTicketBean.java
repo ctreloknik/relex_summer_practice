@@ -53,7 +53,6 @@ public class PersonTicketBean {
     public String getCurrentUser() {
         FacesContext fc = FacesContext.getCurrentInstance();
         ExternalContext externalContext = fc.getExternalContext();
-        System.out.println("!!!!!!!!!!!! WORKED !!!!!!!!");
         return externalContext.getUserPrincipal().getName();
     }
 }

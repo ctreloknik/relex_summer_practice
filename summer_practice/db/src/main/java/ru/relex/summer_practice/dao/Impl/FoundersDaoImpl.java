@@ -18,14 +18,14 @@ public class FoundersDaoImpl extends GenericCrudDaoImpl<Founders, Long> implemen
 
 
     public Collection getConferensesByPerson(Person person) {
-        String jpql = "select f from FOUNDERS f where f.person = :person";
+        String jpql = "select f from Founders f where f.person = :person";
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("person",person);
         return this.EexecuteQuery(jpql, parameters);
     }
 
     public Collection getPersonsByConference(Conference conference) {
-        String jpql = "select f from FOUNDERS f where f.conference = :conference";
+        String jpql = "select f from Founders f where f.conference = :conference";
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("conference",conference);
         return this.EexecuteQuery(jpql, parameters);
