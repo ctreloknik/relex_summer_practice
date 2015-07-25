@@ -74,6 +74,12 @@ public class CourseService extends CourseDaoImpl{
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public List<Course> getNexEvents() {
+        return super.getNexEvents();
+    }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     protected List<Course> EexecuteQuery(String jpql, Map<String, Object> parametres) {
         return super.EexecuteQuery(jpql, parametres);
     }

@@ -33,13 +33,24 @@ public class EventsViewBean implements Serializable{
 
     private List<Course> courses;
 
+    private Course nextEvent;
+
     private ScheduleModel lazyEventModel;
 
     private ScheduleEvent event = new DefaultScheduleEvent();
 
+    private boolean isEmptyNextEvents = false;
+
     @PostConstruct
     public void init(){
         courses = courseService.ReadAll();
+        List<Course> nextEventsTmp = courseService.getNexEvents();
+
+        if(nextEventsTmp.size() != 0) {
+            isEmptyNextEvents = true;
+            nextEvent = nextEventsTmp.get(0);
+        }
+        else isEmptyNextEvents = false;
 
         // MAGIC !!!
         lazyEventModel = new LazyScheduleModel(){
@@ -59,6 +70,14 @@ public class EventsViewBean implements Serializable{
 
     public List<Course> getCourses() {
         return courses;
+    }
+
+    public Course getNextEvent() {
+        return nextEvent;
+    }
+
+    public boolean getIsEmpty(){
+        return this.isEmptyNextEvents;
     }
 
     public void onEventSelect(SelectEvent selectEvent) {

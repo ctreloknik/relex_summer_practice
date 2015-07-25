@@ -52,6 +52,13 @@
                     <p:tabView dynamic="true" cache="true">
                         <!-- Календарь событий -->
                         <p:tab title="Календарь событий">
+                            <p:panel rendered="#{eventsViewBean.isEmpty}" type="ordered" style="align-content: center">
+                                <h2 align="center"><span class="label label-default">Ближайшее событие</span></h2>
+                                <h3 align="center" style="font-style: italic;">
+                                    #{eventsViewBean.nextEvent.conference.name}, c #{eventsViewBean.nextEvent.startDate} по #{eventsViewBean.nextEvent.endDate}
+                                </h3>
+                            </p:panel>
+
                             <div class="panel panel-default"> <!-- Bootstrap -->
                                 <div class="panel-body" align="center">
                                     <h2><span class="label label-default">Календарь событий</span></h2>
@@ -59,8 +66,8 @@
 
                                 <p:schedule id="schedule" value="#{eventsViewBean.lazyEventModel}"
                                             draggable="false" resizable="false" rightHeaderTemplate="Month"
-                                            clientTimeZone="local" timeFormat="hh:mm"
-                                            style="margin-right: 50px; margin-left: 50px">
+                                            clientTimeZone="local"
+                                            style="margin-right: 20px; margin-left: 20px">
                                     <!-- Отслеживание нажатия на эвент -->
                                     <!-- <p:ajax event="eventSelect" update="eventDetails" oncomplete="PF('eventDialog').show();"/> -->
                                 </p:schedule>

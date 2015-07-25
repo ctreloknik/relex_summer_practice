@@ -48,18 +48,9 @@ public class BuyTicketsBean implements Serializable {
     }
 
     public void onConfDrop(DragDropEvent ddEvent) {
-        System.out.println(" IN DROP function start");
-
         Conference conference = ((Conference) ddEvent.getData());
-        System.out.println(" IN DROP conference created. " + conference.getName());
-
         droppedConferences.add(conference);
-        System.out.println(" IN DROP Available. function added");
-        System.out.println(" IN DROP Available. count " + droppedConferences.size());
-
         conferences.remove(conference);
-        System.out.println(" IN Available " + conferences.size());
-        System.out.println(" IN DROP. function end");
     }
 
     public void buyTickets(){

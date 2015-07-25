@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Eugene on 12.07.2015.
@@ -43,4 +44,10 @@ public class CourseDaoImpl extends GenericCrudDaoImpl<Course, Long> implements C
             if (emf != null) emf.close();
         }
     }
+
+    public List<Course> getNexEvents(){
+        String jpql = "SELECT DISTINCT c from Course c WHERE c.startDate > current_date ORDER BY c.startDate";
+        return this.EexecuteQuery(jpql);
+    }
+
 }
