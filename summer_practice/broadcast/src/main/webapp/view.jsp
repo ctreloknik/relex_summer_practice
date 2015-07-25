@@ -3,7 +3,7 @@
   <title>Echo Chamber</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width">
-  <script src="webrtcviewer.js"></script>
+  <script src="../../../../conference/src/main/webapp/resources/js/webrtcviewer.js"></script>
 </head>
 <body>
 

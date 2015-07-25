@@ -70,16 +70,20 @@ public class WebRtcSocket {
                     viewers.get(webRtcMessage.getRoom()).get(webRtcMessage.getViewer()).getBasicRemote().sendText(message);
                     break;
                 case "start_stream":
-                    for (Map.Entry<String,Session> entry: viewers.get(webRtcMessage.getRoom()).entrySet()){
-                        entry.getValue().getBasicRemote().sendText(message);
+                    if(viewers.containsKey(webRtcMessage.getRoom())){
+                        for (Map.Entry<String,Session> entry: viewers.get(webRtcMessage.getRoom()).entrySet()){
+                            entry.getValue().getBasicRemote().sendText(message);
+                        }
                     }
                     break;
                 case "end_stream":
-                    for (Map.Entry<String,Session> entry: viewers.get(webRtcMessage.getRoom()).entrySet()){
-                        entry.getValue().getBasicRemote().sendText(message);
+                    if(viewers.containsKey(webRtcMessage.getRoom())){
+                        for (Map.Entry<String,Session> entry: viewers.get(webRtcMessage.getRoom()).entrySet()){
+                            entry.getValue().getBasicRemote().sendText(message);
+                        }
+                        viewers.remove(webRtcMessage.getRoom());
                     }
                     streamers.remove(webRtcMessage.getRoom());
-                    viewers.remove(webRtcMessage.getRoom());
                     break;
                 case "viewer":
                     if(!viewers.containsKey(webRtcMessage.getRoom())){
