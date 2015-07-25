@@ -1,15 +1,16 @@
 package ru.relex.summer_practice.conference.beans;
 
-import org.primefaces.model.DualListModel;
+import org.primefaces.event.DragDropEvent;
 import ru.relex.summer_practice.db.Conference;
 import ru.relex.summer_practice.db.Person;
+import ru.relex.summer_practice.db.PersonTicket;
 import ru.relex.summer_practice.service.ConferenceService;
 import ru.relex.summer_practice.service.PersonService;
 import ru.relex.summer_practice.service.PersonTicketService;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.ViewScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -22,49 +23,93 @@ import java.util.List;
  */
 
 @Named
-@ViewScoped
+@SessionScoped
 public class BuyTicketsBean implements Serializable {
 
     @EJB
-    ConferenceService conferenceService;
-    @EJB
-    PersonService personService;
-    @EJB
-    PersonTicketService personTicketService;
+    private ConferenceService service;
 
-    private DualListModel<String> conferencesNames;
+    @EJB
+    private PersonService personService;
+
+    @EJB
+    private PersonTicketService personTicketService;
+
     private List<Conference> conferences;
+
+    private List<Conference> droppedConferences;
+
+    private Conference selectedConference;
 
     @PostConstruct
     public void init() {
-        List<String> conferencesSource = getConferensesNames();
-        List<String> conferencesTarget = new ArrayList<String>();
-
-        conferencesNames = new DualListModel<String>(conferencesSource, conferencesTarget);
+        droppedConferences = new ArrayList<Conference>();
+        conferences = service.getTicketsForBuying(getPerson(getCurrentUser()));
     }
 
-    public DualListModel<String> getConferences(){
-        return conferencesNames;
+    public void onConfDrop(DragDropEvent ddEvent) {
+        System.out.println(" IN DROP function start");
+
+        Conference conference = ((Conference) ddEvent.getData());
+        System.out.println(" IN DROP conference created. " + conference.getName());
+
+        droppedConferences.add(conference);
+        System.out.println(" IN DROP Available. function added");
+        System.out.println(" IN DROP Available. count " + droppedConferences.size());
+
+        conferences.remove(conference);
+        System.out.println(" IN Available " + conferences.size());
+        System.out.println(" IN DROP. function end");
     }
 
-    public void setConferences(DualListModel<String> conferences) {
-        this.conferencesNames = conferences;
+    public void buyTickets(){
+        if (droppedConferences.size() == 0) return;
+
+        PersonTicket personTicket = new PersonTicket();
+        Person person = getPerson(getCurrentUser());
+        int price = 0;
+
+        for (Conference conference : droppedConferences){
+            price += conference.getPrice();
+            personTicket.setPerson(person);
+            personTicket.setConference(conference);
+            personTicketService.Create(personTicket);
+        }
+
+        person.setBalance(person.getBalance() - price);
+        personService.Update(person);
+
+        droppedConferences = null;
+        init();
+        //droppedConferences.clear();
+        //conferences = service.getTicketsForBuying(getPerson(getCurrentUser()));
     }
 
-    private List<String> getConferensesNames(){
-        conferences = conferenceService.getTicketsForBuying(getPerson(getCurrentUser()));
-        List<String> result = new ArrayList<String>();
-
-        for (Conference conference : conferences)
-            result.add(conference.getId() + " " + conference.getName());
-        return result;
+    public void setService(ConferenceService service) {
+        this.service = service;
     }
 
-    public Person getPerson(String login){
+    public List<Conference> getConfs() {
+        return conferences;
+    }
+
+    public List<Conference> getDroppedConfs() {
+        return droppedConferences;
+    }
+
+    public Conference getSelectedConfs() {
+        return selectedConference;
+    }
+
+    public void setSelectedConfs(Conference selectedCar) {
+        this.selectedConference = selectedCar;
+    }
+
+    private Person getPerson(String login){
         return personService.getUserByNickname(login);
     }
 
-    public String getCurrentUser() {
+    private String getCurrentUser() {
         FacesContext fc = FacesContext.getCurrentInstance();
         ExternalContext externalContext = fc.getExternalContext();
         return externalContext.getUserPrincipal().getName();

@@ -23,76 +23,83 @@
 <h:body>
     <ui:composition template="/pages/public/template.xhtml">
         <ui:define name="center_block">
-            <h:form id="ticketForm">
-                <p:pickList id="pickListTickets" value="#{buyTicketsBean.conferences}" var="tickets"
-                            itemLabel="#{tickets}" itemValue="#{tickets}" />
+            <script type="text/javascript">
+                function handleDrop(event, ui) {
+                    var droppedConf = ui.draggable;
 
-                <!--
-                <p:commandButton id="ticketsSubmit" value="Купить" update="displayTickets" oncomplete="PF('ticketsDialog').show()" style="margin-top:5px" />
-                -->
+                    droppedConf.fadeOut('fast');
+                }
+            </script>
 
-                <!-- БИЛЕТЫ ДЛЯ ПОКУПКИ -->
-                <!--
-                <p:fieldset id="availableTicketsField" legend="Список билетов">
-                    <p:dataGrid id="availableTickets" var="ticket" value="# {dragNDropTicketsBean.tickets}" columns="3">
-                        <p:panel id="pnl" header="# {ticket.conference.name}" style="text-align:center">
-                            <h:panelGrid columns="1" style="width:100%">
-                                <h:outputText value="# {ticket.price}" />
+            <h:form id="confForm">
+                <p:panel>
+
+                    <p:fieldset id="availableConfsField" legend="Доступные для покупки билеты">
+                        <p:dataGrid id="availableConfs" var="conf" value="#{buyTicketsBean.confs}" columns="3">
+                            <p:panel id="pnl" header="#{conf.name}" style="text-align:center">
+                                <h:outputText value="#{conf.name}"/>
+                            </p:panel>
+
+                            <p:draggable for="pnl" revert="true" handle=".ui-panel-titlebar" stack=".ui-panel"/>
+                        </p:dataGrid>
+                    </p:fieldset>
+
+                    <p:fieldset id="selectedConfs" legend="Корзина" style="margin-top:20px">
+                        <p:outputPanel id="dropArea">
+                            <h:outputText value="Перенесите билеты в эту зону"
+                                          rendered="#{empty buyTicketsBean.droppedConfs}" style="font-size:24px;"/>
+                            <p:dataTable id="selectedConfsTable" var="conf" value="#{buyTicketsBean.droppedConfs}"
+                                         rendered="#{not empty buyTicketsBean.droppedConfs}">
+                                <p:column headerText="Id">
+                                    <h:outputText value="#{conf.id}"/>
+                                </p:column>
+
+                                <p:column headerText="Название">
+                                    <h:outputText value="#{conf.name}"/>
+                                </p:column>
+
+                                <p:column style="width:32px">
+                                    <p:commandButton update=":confForm:display" oncomplete="PF('confDialog').show()"
+                                                     icon="ui-icon-search">
+                                        <f:setPropertyActionListener value="#{conf}"
+                                                                     target="#{buyTicketsBean.selectedConfs}"/>
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>
+                        </p:outputPanel>
+                    </p:fieldset>
+
+                    <p:commandButton value="Купить" id="buy" actionListener="#{buyTicketsBean.buyTickets}"
+                                     ajax="false"/>
+                    <p:commandButton value="Очистить и обновить" id="refresh" actionListener="#{buyTicketsBean.init}"
+                                     ajax="false"/>
+
+                    <p:droppable for="selectedConfs" tolerance="touch" activeStyleClass="ui-state-highlight"
+                                 datasource="availableConfs" onDrop="handleDrop">
+                        <p:ajax listener="#{buyTicketsBean.onConfDrop}" update="dropArea availableConfs"/>
+                    </p:droppable>
+
+                    <p:dialog header="Подробности" widgetVar="confDialog" resizable="false" draggable="false"
+                              showEffect="fade" hideEffect="fade" modal="true">
+
+                        <p:outputPanel id="display">
+                            <h:panelGrid columns="2" cellpadding="5"
+                                         rendered="#{not empty buyTicketsBean.selectedConfs}">
+
+                                <h:outputText value="Название"/>
+                                <h:outputText value="#{buyTicketsBean.selectedConfs.name}" style="font-weight:bold"/>
+
+                                <h:outputText value="Описание"/>
+                                <h:outputText value="#{buyTicketsBean.selectedConfs.description}"
+                                              style="font-weight:bold"/>
+
+                                <h:outputText value="Цена билета"/>
+                                <h:outputText value="#{buyTicketsBean.selectedConfs.price}" style="font-weight:bold"/>
+
                             </h:panelGrid>
-                        </p:panel>
-
-                        <p:draggable for="pnl" revert="true" handle=".ui-panel-titlebar" stack=".ui-panel"/>
-                    </p:dataGrid>
-                </p:fieldset>
-
-                <p:fieldset id="selectedTickets" legend="Выбранные билеты" style="margin-top:20px">
-                    <p:outputPanel id="dropArea">
-                        <h:outputText value="Перенесите билеты сюда" rendered="# {empty dragNDropTicketsBean.droppedTickets}" style="font-size:24px;" />
-                        <p:dataTable id="selectedTicketsTable" var="ticket" value="# {dragNDropTicketsBean.droppedTickets}" rendered="# {not empty dragNDropTicketsBean.droppedTickets}">
--->
-                            <!-- ИНФОРМАЦИЯ ПО БИЛЕТАМ В БЛОКАХ НИЖЕ -->
-                           <!-- <p:column headerText="Конференция">
-                                <h:outputText value="# {ticket.conference.name}" />
-                            </p:column>
-
-                            <p:column headerText="Цена">
-                                <h:outputText value="# {ticket.price}" />
-                            </p:column>
-
-
-                            <p:column style="width:32px">
-                                <p:commandButton update=":ticketForm:display" oncomplete="PF('ticketDialog').show()" icon="ui-icon-search">
-                                    <f:setPropertyActionListener value="# {ticket}" target="# {dragNDropTicketsBean.selectedTicket}" />
-                                </p:commandButton>
-                            </p:column>
-                        </p:dataTable>
-                    </p:outputPanel>
-                </p:fieldset>
-
-                <p:droppable for="selectedTickets" tolerance="touch" activeStyleClass="ui-state-highlight" datasource="availableTickets" onDrop="handleDrop">
-                    <p:ajax listener="# {dragNDropTicketsBean.onTicketDrop}" update="dropArea availableTickets" />
-                </p:droppable>
-
-                <p:dialog header="Ticket Detail" widgetVar="ticketDialog" resizable="false" draggable="false"
-                          showEffect="fade" hideEffect="fade" modal="true">
-
-                    <p:outputPanel id="display">
-                        <h:panelGrid columns="2" cellpadding="5" rendered="# {not empty dragNDropTicketsBean.selectedTicket}">
-                            --><!--
-                            <f:facet name="header">
-                                <p:graphicImage name="/demo/images/car/ *ШАРП* {dragNDropTicketsBean.selectedTicket.*был brand от машин в старом примере*}.gif"/>
-                            </f:facet>
-                             -->
-<!--
-                            <h:outputText value="Конференция" />
-                            <h:outputText value="# {dragNDropTicketsBean.selectedTicket.conference.name}" style="font-weight:bold"/>
-
-                            <h:outputText value="Цена:" />
-                            <h:outputText value="# {dragNDropTicketsBean.selectedTicket.price}" style="font-weight:bold"/>
-
-                        </h:panelGrid>
-                    </p:outputPanel>
-                </p:dialog> -->
+                        </p:outputPanel>
+                    </p:dialog>
+                </p:panel>
             </h:form>
         </ui:define>
     </ui:composition>
