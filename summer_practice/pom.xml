@@ -11,6 +11,7 @@
     <module>console</module>
     <module>web</module>
     <module>conference</module>
+    <module>broadcast</module>
   </modules>
   <build>
         <plugins>
