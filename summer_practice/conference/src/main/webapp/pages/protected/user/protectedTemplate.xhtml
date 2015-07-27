@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: Nikita
+  Date: 27.07.2015
+  Time: 13:13
+-->
+<ui:composition template="/pages/public/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" xmlns:a="http://java.sun.com/jsf/html">
+
+    <ui:define name="nav-left">
+        <li><a href="/conference/pages/public/conference.xhtml">Конференции</a></li>
+        <li><a href="buytickets.xhtml">Купить билеты</a></li>
+    </ui:define>
+
+    <ui:define name="nav-right">
+        <li class="">
+            <a href="info.xhtml">Профиль</a>
+        </li>
+        <li>
+            <!--
+            <p:link value="Выход" outcome="/conference/pages/public/main.xhtml"
+            onclick="# {userBean.logout}">
+            </p:link>
+            -->
+        </li>
+    </ui:define>
+</ui:composition>

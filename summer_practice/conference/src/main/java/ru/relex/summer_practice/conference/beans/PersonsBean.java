@@ -41,11 +41,11 @@ public class PersonsBean implements Serializable {
         this.persons = persons;
     }
 
-    public Person getCurrentPerson(){
+    public Person getCurrentPerson() {
         return currentPerson;
     }
 
-    private Person getPerson(String login){
+    private Person getPerson(String login) {
         return personService.getUserByNickname(login);
     }
 
@@ -53,5 +53,9 @@ public class PersonsBean implements Serializable {
         FacesContext fc = FacesContext.getCurrentInstance();
         ExternalContext externalContext = fc.getExternalContext();
         return externalContext.getUserPrincipal().getName();
+    }
+
+    public void updatePerson(){
+        personService.Update(currentPerson);
     }
 }

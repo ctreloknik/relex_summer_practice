@@ -21,27 +21,42 @@
 </h:head>
 
 <h:body>
-    <ui:composition template="/pages/public/template.xhtml">
+    <ui:composition template="protectedTemplate.xhtml">
         <ui:define name="center_block">
             <!-- Информация о пользователе -->
             <h:form>
                 <p:panel id="basic" header="Информация о пользователе #{request.remoteUser}" style="margin-bottom:5px">
                     <h:panelGrid columns="2" cellpadding="25">
-                        <h:outputText value="Имя:" style="margin-bottom: 50px; margin-right: 35px"/>
-                        <h:outputText value="#{personsBean.currentPerson.fullname}"
-                                      style="font-weight: bold"/>
+                        <h:outputText value="*Имя:" style="margin-bottom: 50px; margin-right: 35px"/>
+                        <p:inplace id="name" editor="true">
+                            <p:ajax event="save" listener="#{personsBean.updatePerson}"/>
+                            <p:inputText value="#{personsBean.currentPerson.fullname}" required="true" label="text"/>
+                        </p:inplace>
 
-                        <h:outputText value="Телефон:" style="margin-bottom: 50px; margin-right: 35px"/>
-                        <h:outputText value=" #{personsBean.currentPerson.phoneNumber}"
-                                      style="font-weight: bold"/>
+                        <h:outputText value="*Телефон:" style="margin-bottom: 50px; margin-right: 35px"/>
+                        <p:inplace id="phone" editor="true">
+                            <p:ajax event="save" listener="#{personsBean.updatePerson}"/>
+                            <p:inputText value="#{personsBean.currentPerson.phoneNumber}" required="true" label="text"/>
+                        </p:inplace>
 
-                        <h:outputText value="Email:" style="margin-bottom: 50px; margin-right: 35px"/>
-                        <h:outputText value="#{personsBean.currentPerson.email}"
-                                      style="font-weight: bold"/>
+                        <h:outputText value="*Email:" style="margin-bottom: 50px; margin-right: 35px"/>
+                        <p:inplace id="email" editor="true">
+                            <p:ajax event="save" listener="#{personsBean.updatePerson}"/>
+                            <p:inputText value="#{personsBean.currentPerson.email}" required="true" label="text">
+                                <f:validateRegex
+                                        pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                            </p:inputText>
+                        </p:inplace>
 
                         <h:outputText value="Баланс:" style="margin-bottom: 50px; margin-right: 35px"/>
                         <h:outputText value="#{personsBean.currentPerson.balance}"
                                       style="font-weight: bold"/>
+                    </h:panelGrid>
+
+
+                    <h:panelGrid columns="1">
+                        <a href="/conference/pages/public/recpass.xhtml">Сменить пароль</a>
+                        <h:outputText value="*Для редактирования информации нажмите на нужное поле"/>
                     </h:panelGrid>
                 </p:panel>
             </h:form>
@@ -53,6 +68,7 @@
                         <p:tab title="Календарь событий">
                             <p:panel rendered="#{eventsViewBean.isEmpty}" type="ordered" style="align-content: center">
                                 <h2 align="center"><span class="label label-default">Ближайшее событие</span></h2>
+
                                 <h3 align="center" style="font-style: italic;">
                                     #{eventsViewBean.nextEvent.conference.name}, c #{eventsViewBean.nextEvent.startDate} по #{eventsViewBean.nextEvent.endDate}
                                 </h3>
