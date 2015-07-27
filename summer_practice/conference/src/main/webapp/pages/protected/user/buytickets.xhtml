@@ -23,39 +23,40 @@
 <h:body>
     <ui:composition template="/pages/public/template.xhtml">
         <ui:define name="center_block">
+            <!-- Скрипт для переноса билетов в корзину -->
             <script type="text/javascript">
                 function handleDrop(event, ui) {
                     var droppedConf = ui.draggable;
-
                     droppedConf.fadeOut('fast');
                 }
             </script>
 
             <h:form id="confForm">
                 <p:panel>
-
+                    <!-- Панель с билетами для покупки -->
                     <p:fieldset id="availableConfsField" legend="Доступные для покупки билеты">
                         <p:dataGrid id="availableConfs" var="conf" value="#{buyTicketsBean.confs}" columns="3">
                             <p:panel id="pnl" header="#{conf.name}" style="text-align:center">
-                                <h:outputText value="#{conf.name}"/>
+                                <h:outputText value="#{conf.price}"/>
                             </p:panel>
 
                             <p:draggable for="pnl" revert="true" handle=".ui-panel-titlebar" stack=".ui-panel"/>
                         </p:dataGrid>
                     </p:fieldset>
 
+                    <!-- Корзина с билетами -->
                     <p:fieldset id="selectedConfs" legend="Корзина" style="margin-top:20px">
                         <p:outputPanel id="dropArea">
                             <h:outputText value="Перенесите билеты в эту зону"
                                           rendered="#{empty buyTicketsBean.droppedConfs}" style="font-size:24px;"/>
                             <p:dataTable id="selectedConfsTable" var="conf" value="#{buyTicketsBean.droppedConfs}"
                                          rendered="#{not empty buyTicketsBean.droppedConfs}">
-                                <p:column headerText="Id">
-                                    <h:outputText value="#{conf.id}"/>
-                                </p:column>
-
                                 <p:column headerText="Название">
                                     <h:outputText value="#{conf.name}"/>
+                                </p:column>
+
+                                <p:column headerText="Id">
+                                    <h:outputText value="#{conf.price}"/>
                                 </p:column>
 
                                 <p:column style="width:32px">
@@ -69,11 +70,13 @@
                         </p:outputPanel>
                     </p:fieldset>
 
+                    <!-- Кнопки покупки и обновления данных -->
                     <p:commandButton value="Купить" id="buy" actionListener="#{buyTicketsBean.buyTickets}"
                                      ajax="false"/>
                     <p:commandButton value="Очистить и обновить" id="refresh" actionListener="#{buyTicketsBean.init}"
                                      ajax="false"/>
 
+                    <!-- Перенос билетов в корзину и окно с подробностями о конференции -->
                     <p:droppable for="selectedConfs" tolerance="touch" activeStyleClass="ui-state-highlight"
                                  datasource="availableConfs" onDrop="handleDrop">
                         <p:ajax listener="#{buyTicketsBean.onConfDrop}" update="dropArea availableConfs"/>
@@ -83,19 +86,17 @@
                               showEffect="fade" hideEffect="fade" modal="true">
 
                         <p:outputPanel id="display">
-                            <h:panelGrid columns="2" cellpadding="5"
+                            <h:panelGrid columns="2" cellpadding="10"
                                          rendered="#{not empty buyTicketsBean.selectedConfs}">
-
-                                <h:outputText value="Название"/>
+                                <h:outputText value="Название "/>
                                 <h:outputText value="#{buyTicketsBean.selectedConfs.name}" style="font-weight:bold"/>
 
-                                <h:outputText value="Описание"/>
+                                <h:outputText value="Описание "/>
                                 <h:outputText value="#{buyTicketsBean.selectedConfs.description}"
                                               style="font-weight:bold"/>
 
-                                <h:outputText value="Цена билета"/>
+                                <h:outputText value="Цена билета "/>
                                 <h:outputText value="#{buyTicketsBean.selectedConfs.price}" style="font-weight:bold"/>
-
                             </h:panelGrid>
                         </p:outputPanel>
                     </p:dialog>
