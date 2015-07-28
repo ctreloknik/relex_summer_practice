@@ -37,4 +37,17 @@ public class PersonLectureRoleDaoImpl extends GenericCrudDaoImpl<PersonLectureRo
         parameters.put("roles", roles);
         return this.EexecuteQuery(jpql, parameters);
     }
+
+    @Override
+    public Roles getRoleByPersonLecture(Person person, Lecture lecture) {
+        String jpql = "Select plr from PersonLectureRole plr where plr.person = :person and plr.lecture = :lecture";
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("person", person);
+        parameters.put("lecture", lecture);
+        List<PersonLectureRole> result = this.EexecuteQuery(jpql,parameters);
+        if (result.size() != 1){
+            return null;
+        }
+        return result.get(0).getRoles();
+    }
 }

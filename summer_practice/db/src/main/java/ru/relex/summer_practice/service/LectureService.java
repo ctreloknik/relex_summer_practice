@@ -19,6 +19,11 @@ import java.util.Map;
 
 @Stateless
 public class LectureService extends LectureDaoImpl{
+    @Override
+    public Lecture getLectureByID(Long lectureID) {
+        return super.getLectureByID(lectureID);
+    }
+
     @PersistenceContext(unitName = "PERSISTENCEUNIT")
     protected EntityManager em;
 

@@ -31,8 +31,8 @@ public class RatingService extends RatingDaoImpl {
     @PersistenceContext(unitName = "PERSISTENCEUNIT")
     protected EntityManager em;
     @Override
-    public void AddRating(Person person, Question question, int rating) {
-        super.AddRating(person, question, rating);
+    public boolean AddRating(Person person, Question question, int rating) {
+        return super.AddRating(person, question, rating);
     }
 
     @Override

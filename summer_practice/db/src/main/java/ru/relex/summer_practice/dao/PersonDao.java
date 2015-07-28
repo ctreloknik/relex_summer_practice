@@ -9,4 +9,5 @@ public interface PersonDao extends GenericCrudDao<Person, Long> {
     public Person Login(String login, String password);
     public Person getUserByNickname(String login);
     public Person getUserByEmail(String email);
+    public Person getUserById(Long id);
 }

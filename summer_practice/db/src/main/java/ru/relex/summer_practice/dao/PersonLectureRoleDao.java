@@ -16,4 +16,6 @@ public interface PersonLectureRoleDao extends GenericCrudDao<PersonLectureRole, 
     public List<PersonLectureRole> getAllByLecture(Lecture lecture);
 
     public List<PersonLectureRole> getAllByRoles(Roles roles);
+
+    public Roles getRoleByPersonLecture(Person person, Lecture lecture);
 }
