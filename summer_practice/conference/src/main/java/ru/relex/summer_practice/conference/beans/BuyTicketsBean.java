@@ -64,11 +64,14 @@ public class BuyTicketsBean implements Serializable {
             price += conference.getPrice();
             personTicket.setPerson(person);
             personTicket.setConference(conference);
-            personTicketService.Create(personTicket);
         }
 
-        person.setBalance(person.getBalance() - price);
-        personService.Update(person);
+        if (price <= person.getBalance()) {
+            System.out.println(price + " OLOLO " + person.getBalance());
+            person.setBalance(person.getBalance() - price);
+            personTicketService.Create(personTicket);
+            personService.Update(person);
+        }
 
         droppedConferences = null;
         init();

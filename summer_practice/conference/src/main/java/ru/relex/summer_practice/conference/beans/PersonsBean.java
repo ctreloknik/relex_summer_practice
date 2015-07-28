@@ -5,7 +5,7 @@ import ru.relex.summer_practice.service.PersonService;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -17,7 +17,7 @@ import java.util.List;
  */
 
 @Named
-@SessionScoped
+@ViewScoped
 public class PersonsBean implements Serializable {
 
     @EJB
