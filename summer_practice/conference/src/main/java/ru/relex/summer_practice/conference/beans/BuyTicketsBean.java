@@ -67,7 +67,6 @@ public class BuyTicketsBean implements Serializable {
         }
 
         if (price <= person.getBalance()) {
-            System.out.println(price + " OLOLO " + person.getBalance());
             person.setBalance(person.getBalance() - price);
             personTicketService.Create(personTicket);
             personService.Update(person);
