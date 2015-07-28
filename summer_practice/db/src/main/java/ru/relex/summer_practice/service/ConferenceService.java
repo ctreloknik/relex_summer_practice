@@ -80,6 +80,12 @@ public class ConferenceService extends ConferenceDaoImpl {
 
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public Conference getConferenceByName(String name) {
+        return super.getConferenceByName(name);
+    }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public List<Conference> getTicketsForBuying(Person person) {
         return super.getTicketsForBuying(person);
     }
