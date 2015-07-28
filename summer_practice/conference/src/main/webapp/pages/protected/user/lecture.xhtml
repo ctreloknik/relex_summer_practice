@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: Sasha
+  Date: 25.07.2015
+  Time: 19:09
+-->
+<ui:composition template="/pages/public/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:define name="nav-right">
+        <h:form>
+            <h:commandLink action="#{userBean.logout}" value="logout"></h:commandLink>
+        </h:form>
+    </ui:define>
+    <ui:define name="center_block">
+        <h:outputScript rendered="#{lectureBean.role.name eq 'Moderator'}" library="js" name="webrtcbroadcast.js"/>
+        <h:outputScript library="js" name="webrtcviewer.js" rendered="#{lectureBean.role.name eq 'Viewer'}"/>
+        <h:outputScript library="js" name="textviewer.js" rendered="#{lectureBean.role.name eq 'Viewer'}"/>
+        <h:outputScript library="js" name="textbroadcast.js" rendered="#{lectureBean.role.name eq 'Moderator'}"></h:outputScript>
+        <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
+        <h:outputScript target="head" rendered="#{lectureBean.role.name eq 'Moderator'}">
+            $ = jQuery;
+            $(document).ready(function() {
+                TextBroadcast('#{lectureBean.lecture.id}','#{lectureBean.person.id}',new WebSocket("ws://localhost:8080/broadcast/text"));
+            });
+        </h:outputScript>
+        <h:outputScript target="head" rendered="#{lectureBean.role.name eq 'Viewer'}">
+            $ = jQuery;
+            $(document).ready(function() {
+            TextViewer('#{lectureBean.lecture.id}','#{lectureBean.person.id}',new WebSocket("ws://localhost:8080/broadcast/text"),
+                document.getElementById("btn-send"));
+            WebRtcViewer(document.getElementById("video_conf"),new WebSocket("ws://localhost:8080/broadcast/rtc"), '#{lectureBean.lectureID}');
+            });
+        </h:outputScript>
+
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="panel  panel-danger">
+                        <div class="panel-heading">
+                            <span class="glyphicon glyphicon-facetime-video"></span> Видео трансяция
+                        </div>
+                        <div class="panel-body">
+                            <video id="video_conf" style="background: black; width: 100%;">
+
+                            </video>
+                            <div class="btn-group btn-group-justified" role="group" aria-label="..."
+                                 style="margin-top: -5px;">
+                                <div class="btn-group" role="group">
+                                    <button onclick="openSocket()" class="btn btn-danger" style="border-radius: 0px">
+                                <span class="glyphicon glyphicon-play">
+                                </span>
+                                    </button>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <button class="btn btn-danger" style="border-radius: 0px">
+                                    <span class="glyphicon glyphicon-volume-off">
+
+                                    </span>
+                                    </button>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <button class="btn btn-danger" style="border-radius: 0px">
+                                    <span class="glyphicon glyphicon-volume-down">
+
+                                    </span>
+                                    </button>
+                                </div>
+
+
+                                <div class="btn-group" role="group">
+                                    <button class="btn btn-danger" style="border-radius: 0px">
+                                    <span class="glyphicon glyphicon-volume-up">
+
+                                    </span>
+                                    </button>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <button class="btn btn-danger" style="border-radius: 0px">
+                                    <span class="glyphicon glyphicon-resize-full">
+                                    </span>
+                                    </button>
+                                </div>
+                            </div>
+                            <script>
+                                function openSocket() {
+                                    navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
+                                    var vid1 = document.getElementById("video_conf");
+                                    navigator.getUserMedia({
+                                        audio: true,
+                                        video: true
+                                    }, function (s) {
+                                        stream = s;
+                                        vid1.src = URL.createObjectURL(s);
+                                        vid1.play();
+                                        WebRtcBroadcast(stream, new WebSocket("ws://localhost:8080/broadcast/rtc"), '#{lectureBean.lectureID}');
+                                    }, function (error) {
+                                        try {
+                                            console.error(error);
+                                        } catch (e) {
+                                        }
+                                    });
+                                }
+                            </script>
+                        </div>
+                    </div>
+                    <h:panelGroup rendered="#{lectureBean.role.name eq 'Moderator'}">
+                        <div class="panel  panel-danger">
+                            <div class="panel-heading">
+                                <span class="glyphicon glyphicon-pencil"></span> Модерирование
+                            </div>
+                            <div class="panel-body" id="moder-text">
+
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                    <div class="panel  panel-danger">
+                        <div class="panel-heading">
+                            <span class="glyphicon glyphicon-menu-hamburger"></span> Описание
+                        </div>
+                        <div class="panel-body">
+                            <h4><h:outputLabel value="#{lectureBean.lecture.topic}"></h:outputLabel></h4>
+
+                            <p><h:outputLabel value="#{lectureBean.lecture.description}"></h:outputLabel></p>
+                        </div>
+                    </div>
+                    <div class="panel  panel-danger">
+                        <div class="panel-heading">
+                            <span class="glyphicon glyphicon-book"></span> Текстовая трансяция
+                        </div>
+                        <div class="panel-body" id="msg-text">
+
+                        </div>
+                        <h:panelGroup rendered="#{lectureBean.role.name eq 'Moderator'}">
+                            <div class="panel-footer">
+                                <div class="input-group">
+                                    <input id="text-broad-input" type="text" class="form-control input-sm"
+                                           placeholder="Оставте сообщение здесь"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-danger btn-sm" id="btn-send-broad"
+                                            onclick="sendMessage($('#text-broad-input').val())">
+                                        Отправить
+                                    </button>
+                                </span>
+                                </div>
+                            </div>
+                        </h:panelGroup>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="row">
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">
+                                <span class="glyphicon glyphicon-comment"></span> Вопросы
+                            </div>
+                            <div class="panel-body" id="question-text" style="height: 480px; overflow-y: auto">
+                            <c:forEach var="item" items="#{lectureBean.questions}">
+                                <h:panelGroup rendered="#{item.moderated}">
+                                    <strong>
+                                        <small>#{item.questioner.fullname}</small>
+                                        <span class="badge pull-right" id="r#{item.id}">#{item.rating}</span>
+                                    </strong>
+                                    <div class="clearfix">
+                                        <small>#{item.text}</small>
+                                    </div>
+                                    <div class="clearfix">
+                                        <small>
+                                            <span class="glyphicon glyphicon-time"></span>#{item.datetime}
+                                        </small>
+                                        <button class="btn btn-success btn-xs glyphicon glyphicon-thumbs-up pull-right" onclick="like('#{item.lecture.id}','#{item.id}','#{lectureBean.person.id}')"></button>
+                                        <button class="btn btn-danger btn-xs glyphicon glyphicon-thumbs-down pull-right" onclick="dislike('#{item.lecture.id}','#{item.id}','#{lectureBean.person.id}')"></button>
+                                    </div>
+                                    <hr></hr>
+                                </h:panelGroup>
+                            </c:forEach>
+
+
+                            </div>
+
+                            <div class="panel-footer">
+                                <div class="input-group">
+                                    <input id="text-input" type="text" class="form-control input-sm"
+                                           placeholder="Введите ваш вопрос"/>
+                                <span class="input-group-btn">
+                                    <button disabled="disabled" class="btn btn-danger btn-sm" id="btn-send"
+                                            onclick="sendQuestion($('#text-input').val())">
+                                        Отправить
+                                    </button>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>
