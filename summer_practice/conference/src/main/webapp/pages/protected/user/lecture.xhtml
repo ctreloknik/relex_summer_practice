@@ -17,18 +17,18 @@
         </h:form>
     </ui:define>
     <ui:define name="center_block">
-        <h:outputScript rendered="#{lectureBean.role.name eq 'Moderator'}" library="js" name="webrtcbroadcast.js"/>
-        <h:outputScript library="js" name="webrtcviewer.js" rendered="#{lectureBean.role.name eq 'Viewer'}"/>
-        <h:outputScript library="js" name="textviewer.js" rendered="#{lectureBean.role.name eq 'Viewer'}"/>
-        <h:outputScript library="js" name="textbroadcast.js" rendered="#{lectureBean.role.name eq 'Moderator'}"></h:outputScript>
+        <h:outputScript rendered="#{lectureBean.role.name eq 'Модератор'}" library="js" name="webrtcbroadcast.js"/>
+        <h:outputScript library="js" name="webrtcviewer.js" rendered="#{lectureBean.role.name eq 'Зритель'}"/>
+        <h:outputScript library="js" name="textviewer.js" rendered="#{lectureBean.role.name eq 'Зритель'}"/>
+        <h:outputScript library="js" name="textbroadcast.js" rendered="#{lectureBean.role.name eq 'Модератор'}"></h:outputScript>
         <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
-        <h:outputScript target="head" rendered="#{lectureBean.role.name eq 'Moderator'}">
+        <h:outputScript target="head" rendered="#{lectureBean.role.name eq 'Модератор'}">
             $ = jQuery;
             $(document).ready(function() {
                 TextBroadcast('#{lectureBean.lecture.id}','#{lectureBean.person.id}',new WebSocket("ws://localhost:8080/broadcast/text"));
             });
         </h:outputScript>
-        <h:outputScript target="head" rendered="#{lectureBean.role.name eq 'Viewer'}">
+        <h:outputScript target="head" rendered="#{lectureBean.role.name eq 'Зритель'}">
             $ = jQuery;
             $(document).ready(function() {
             TextViewer('#{lectureBean.lecture.id}','#{lectureBean.person.id}',new WebSocket("ws://localhost:8080/broadcast/text"),
@@ -108,7 +108,7 @@
                             </script>
                         </div>
                     </div>
-                    <h:panelGroup rendered="#{lectureBean.role.name eq 'Moderator'}">
+                    <h:panelGroup rendered="#{lectureBean.role.name eq 'Модератор'}">
                         <div class="panel  panel-danger">
                             <div class="panel-heading">
                                 <span class="glyphicon glyphicon-pencil"></span> Модерирование
@@ -135,7 +135,7 @@
                         <div class="panel-body" id="msg-text">
 
                         </div>
-                        <h:panelGroup rendered="#{lectureBean.role.name eq 'Moderator'}">
+                        <h:panelGroup rendered="#{lectureBean.role.name eq 'Модератор'}">
                             <div class="panel-footer">
                                 <div class="input-group">
                                     <input id="text-broad-input" type="text" class="form-control input-sm"
