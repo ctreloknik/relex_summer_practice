@@ -4,14 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import org.hibernate.service.spi.InjectService;
 import ru.relex.summer_practice.db.Lecture;
+import ru.relex.summer_practice.db.Message;
 import ru.relex.summer_practice.db.Person;
 import ru.relex.summer_practice.db.Question;
-import ru.relex.summer_practice.service.LectureService;
-import ru.relex.summer_practice.service.PersonService;
-import ru.relex.summer_practice.service.QuestionService;
-import ru.relex.summer_practice.service.RatingService;
+import ru.relex.summer_practice.service.*;
 
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
@@ -39,6 +36,8 @@ public class TextSocket {
     private PersonService personService;
     @Inject
     private RatingService ratingService;
+    @Inject
+    private MessageService messageService;
 
     private static Gson gson;
     private static JsonParser jsonParser;
@@ -47,6 +46,7 @@ public class TextSocket {
     private static Hashtable<Long, Vector<Session>> viewers;
     private static Hashtable<Long, Person> personCache;
     private static Hashtable<Long, Question> questionCache;
+
 
     static {
         gson = new GsonBuilder().create();
@@ -181,7 +181,22 @@ public class TextSocket {
                             }
                         }
                     }
-
+                    break;
+                case "message":
+                    Message messageText = new Message();
+                    messageText.setDatetime(new Date());
+                    messageText.setText(textMessage.getText());
+                    messageText.setLecture(lectureCache.get(textMessage.getLecture()));
+                    textMessage.setDatetime(messageText.getDatetime());
+                    messageService.Create(messageText);
+                    if (viewers.containsKey(textMessage.getLecture())) {
+                        for (Session session1 : viewers.get(textMessage.getLecture())) {
+                            session1.getBasicRemote().sendText(gson.toJson(textMessage));
+                        }
+                    }
+                    if (moderators.containsKey(textMessage.getLecture())) {
+                        moderators.get(textMessage.getLecture()).getBasicRemote().sendText(gson.toJson(textMessage));
+                    }
                     break;
             }
         } catch (IOException e) {
