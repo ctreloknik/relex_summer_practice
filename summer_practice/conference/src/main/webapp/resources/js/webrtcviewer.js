@@ -1,6 +1,24 @@
 var room_id = undefined;
 var session_id = undefined;
 var webSocket = undefined;
+var PeerConnection = window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
+navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
+var IceCandidate = window.mozRTCIceCandidate || window.RTCIceCandidate;
+var SessionDescription = window.mozRTCSessionDescription || window.RTCSessionDescription;
+
+var server = {
+    iceServers: [
+        {url: "stun:stun.l.google.com:19302"},
+        {url: "stun:stun.services.mozilla.com"}
+    ]
+}
+
+var options = {
+    optional: [
+        {DtlsSrtpKeyAgreement: true},
+        {RtpDataChannels: true}
+    ]
+}
 
 function WebRtcViewer(video, ws, room){
     webSocket = ws;
@@ -11,7 +29,7 @@ function WebRtcViewer(video, ws, room){
         } ]
     };
 
-    this.pc = new webkitRTCPeerConnection(this.configuration);
+    this.pc = new PeerConnection(server,options);
 
     this.mediaConstraints = {
         'mandatory' : {
@@ -55,7 +73,7 @@ function WebRtcViewer(video, ws, room){
                 }));
                 break;
             case 'answer':
-                pc.setRemoteDescription(new RTCSessionDescription(msg.data));
+                pc.setRemoteDescription(new SessionDescription(msg.data));
                 break;
             case 'start_stream':
                 pc.createOffer(function(description) {
@@ -69,7 +87,7 @@ function WebRtcViewer(video, ws, room){
                 }, null, mediaConstraints);
                 break;
             case 'answer_candidate':
-                var candidate = new RTCIceCandidate({
+                var candidate = new IceCandidate({
                     sdpMLineIndex : msg.data.label,
                     candidate : msg.data.candidate
                 });
@@ -83,7 +101,7 @@ function WebRtcViewer(video, ws, room){
     }
 }
 
-window.onbeforeunload = function(evt){
+window.addEventListener("beforeunload", function(evt){
     webSocket.send(JSON.stringify({
         type : 'disconnect_viewer',
         room: room_id,
@@ -91,5 +109,5 @@ window.onbeforeunload = function(evt){
     }));
     webSocket.close();
     pc.close();
-}
+}, true);
 

@@ -3,6 +3,7 @@ package ru.relex.summer_practice.dao.Impl;
 import ru.relex.summer_practice.dao.LectureDao;
 import ru.relex.summer_practice.db.Course;
 import ru.relex.summer_practice.db.Lecture;
+import ru.relex.summer_practice.db.Question;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -70,5 +71,17 @@ public class LectureDaoImpl extends GenericCrudDaoImpl<Lecture, Long> implements
             return null;
         }
         return result.get(0).getDatetime();
+    }
+
+    @Override
+    public Lecture getLectureByID(Long lectureID) {
+        String jpql = "select l from Lecture l where l.id = :id";
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("id", lectureID);
+        List<Lecture> result = this.EexecuteQuery(jpql, parameters);
+        if (result.size() == 0) {
+            return null;
+        }
+        return result.get(0);
     }
 }
