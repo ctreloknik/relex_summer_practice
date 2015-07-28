@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
+      lang="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<h:head>
+    <title>Конференции</title>
+</h:head>
+
+<h:body>
+    <ui:composition template="/pages/public/template.xhtml">
+        <ui:define name="nav-left">
+            <li class="active"><a href="conferences.xhtml">Конференции</a></li>
+        </ui:define>
+        <ui:define name="center_block">
+            <h:form>
+                <p:dataTable value="#{conferencesBean.conferences}" var="conference">
+                    <p:column headerText="Предварительный просмотр" width="20%">
+                        <div align="center">
+                            <h:graphicImage url="../../resources/images/conference-preview/00-logo.jpg" />
+                        </div>
+                    </p:column>
+
+                    <p:column headerText="Название" width="20%">
+                        <div align="center">
+                            <h:outputText value="#{conference.name}"/>
+                        </div>
+                    </p:column>
+
+                    <p:column headerText="Описание" width="20%">
+                        <div align="center">
+                            <h:outputText value="#{conference.description}" />
+                        </div>
+                    </p:column>
+
+                    <p:column headerText="Цена билета" width="20%">
+                        <div align="center">
+                            <h:outputText value="#{conference.price}" />
+                        </div>
+                    </p:column>
+
+                    <p:column headerText="Подробнее" width="20%">
+                        <div align="center">
+                            <p:commandButton value="Показать" action="#{conferenceBean.Detail}">
+                                <f:param name="conferenceId" value="#{conference.id}"/>
+                            </p:commandButton>
+                        </div>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+</html>

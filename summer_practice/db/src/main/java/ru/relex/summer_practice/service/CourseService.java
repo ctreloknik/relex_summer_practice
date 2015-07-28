@@ -1,6 +1,7 @@
 package ru.relex.summer_practice.service;
 
 import ru.relex.summer_practice.dao.Impl.CourseDaoImpl;
+import ru.relex.summer_practice.db.Conference;
 import ru.relex.summer_practice.db.Course;
 
 import javax.ejb.Stateless;

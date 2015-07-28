@@ -2,6 +2,7 @@ package ru.relex.summer_practice.dao.Impl;
 
 import ru.relex.summer_practice.dao.ConferenceDao;
 import ru.relex.summer_practice.db.Conference;
+import ru.relex.summer_practice.db.Course;
 import ru.relex.summer_practice.db.Person;
 
 import javax.persistence.EntityManager;
@@ -46,6 +47,27 @@ public class ConferenceDaoImpl extends GenericCrudDaoImpl<Conference, Long> impl
             if (em != null ) em.close();
             if (emf != null) emf.close();
         }
+    }
+
+    @Override
+    public Conference getConferenceByName(String name) {
+        String jpa = "SELECT c FROM Conference c WHERE c.name = :name";
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("name",name);
+        List<Conference> conference = this.EexecuteQuery(jpa,parameters);
+        if (conference.size() != 1){
+            return null;
+        }
+        return conference.get(0);
+    }
+
+    @Override
+    public Conference getConferenceById(Long id) {
+        String jpa = "SELECT c FROM Conference c WHERE c.id = :id";
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("id",id);
+        List<Conference> conference = this.EexecuteQuery(jpa,parameters);
+        return conference.get(0);
     }
 
     @Override

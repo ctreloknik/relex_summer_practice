@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
+lang="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<h:head>
+    <title>Конференция</title>
+</h:head>
+
+<h:body>
+    <ui:composition template="/pages/public/template.xhtml">
+        <ui:define name="nav-left">
+            <li><a href="conferences.xhtml">Конференции</a></li>
+        </ui:define>
+        <ui:define name="center_block">
+            <h:form>
+
+                <p:wizard flowListener="#{CreateConferenceBean.onFlowProcess}">
+                    <p:tab id="conferences" title="Conferences">
+                        <p:panel header="Add Conferences">
+                            <p:messages />
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Description: " style="color: black" />
+                                <p:inputText value="#{CreateConferenceBean.conference.description}" required="true" label="Description"/>
+
+                                <h:outputText value="Name: " style="color: black" />
+                                <p:inputText value="#{CreateConferenceBean.conference.name}" required="true" label="Name"/>
+
+                                <h:outputText value="Price: " style="color: black" />
+                                <p:inputText value="#{CreateConferenceBean.conference.price}" required="true" label="Price"/>
+
+                                <p:commandButton value="Add" id="btnAdd" actionListener="#{CreateConferenceBean.btnAddAction}" styleClass="ui-priority-primary" />
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <!--<p:tab id="address" title="Address">
+                        <p:panel header="Address Details">
+                            <p:messages />
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Street: " />
+                                <p:inputText value="#{userWizard.user.street}" />
+
+                                <h:outputText value="Postal Code: " />
+                                <p:inputText value="#{userWizard.user.postalCode}" />
+
+                                <h:outputText value="City: " />
+                                <p:inputText value="#{userWizard.user.city}" />
+
+                                <h:outputText value="Skip to last: " />
+                                <h:selectBooleanCheckbox value="#{userWizard.skip}" />
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="contact" title="Contact">
+                        <p:panel header="Contact Information">
+                            <p:messages />
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Email: *" />
+                                <p:inputText value="#{userWizard.user.email}" required="true" label="Email"/>
+
+                                <h:outputText value="Phone: " />
+                                <p:inputText value="#{userWizard.user.phone}"/>
+
+                                <h:outputText value="Additional Info: " />
+                                <p:inputText value="#{userWizard.user.info}"/>
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="confirm" title="Confirmation">
+                        <p:panel header="Confirmation">
+                            <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                                <h:panelGrid columns="2" columnClasses="label, value">
+                                    <h:outputText value="Firstname: " />
+                                    <h:outputText value="#{userWizard.user.firstname}" styleClass="outputLabel"/>
+
+                                    <h:outputText value="Lastname: " />
+                                    <h:outputText value="#{userWizard.user.lastname}" styleClass="outputLabel"/>
+
+                                    <h:outputText value="Age: " />
+                                    <h:outputText value="#{userWizard.user.age}" styleClass="outputLabel"/>
+                                </h:panelGrid>
+
+                                <h:panelGrid columns="2" columnClasses="label, value">
+                                    <h:outputText value="Street: " />
+                                    <h:outputText value="#{userWizard.user.street}" styleClass="outputLabel"/>
+
+                                    <h:outputText value="Postal: " />
+                                    <h:outputText value="#{userWizard.user.postalCode}" styleClass="outputLabel"/>
+
+                                    <h:outputText value="City: " />
+                                    <h:outputText value="#{userWizard.user.city}" styleClass="outputLabel"/>
+                                </h:panelGrid>
+
+                                <h:panelGrid columns="2" columnClasses="label, value">
+                                    <h:outputText value="Email: " />
+                                    <h:outputText value="#{userWizard.user.email}" styleClass="outputLabel"/>
+
+                                    <h:outputText value="Phone " />
+                                    <h:outputText value="#{userWizard.user.phone}" styleClass="outputLabel"/>
+
+                                    <h:outputText value="Info: " />
+                                    <h:outputText value="#{userWizard.user.info}" styleClass="outputLabel"/>
+
+                                    <h:outputText />
+                                    <h:outputText />
+                                </h:panelGrid>
+                            </h:panelGrid>
+
+                            <p:commandButton value="Submit" actionListener="#{userWizard.save}" update="growl" process="@this"/>
+                        </p:panel>
+                    </p:tab>-->
+                </p:wizard>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>
