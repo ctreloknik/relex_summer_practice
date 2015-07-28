@@ -36,7 +36,7 @@ public class SignUpService{
         person.setFullname(firstName + " " + secondName);
         person.setEmail(email);
         person.setPhoneNumber(phoneNumber);
-        codeSendService.sendCode(person.getEmail(),"Регистрация на ConferenceManagmentSystem");
+        codeSendService.sendCode(person.getEmail(),"Registration on ConferenceManagmentSystem");
     }
 
     public Boolean confirmationStep(String code){
