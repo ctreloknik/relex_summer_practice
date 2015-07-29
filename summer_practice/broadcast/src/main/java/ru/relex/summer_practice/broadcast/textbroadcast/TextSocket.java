@@ -110,6 +110,12 @@ public class TextSocket {
                     }
                     break;
                 case "moderator":
+                    if(!lectureCache.containsKey(textMessage.getLecture())){
+                        Lecture lecture = lectureService.getLectureByID(textMessage.getLecture());
+                        if(lecture != null){
+                            lectureCache.put(textMessage.getLecture(),lecture );
+                        }
+                    }
                     if (!moderators.containsKey(textMessage.getLecture())){
                         moderators.put(textMessage.getLecture(),session);
                         if(viewers.containsKey(textMessage.getLecture())){
@@ -122,6 +128,10 @@ public class TextSocket {
                     }
                     break;
                 case "moder":
+                    if (!questionCache.containsKey(textMessage.getQuestion()))
+                    {
+                        questionCache.put(textMessage.getQuestion(),questionService.Read(textMessage.getQuestion()));
+                    }
                     Question q = questionCache.get(textMessage.getQuestion());
                     q.setModerated(true);
                     q = questionService.Update(q);
@@ -146,7 +156,10 @@ public class TextSocket {
                     break;
                 case "unmoder":
                     questionService.Delete(textMessage.getQuestion());
-                    questionCache.remove(textMessage.getQuestion());
+                    if (questionCache.containsKey(textMessage.getQuestion()))
+                    {
+                        questionCache.remove(textMessage.getQuestion());
+                    }
                     break;
                 case "disconnect_moderator":
                     moderators.remove(textMessage.getLecture());

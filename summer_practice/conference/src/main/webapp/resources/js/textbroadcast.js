@@ -113,6 +113,23 @@ function like(lecture, question, person){
     }));
 }
 
+function moder(lecture, question){
+    socket.send(JSON.stringify({
+        type: "moder",
+        lecture: lecture,
+        question: question
+    }));
+    $("#question"+question).remove();
+}
+
+function unmoder(lecture, question){
+    socket.send(JSON.stringify({
+        type: "unmoder",
+        lecture: lecture,
+        question: question
+    }));
+    $("#question"+question).remove();
+}
 function addMessage(msg){
     var element = "<small><span class='glyphicon glyphicon-time'></span>";
     element +=' ' + msg.datetime;
@@ -136,16 +153,16 @@ function dislike(lecture, question, person){
 
 function sendQuestion(message){
     socket.send(JSON.stringify({
-        type: "message",
+        type: "new_question",
         lecture: lecture_id,
         text: message
     }));
 }
 
-function sendMessage(message){
+function sendMessage(message, lecture){
     socket.send(JSON.stringify({
         type: "message",
-        lecture: lecture_id,
+        lecture: lecture,
         text: message
     }));
 }
