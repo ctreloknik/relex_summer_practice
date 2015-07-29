@@ -40,4 +40,13 @@
                         <redirect/>
                 </navigation-case>
         </navigation-rule>
+        <navigation-rule>
+                <from-view-id>/pages/public/conference.xhtml</from-view-id>
+                <navigation-case>
+                        <from-action>#{courseBean.Detail}</from-action>
+                        <from-outcome>success</from-outcome>
+                        <to-view-id>/pages/public/course.xhtml</to-view-id>
+                        <redirect/>
+                </navigation-case>
+        </navigation-rule>-
 </faces-config>

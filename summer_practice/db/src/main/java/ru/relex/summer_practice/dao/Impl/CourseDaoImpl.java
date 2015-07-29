@@ -1,12 +1,14 @@
 package ru.relex.summer_practice.dao.Impl;
 
 import ru.relex.summer_practice.dao.CourseDao;
+import ru.relex.summer_practice.db.Conference;
 import ru.relex.summer_practice.db.Course;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -43,6 +45,15 @@ public class CourseDaoImpl extends GenericCrudDaoImpl<Course, Long> implements C
             if (em != null ) em.close();
             if (emf != null) emf.close();
         }
+    }
+
+    @Override
+    public Course getCourseById(Long id) {
+        String jpa = "SELECT c FROM Course c WHERE c.id = :id";
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("id",id);
+        List<Course> conference = this.EexecuteQuery(jpa,parameters);
+        return conference.get(0);
     }
 
     public List<Course> getNexEvents(){

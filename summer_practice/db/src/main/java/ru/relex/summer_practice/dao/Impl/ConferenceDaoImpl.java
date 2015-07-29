@@ -10,6 +10,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Eugene on 12.07.2015.
@@ -78,6 +79,11 @@ public class ConferenceDaoImpl extends GenericCrudDaoImpl<Conference, Long> impl
         return this.EexecuteQuery(jpa, parameters);
     }
 
+    @Override
+    public Conference getConferenceForShow() {
+        List<Conference> conferences = getModeratedConference(true);
+        return conferences.get(0);
+    }
 
     public List<Conference> getTicketsForBuying(Person person){
         String jpql = "SELECT DISTINCT c from Conference c, Course co WHERE c = co.conference and co.endDate>current_date" +

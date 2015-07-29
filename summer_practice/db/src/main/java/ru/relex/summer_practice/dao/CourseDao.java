@@ -11,5 +11,6 @@ import java.util.List;
 public interface CourseDao extends GenericCrudDao<Course, Long> {
     public Date getStartDate(Course course);
     public Date getEndDate(Course course);
+    public Course getCourseById (Long id);
     public List<Course> getNexEvents();
 }

@@ -5,6 +5,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
 lang="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
 <h:head>
@@ -17,40 +18,66 @@ lang="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
             <li><a href="conferences.xhtml">Конференции</a></li>
         </ui:define>
         <ui:define name="center_block">
-            <h1>Здесь будет располагаться информация о конкретной конференции (work in progress)</h1>
-            <div align="center">
-            <h:graphicImage url="../../resources/images/conference-preview/4-logo.jpg" />
-            </div>
+            <style>
+                .panel {
+                    border-radius: 0px;
+                }
+                .col-md-4 {
+                    background: white;
+                }
+                .col-md-8 {
+                    background: white;
+                }
+                .col-md-12   {
+                    background: white;
+                }
+                .outputText {
+                    font-size: 30px;
+                }
+            </style>
+            <h:form>
+                <div class="panel panel-default">
+                    <h1 align="center">#{conferenceBean.conference.name}</h1>
+                    <br/>
+                    <div class="col-md-4">
+                        <h:graphicImage url="../../resources/images/conference-preview/000-logo.jpg" />
+                    </div>
+                    <div class="col-md-8">
+                        <h:outputText value="Описание: #{conferenceBean.conference.description}"/><br/>
+                        <h:outputText value="Стоимость билета: #{conferenceBean.conference.price}"/>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <p:dataTable value="#{conferenceBean.conference.courses}" var="course">
+                        <p:column headerText="Аудитория" width="25%">
+                            <div align="center">
+                                <h:outputText value="#{course.lectureRoom}"/>
+                            </div>
+                        </p:column>
+
+                        <p:column headerText="Дата начала" width="25%">
+                            <div align="center">
+                                <h:outputText value="#{course.startDate}"/>
+                            </div>
+                        </p:column>
+
+                        <p:column headerText="Дата окончания" width="25%">
+                            <div align="center">
+                                <h:outputText value="#{course.endDate}" />
+                            </div>
+                        </p:column>
+
+                        <p:column headerText="Подробнее" width="25%">
+                            <div align="center">
+                                <p:commandButton value="Показать" action="#{courseBean.Detail}">
+                                    <f:param name="conferenceId" value="#{conference.id}"/>
+                                </p:commandButton>
+                            </div>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </h:form>
         </ui:define>
     </ui:composition>
-        <!--<ui:define name="center_block">
-            <h1>text</h1>
-            <div style="background: white">
-                <div align="center">
-                    <h1>Список потоков:</h1>
-                </div>
-                <h:form>
-                   p:dataTable value="#{}" var="lecture">
-                       <p:column headerText="Тема" width="34%">
-                           <div align="center">
-                               <h:outputText value="#{lecture.topic}"/>
-                           </div>
-                       </p:column>
-
-                       <p:column headerText="Дата и время" width="33%">
-                           <div align="center">
-                               <h:outputText value="#{lecture.datetime}"/>
-                           </div>
-                       </p:column>
-
-                       <p:column headerText="Описание" width="33%">
-                           <div align="center">
-                               <h:outputText value="#{lecture.description}" />
-                           </div>
-                       </p:column>
-                   </p:dataTable>
-                </h:form>
-            </div>
-        </ui:define>-->
 </h:body>
 </html>
