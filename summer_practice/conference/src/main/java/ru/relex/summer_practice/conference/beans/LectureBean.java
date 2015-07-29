@@ -4,10 +4,8 @@ import ru.relex.summer_practice.db.Lecture;
 import ru.relex.summer_practice.db.Person;
 import ru.relex.summer_practice.db.Question;
 import ru.relex.summer_practice.db.Roles;
-import ru.relex.summer_practice.service.LectureService;
-import ru.relex.summer_practice.service.PersonLectureRoleService;
-import ru.relex.summer_practice.service.PersonService;
-import ru.relex.summer_practice.service.QuestionService;
+import ru.relex.summer_practice.db.Message;
+import ru.relex.summer_practice.service.*;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -17,7 +15,6 @@ import javax.ejb.EJB;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by Sasha on 26.07.2015.
@@ -35,8 +32,11 @@ public class LectureBean implements Serializable {
     private PersonLectureRoleService personLectureRoleService;
     @EJB
     private QuestionService questionService;
+    @EJB
+    private MessageService messageService;
 
     private List<Question> questions;
+    private List<Message> messages;
 
     private Person person;
     private Lecture lecture;
@@ -65,6 +65,7 @@ public class LectureBean implements Serializable {
         lecture = lectureService.getLectureByID(lectureID);
         role = personLectureRoleService.getRoleByPersonLecture(person, lecture);
         questions = questionService.ReadQuestionByLecture(lecture);
+        messages = messageService.ReadAllByLecture(lecture);
         return "success";
     }
 
@@ -99,4 +100,13 @@ public class LectureBean implements Serializable {
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
 }
+
