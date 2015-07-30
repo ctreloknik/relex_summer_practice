@@ -33,6 +33,8 @@ public class EventsViewBean implements Serializable{
 
     private List<Course> courses;
 
+    private List<Course> detailedCourses;
+
     private Course nextEvent;
 
     private ScheduleModel lazyEventModel;
@@ -80,8 +82,18 @@ public class EventsViewBean implements Serializable{
         return this.isEmptyNextEvents;
     }
 
-    public void onEventSelect(SelectEvent selectEvent) {
-        event = (ScheduleEvent) selectEvent.getObject();
+    public ScheduleEvent getEvent() {
+        return event;
+    }
+
+    public List<Course> getDatailedCources(){
+        return detailedCourses;
+    }
+
+    public void onDateSelect(SelectEvent selectEvent) {
+        System.out.println(" !!!DATE " + ((Date)selectEvent.getObject()));
+        detailedCourses = courseService.getCourcesBydate(((Date)selectEvent.getObject()));
+        System.out.println(" !!!COUNT " + courseService.getCourcesBydate(((Date)selectEvent.getObject())).size());
     }
 
 }

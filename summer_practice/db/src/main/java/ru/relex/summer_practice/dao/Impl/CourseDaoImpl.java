@@ -1,7 +1,6 @@
 package ru.relex.summer_practice.dao.Impl;
 
 import ru.relex.summer_practice.dao.CourseDao;
-import ru.relex.summer_practice.db.Conference;
 import ru.relex.summer_practice.db.Course;
 
 import javax.persistence.EntityManager;
@@ -59,6 +58,13 @@ public class CourseDaoImpl extends GenericCrudDaoImpl<Course, Long> implements C
     public List<Course> getNexEvents(){
         String jpql = "SELECT DISTINCT c from Course c WHERE c.startDate > current_date ORDER BY c.startDate";
         return this.EexecuteQuery(jpql);
+    }
+
+    public List<Course> getCourcesBydate(Date date){
+        String jpa = "SELECT c FROM Course c WHERE :date BETWEEN c.startDate AND c.endDate";
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("date",date);
+        return this.EexecuteQuery(jpa,parameters);
     }
 
 }

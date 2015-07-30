@@ -84,8 +84,29 @@
                                             clientTimeZone="local" timeFormat="hh:mm"
                                             style="margin-right: 20px; margin-left: 20px">
                                     <!-- Отслеживание нажатия на эвент -->
-                                    <!-- <p:ajax event="eventSelect" update="eventDetails" oncomplete="PF('eventDialog').show();"/> -->
+                                    <!-- <p:ajax event="eventSelect" listener="# {eventsViewBean.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+                                    -->
+                                    <p:ajax event="dateSelect" listener="#{eventsViewBean.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+
                                 </p:schedule>
+
+                                <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
+                                    <h:panelGrid id="eventDetails" columns="1">
+                                        <p:dataTable var="events" value="#{eventsViewBean.datailedCources}">
+                                            <p:column headerText="Id">
+                                                <h:outputText value="#{events.id}" />
+                                            </p:column>
+
+                                            <p:column headerText="Year">
+                                                <h:outputText value="#{events.startDate}" />
+                                            </p:column>
+
+                                            <p:column headerText="Brand">
+                                                <h:outputText value="#{events.endDate}" />
+                                            </p:column>
+                                        </p:dataTable>
+                                    </h:panelGrid>
+                                </p:dialog>
                             </div>
                         </p:tab>
 

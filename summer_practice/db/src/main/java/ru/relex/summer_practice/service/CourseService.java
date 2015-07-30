@@ -1,7 +1,6 @@
 package ru.relex.summer_practice.service;
 
 import ru.relex.summer_practice.dao.Impl.CourseDaoImpl;
-import ru.relex.summer_practice.db.Conference;
 import ru.relex.summer_practice.db.Course;
 
 import javax.ejb.Stateless;
@@ -77,6 +76,12 @@ public class CourseService extends CourseDaoImpl{
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public List<Course> getNexEvents() {
         return super.getNexEvents();
+    }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public List<Course> getCourcesBydate(Date date) {
+        return super.getCourcesBydate(date);
     }
 
     @Override

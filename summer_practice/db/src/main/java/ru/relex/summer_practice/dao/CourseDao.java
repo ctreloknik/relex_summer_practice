@@ -13,4 +13,5 @@ public interface CourseDao extends GenericCrudDao<Course, Long> {
     public Date getEndDate(Course course);
     public Course getCourseById (Long id);
     public List<Course> getNexEvents();
+    public List<Course> getCourcesBydate(Date date);
 }
