@@ -51,7 +51,7 @@ lang="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
                     <p:dataTable value="#{conferenceBean.conference.courses}" var="course">
                         <p:column headerText="Аудитория" width="25%">
                             <div align="center">
-                                <h:outputText value="#{course.lectureRoom}"/>
+                                <h:outputText value="#{course.lectureRoom.number}"/>
                             </div>
                         </p:column>
 

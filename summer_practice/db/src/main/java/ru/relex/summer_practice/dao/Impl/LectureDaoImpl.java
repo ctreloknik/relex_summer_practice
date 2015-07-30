@@ -84,4 +84,12 @@ public class LectureDaoImpl extends GenericCrudDaoImpl<Lecture, Long> implements
         }
         return result.get(0);
     }
+
+    @Override
+    public List<Lecture> getLectureByCourseId(Long id) {
+        String jpql = "SELECT l FROM Lecture l where l.course.id = :id";
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("id", id);
+        return this.EexecuteQuery(jpql, parameters);
+    }
 }

@@ -96,6 +96,7 @@ public class ConferenceService extends ConferenceDaoImpl {
         return super.getConferenceForShow();
     }
 
+
     @Override
     @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public List<Conference> getTicketsForBuying(Person person) {

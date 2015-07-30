@@ -100,4 +100,10 @@ public class LectureService extends LectureDaoImpl{
     protected List<Lecture> EexecuteQuery(String jpql, Map<String, Object> parametres) {
         return super.EexecuteQuery(jpql, parametres);
     }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public List<Lecture> getLectureByCourseId(Long id) {
+        return super.getLectureByCourseId(id);
+    }
 }

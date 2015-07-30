@@ -4,6 +4,7 @@ import ru.relex.summer_practice.dao.ConferenceDao;
 import ru.relex.summer_practice.db.Conference;
 import ru.relex.summer_practice.db.Course;
 import ru.relex.summer_practice.db.Person;
+import ru.relex.summer_practice.service.CourseService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -56,6 +57,9 @@ public class ConferenceDaoImpl extends GenericCrudDaoImpl<Conference, Long> impl
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("name",name);
         List<Conference> conference = this.EexecuteQuery(jpa,parameters);
+        for (Conference conf : conference) {
+
+        }
         if (conference.size() != 1){
             return null;
         }

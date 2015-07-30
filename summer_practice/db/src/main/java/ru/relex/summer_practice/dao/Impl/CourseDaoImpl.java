@@ -1,5 +1,6 @@
 package ru.relex.summer_practice.dao.Impl;
 
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 import ru.relex.summer_practice.dao.CourseDao;
 import ru.relex.summer_practice.db.Conference;
 import ru.relex.summer_practice.db.Course;
@@ -52,8 +53,8 @@ public class CourseDaoImpl extends GenericCrudDaoImpl<Course, Long> implements C
         String jpa = "SELECT c FROM Course c WHERE c.id = :id";
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("id",id);
-        List<Course> conference = this.EexecuteQuery(jpa,parameters);
-        return conference.get(0);
+        List<Course> courses = this.EexecuteQuery(jpa,parameters);
+        return courses.get(0);
     }
 
     public List<Course> getNexEvents(){
@@ -61,4 +62,11 @@ public class CourseDaoImpl extends GenericCrudDaoImpl<Course, Long> implements C
         return this.EexecuteQuery(jpql);
     }
 
+    @Override
+    public List<Course> getCourseByConferenceId(Long id) {
+        String jpa = "SELECT c FROM Course c WHERE c.conference.id = :id";
+        HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("id",id);
+        return this.EexecuteQuery(jpa, parameters);
+    }
 }

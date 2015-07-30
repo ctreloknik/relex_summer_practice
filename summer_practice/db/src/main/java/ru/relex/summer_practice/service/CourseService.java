@@ -90,4 +90,18 @@ public class CourseService extends CourseDaoImpl{
     protected List<Course> EexecuteQuery(String jpql) {
         return super.EexecuteQuery(jpql);
     }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public List<Course> getCourseByConferenceId(Long id) {
+        return super.getCourseByConferenceId(id);
+    }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+    public Course getCourseById(Long id) {
+        return super.getCourseById(id);
+    }
+
+
 }

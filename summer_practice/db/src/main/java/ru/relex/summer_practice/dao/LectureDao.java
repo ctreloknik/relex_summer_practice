@@ -16,4 +16,5 @@ public interface LectureDao extends GenericCrudDao<Lecture, Long> {
     public String getDescription(Lecture lecture);
     public Date getStartTimeByCourse(Course course);
     public Lecture getLectureByID(Long lectureID);
+    public List<Lecture> getLectureByCourseId(Long id);
 }

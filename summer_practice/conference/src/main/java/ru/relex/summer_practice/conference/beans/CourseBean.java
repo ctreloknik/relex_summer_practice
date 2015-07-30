@@ -1,7 +1,9 @@
 package ru.relex.summer_practice.conference.beans;
 
 import ru.relex.summer_practice.db.Course;
+import ru.relex.summer_practice.db.Lecture;
 import ru.relex.summer_practice.service.CourseService;
+import ru.relex.summer_practice.service.LectureService;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -9,6 +11,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Map;
 
 /**
@@ -21,6 +24,9 @@ public class CourseBean implements Serializable{
     @EJB
     CourseService courseService;
 
+    @EJB
+    LectureService lectureService;
+
     @PostConstruct
     public void initCourseBean() {
     }
@@ -32,6 +38,7 @@ public class CourseBean implements Serializable{
         Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
         Long id = Long.parseLong(params.get("courseId"));
         course = courseService.getCourseById(id);
+        course.setLectures(new HashSet<Lecture>(lectureService.getLectureByCourseId(course.getId())));
         return "success";
     }
 
