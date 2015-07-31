@@ -103,4 +103,9 @@ public class Lecture {
     public void setMessage(Set<Message> message) {
         this.message = message;
     }
+
+    @Override
+    public String toString() {
+        return this.id.toString();
+    }
 }

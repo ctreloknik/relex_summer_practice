@@ -4,6 +4,7 @@ import ru.relex.summer_practice.dao.GenericCrudDao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
@@ -69,5 +70,16 @@ public class GenericCrudDaoImpl<T, PK>  extends AbstructDaoImpl<T, PK> implement
     protected void closeEntityManager() {
         if (em.getTransaction().isActive()) em.getTransaction().commit();
         if (em != null && em.isOpen()) em.close();
+    }
+
+    @Override
+    public void Delete(List<T> t) {
+        em  = getEntityManager();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaDelete<T> cq = cb.createCriteriaDelete(instance);
+        Root<T> rootEntry = cq.from(instance);
+        cq.where(rootEntry.in(t));
+        em.createQuery(cq).executeUpdate();
+        closeEntityManager();
     }
 }

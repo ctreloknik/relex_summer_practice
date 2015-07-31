@@ -27,10 +27,6 @@ public class Question {
     @Column(name = "RATING")
     private int rating;
 
-    @OneToOne
-    @JoinColumn(name = "MESSAGE_ID", nullable = true)
-    private Message answer;
-
     @Column(name = "DATETIME")
     private Date datetime;
 
@@ -58,14 +54,6 @@ public class Question {
 
     public void setDatetime(Date datetime) {
         this.datetime = datetime;
-    }
-
-    public Message getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(Message answer) {
-        this.answer = answer;
     }
 
     public int getRating() {

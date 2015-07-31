@@ -11,4 +11,5 @@ public interface GenericCrudDao<T, PK> {
     public T Update(T t);
     public void Delete(PK id);
     public List<T> ReadAll();
+    public void Delete(List<T> t);
 }

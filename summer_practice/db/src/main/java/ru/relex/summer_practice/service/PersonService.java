@@ -87,4 +87,9 @@ public class PersonService extends PersonDaoImpl{
     protected List<Person> EexecuteQuery(String jpql) {
         return super.EexecuteQuery(jpql);
     }
+
+    @Override
+    public void Delete(List<Person> t) {
+        super.Delete(t);
+    }
 }

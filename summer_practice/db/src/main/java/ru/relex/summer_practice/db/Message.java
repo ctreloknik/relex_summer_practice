@@ -27,9 +27,6 @@ public class Message {
     @Column(name = "DATETIME")
     private Date datetime;
 
-    @OneToOne(mappedBy = "answer")
-    private Question question;
-
     public Lecture getLecture() {
         return lecture;
     }
@@ -60,9 +57,5 @@ public class Message {
 
     public void setDatetime(Date datetime) {
         this.datetime = datetime;
-    }
-
-    public Question getQuestion() {
-        return question;
     }
 }
