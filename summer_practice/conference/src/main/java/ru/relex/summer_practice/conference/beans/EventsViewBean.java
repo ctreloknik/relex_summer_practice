@@ -86,7 +86,7 @@ public class EventsViewBean implements Serializable{
         return event;
     }
 
-    public List<Course> getDatailedCources(){
+    public List<Course> getDetailedCourses(){
         return detailedCourses;
     }
 
