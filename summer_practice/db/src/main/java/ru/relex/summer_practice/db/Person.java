@@ -33,6 +33,7 @@ public class Person {
 
 	@Column(name = "CONFIRMED")
 	private Boolean confirmed;
+
 	@Column(name = "BALANCE")
 	private Integer balance;
 

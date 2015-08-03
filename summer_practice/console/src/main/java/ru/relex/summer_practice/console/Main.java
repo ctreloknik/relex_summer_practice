@@ -25,6 +25,7 @@ public class Main {
     private static List<Question> questions;
 	public static void main( String[] args )
     {
+
         Lecture lecture = new Lecture();
         lecture.setTopic("Sasha testing");
         lecture.setDatetime(new Date());

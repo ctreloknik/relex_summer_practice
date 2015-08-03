@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: Sasha
+  Date: 30.07.2015
+  Time: 13:49
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+    <title>Simple JSF Facelets page</title>
+</h:head>
+
+<h:body>
+    <h:form id="form">
+        <p:messages id="messages" autoUpdate="true" />
+        <p:dataTable  id="table-info" var="item" value="#{paramBean.items}" rowKey="#{item.id}" editable="true" selection="#{paramBean.selectedItems}">
+            <f:facet name="header">
+                <div align="left">
+                    <p:commandButton update="table-info" value="Add" action="#{paramBean.add}"/>
+                    <p:commandButton update="table-info" value="Delete" action="#{paramBean.delete}" />
+                </div>
+            </f:facet>
+            <p:ajax event="rowEditInit" listener="#{paramBean.onRowEdit}"></p:ajax>
+            <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+            <p:columns value="#{paramBean.columns}" var="column">
+                <f:facet name="header">
+                    <h:outputText value="#{column.header}" />
+                </f:facet>
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{item[column.property]}" /></f:facet>
+                    <f:facet name="input">
+                        <h:selectOneMenu rendered="#{column.type == 'SelectOne'}" value="#{item[column.property]}">
+                            <f:selectItems value="#{paramBean[column.method]}"></f:selectItems>
+                        </h:selectOneMenu>
+                        <p:inputText rendered="#{column.type == 'Field'}" style="width: 100%" value="#{item[column.property]}"></p:inputText>
+                        <p:calendar id="popup" rendered="#{column.type == 'DateField'}" pattern="MM/dd/yyyy HH:mm:ss" value="#{item[column.property]}" />
+                    </f:facet>
+                </p:cellEditor>
+            </p:columns>
+            <p:column style="width:16px;text-align:center">
+                <p:rowEditor/>
+            </p:column>
+        </p:dataTable>
+    </h:form>
+</h:body>
+
+</html>
